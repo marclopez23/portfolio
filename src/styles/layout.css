@@ -65,8 +65,6 @@ select {
   max-width: var(--container-max-width, 1512px);
   margin-left: auto;
   margin-right: auto;
-  padding-left: var(--spacing-2xl);
-  padding-right: var(--spacing-2xl);
 }
 
 .container--narrow {
@@ -240,7 +238,7 @@ select {
 /* Texto en dos columnas */
 .text-columns {
   display: flex;
-  gap: var(--spacing-4xl);
+  gap: var(--section-gap);
 }
 
 .text-columns > * {
@@ -250,7 +248,7 @@ select {
 @media (max-width: 767px) {
   .text-columns {
     flex-direction: column;
-    gap: var(--spacing-2xl);
+    gap: var(--section-gap);
   }
 }
 
@@ -264,6 +262,11 @@ select {
   flex-direction: column;
   background-color: var(--color-main-bg);
 }
+
+.section {
+        padding: var(--section-vertical) var(--section-horizontal);
+    }
+  
 
 .page__header {
   position: fixed;
@@ -288,14 +291,15 @@ select {
    ==================================== */
 
 @media (max-width: 767px) {
-  .container {
-    padding-left: var(--spacing-xl);
-    padding-right: var(--spacing-xl);
-  }
-  
+
   .page__main {
     padding-top: 70px; /* Menos padding en móvil */
   }
+
+   .section {
+      padding-left: var(--section-horizontal); /* 24px según Figma mobile */
+      padding-right: var(--section-horizontal); /* 24px según Figma mobile */
+    }
   
   .section--sm {
     padding-top: var(--spacing-xl);
@@ -344,22 +348,6 @@ select {
   border: 0;
 }
 
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 6px;
-  background: var(--color-text-tertiary);
-  color: var(--color-main-bg);
-  padding: 8px;
-  text-decoration: none;
-  border-radius: 4px;
-  z-index: 1000;
-  transition: top 0.3s;
-}
-
-.skip-link:focus {
-  top: 6px;
-}
 
 /* ====================================
    ANIMATION UTILITIES

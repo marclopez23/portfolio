@@ -56,8 +56,6 @@ if (!currentPage && pathname) {
 ---
 
 <Layout title={title} description={description} keywords={keywords}>
-  <!-- Skip link para accesibilidad -->
-  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
   
   <div class="page">
     <!-- Header fijo con menú -->
@@ -106,23 +104,6 @@ if (!currentPage && pathname) {
 
     .page__footer {
       margin-top: auto;
-    }
-
-    .skip-link {
-      position: absolute;
-      top: -40px;
-      left: 6px;
-      background: var(--color-text-tertiary);
-      color: var(--color-main-bg);
-      padding: 8px;
-      text-decoration: none;
-      border-radius: 4px;
-      z-index: 1000;
-      transition: top 0.3s;
-    }
-
-    .skip-link:focus {
-      top: 6px;
     }
 
     /* Menu fijo mejorado */

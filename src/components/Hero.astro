@@ -71,7 +71,7 @@ const titleId = `${heroId}-title`;
       size="extra-large"
       showDivider={false}
       as={titleTag}
-      class="hero__title"
+      class="title--hero title__text"
       id={titleId}
     />
     <slot />
@@ -88,30 +88,30 @@ const titleId = `${heroId}-title`;
     position: relative;
     width: 100%;
     box-sizing: border-box;
-    
     /* Spacing */
-    padding: var(--spacing-xhg) var(--spacing-2xl);
+    padding: var(--spacing-xhg) var(--section-horizontal);
     gap: var(--spacing-2xl);
-    
-    /* Altura mínima por defecto */
-    min-height: 50vh;
+  
   }
 
   /* Contenido del hero */
   .hero__content {
+     max-width: var(--container-max-width, 1512px);
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     width: 100%;
     gap: var(--spacing-2xl);
+
   }
 
   /* Título del hero - tamaño extra grande */
   .hero :global(.hero__title) {
-    font-size: var(--font-size-xhg);
+    font-size: var(--font-size-4xl);
     font-weight: var(--font-weight-semibold);
-    line-height: var(--line-height-xhg);
+    line-height: var(--line-height-4xl);
     white-space: nowrap;
   }
 
@@ -142,7 +142,6 @@ const titleId = `${heroId}-title`;
   /* Variante con menos padding */
   .hero--compact {
     padding: var(--spacing-hg) var(--spacing-2xl);
-    min-height: 40vh;
   }
 
   /* Variante con fondo personalizado */
@@ -172,8 +171,7 @@ const titleId = `${heroId}-title`;
   /* Responsive adjustments */
   @media (max-width: 767px) {
     .hero {
-      padding: var(--spacing-hg) var(--spacing-2xl);
-      min-height: 40vh;
+      padding: var(--spacing-hg) var(--section-horizontal);
     }
     
     .hero :global(.hero__title) {
@@ -189,7 +187,7 @@ const titleId = `${heroId}-title`;
 
   @media (max-width: 480px) {
     .hero {
-      padding: var(--spacing-4xl) var(--spacing-xl);
+      padding: var(--spacing-4xl) var(--section-horizontal);
     }
     
     .hero :global(.hero__title) {

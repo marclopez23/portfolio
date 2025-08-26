@@ -67,7 +67,6 @@ const menuId = id || 'main-menu';
     <a 
       href={logoHref}
       class="menu__logo"
-      aria-label={logoAlt}
     >
       <img 
         src="/assets/logo.svg" 
@@ -177,6 +176,8 @@ const menuId = id || 'main-menu';
 
   /* Contenido principal */
   .menu__content {
+    max-width: var(--container-max-width, 1512px);
+        margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -35,6 +35,7 @@ export interface Props {
    * ID del elemento
    */
   id?: string;
+  ariaLabel?: string;
 }
 
 const {
@@ -44,7 +45,8 @@ const {
   showNumber = true,
   titleTag = 'h3',
   class: className = '',
-  id
+  id,
+  ariaLabel
 } = Astro.props;
 
 // Clases CSS del componente
@@ -66,6 +68,7 @@ const TitleTag = titleTag;
   role="article"
   aria-labelledby={titleId}
   aria-describedby={descId}
+  aria-label={ariaLabel}
 >
   {showNumber && (
     <div class="punto__number" aria-label={`Paso ${number}`}>
@@ -88,7 +91,7 @@ const TitleTag = titleTag;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: var(--spacing-lg);
+    gap: var(--spacing-sm);
     width: 100%;
     box-sizing: border-box;
   }
@@ -96,8 +99,8 @@ const TitleTag = titleTag;
   /* Número del punto */
   .punto__number {
     font-family: var(--font-family-primary);
-    font-size: var(--font-size-xhg);
-    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-hg);
+    font-weight: var(--font-weight-medium);
     line-height: var(--line-height-xhg);
     color: var(--color-text-primary);
     width: 100%;
@@ -115,8 +118,8 @@ const TitleTag = titleTag;
   /* Título del punto */
   .punto__title {
     font-family: var(--font-family-primary);
-    font-size: var(--font-size-2xl);
-    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-regular);
     line-height: var(--line-height-normal);
     color: var(--color-text-primary);
     width: 100%;
@@ -147,9 +150,7 @@ const TitleTag = titleTag;
 
   /* Responsive adjustments */
   @media (min-width: 768px) {
-    .punto {
-      gap: var(--spacing-lg);
-    }
+
   }
 
   /* Variantes de tamaño */
@@ -184,5 +185,11 @@ const TitleTag = titleTag;
   .punto--right {
     align-items: flex-end;
     text-align: right;
+  }
+
+   @media (max-width: 767px) {
+     .punto__title {
+    font-size: var(--font-size-2xl);
+  }
   }
 </style>

@@ -3,7 +3,6 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import Hero from '../components/Hero.astro';
 import Title from '../components/Title.astro';
-import TextBlock from '../components/TextBlock.astro';
 import Punto from '../components/Punto.astro';
 import RecommendationLetter from '../components/RecommendationLetter.astro';
 
@@ -65,14 +64,14 @@ const recomendacionItems = [
     cargo: "Senior Product Designer",
     empresa: "K-LAGAN",
     href: "/cartas/mauricio-alpizar.pdf",
-    linkText: "Leer carta"
+    linkText: "Leer carta de recomendación de Mauricio Alpizar"
   },
   {
     nombre: "Eszter Vass",
     cargo: "Principal Product Management in Custody Banking",
     empresa: "Epsom", 
     href: "/cartas/eszter-vass.pdf",
-    linkText: "Leer carta"
+    linkText: "Leer carta de recomendación de Eszter Vass"
   }
 ];
 ---
@@ -82,46 +81,60 @@ const recomendacionItems = [
   currentPage="/sobre-mi"
   description="Conoce más sobre Marc López, diseñador UX/UI especializado en crear experiencias digitales centradas en el usuario."
   keywords="sobre mi, marc lopez, diseñador ux ui, experiencia usuario, portfolio"
->
-  
+>s
+
   <!-- Hero Section -->
-  <section class="section section--xl">
-    <div class="container">
+  <section role="banner" aria-labelledby="hero-title">
       <Hero 
         title="Sobre mí"
         titleTag="h1"
         class="fade-in"
+        id="hero-title"
       />
-    </div>
   </section>
 
   <!-- Intro Section -->
-  <section class="section section--lg section--with-border">
+  <section 
+    class="section section--with-border" 
+    id="intro"
+    role="main"
+    aria-labelledby="intro-heading"
+  >
     <div class="container">
+      <!-- Heading invisible para screen readers -->
+      <h2 id="intro-heading" class="sr-only">Introducción personal</h2>
+      
       <div class="text-columns slide-up">
-        <TextBlock 
-          size="xl"
-          title=""
-          description="Mi proceso creativo abarca desde la concepción inicial hasta la entrega final al equipo de desarrollo, garantizando que en cada etapa se tenga al usuario en el centro.
-
-En mi trayectoria profesional, he aprendido que la clave para el éxito radica en comprender las necesidades del usuario, alcanzar los objetivos comerciales y crear productos que impacten y sean accesibles para todos."
-          class="intro-text-left"
-        />
+        <!-- Columna izquierda -->
+        <div class="intro-text" role="region" aria-label="Filosofía de trabajo">
+          <p class="paragraph">
+            Mi proceso creativo abarca desde la <span class="intro-highlight">concepción inicial hasta la entrega final al equipo de desarrollo</span>, garantizando que en cada etapa se tenga al usuario en el centro.
+          </p>
+          <p class="paragraph">
+            En mi trayectoria profesional, he aprendido que la clave para el éxito radica en comprender las necesidades del usuario, alcanzar los objetivos comerciales y crear productos que impacten y sean accesibles para todos.
+          </p>
+        </div>
         
-        <TextBlock
-          size="xl" 
-          title=""
-          description="Mi pasión por el diseño va más allá de las tendencias; se trata de crear soluciones significativas que no solo resuelvan problemas, sino que también inspiren y empoderen a quienes las utilizan.
-
-Estoy comprometido a seguir desafiando los límites del diseño y a liderar el camino hacia un futuro digital más inclusivo y emocionante."
-          class="intro-text-right"
-        />
+        <!-- Columna derecha -->
+        <div class="intro-text" role="region" aria-label="Visión y compromiso">
+          <p class="paragraph">
+            Mi pasión por el diseño va más allá de las tendencias; se trata de <span class="intro-highlight">crear soluciones significativas que no solo resuelvan problemas, sino que también inspiren y empoderen a quienes las utilizan</span>.
+          </p>
+          <p class="paragraph">
+            Estoy comprometido a seguir desafiando los límites del diseño y a liderar el camino hacia un <span class="intro-highlight">futuro digital más inclusivo y emocionante</span>.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Como trabajo Section -->
-  <section class="section section--lg section--with-border">
+  <section 
+    class="section section--with-border" 
+    id="como-trabajo"
+    role="region"
+    aria-labelledby="como-trabajo-title"
+  >
     <div class="container">
       <div class="content-block">
         <!-- Título de sección -->
@@ -131,18 +144,26 @@ Estoy comprometido a seguir desafiando los límites del diseño y a liderar el c
           showDivider={false}
           as="h2"
           class="section-title"
+          id="como-trabajo-title"
         />
         
         <!-- Grid de puntos -->
-        <div class="grid grid--responsive-2">
+        <div 
+          class="grid grid--responsive-2" 
+          role="list"
+          aria-label="Proceso de trabajo en 5 pasos"
+        >
           {comoTrabajoItems.map((item, index) => (
-            <Punto
-              number={item.number}
-              title={item.title}
-              description={item.description}
-              titleTag="h3"
-              class="slide-up"
-            />
+            <div role="listitem">
+              <Punto
+                number={item.number}
+                title={item.title}
+                description={item.description}
+                titleTag="h3"
+                class="slide-up"
+                ariaLabel={`Paso ${item.number}: ${item.title}`}
+              />
+            </div>
           ))}
           
           <!-- Último elemento invisible para mantener el grid -->
@@ -155,7 +176,12 @@ Estoy comprometido a seguir desafiando los límites del diseño y a liderar el c
   </section>
 
   <!-- Qué aporto Section -->
-  <section class="section section--lg section--with-border">
+  <section 
+    class="section section--with-border" 
+    id="que-aporto"
+    role="region"
+    aria-labelledby="que-aporto-title"
+  >
     <div class="container">
       <div class="content-block">
         <!-- Título de sección -->
@@ -165,18 +191,26 @@ Estoy comprometido a seguir desafiando los límites del diseño y a liderar el c
           showDivider={false}
           as="h2"
           class="section-title"
+          id="que-aporto-title"
         />
         
         <!-- Grid de puntos sin números -->
-        <div class="grid grid--responsive-2">
+        <div 
+          class="grid grid--responsive-2"
+          role="list" 
+          aria-label="Habilidades y aportes al equipo"
+        >
           {queAportoItems.map((item, index) => (
-            <Punto
-              title={item.title}
-              description={item.description}
-              showNumber={false}
-              titleTag="h3"
-              class="slide-up"
-            />
+            <div role="listitem">
+              <Punto
+                title={item.title}
+                description={item.description}
+                showNumber={false}
+                titleTag="h3"
+                class="slide-up"
+                ariaLabel={`Aporte: ${item.title}`}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -184,7 +218,12 @@ Estoy comprometido a seguir desafiando los límites del diseño y a liderar el c
   </section>
 
   <!-- Cartas de recomendación Section -->
-  <section class="section section--lg section--with-border">
+  <section 
+    class="section section--with-border" 
+    id="recomendaciones"
+    role="region"
+    aria-labelledby="recomendaciones-title"
+  >
     <div class="container">
       <div class="content-block">
         <!-- Título de sección -->
@@ -194,20 +233,28 @@ Estoy comprometido a seguir desafiando los límites del diseño y a liderar el c
           showDivider={false}
           as="h2"
           class="section-title"
+          id="recomendaciones-title"
         />
         
         <!-- Grid de cartas -->
-        <div class="grid grid--responsive-2">
+        <div 
+          class="grid grid--responsive-2"
+          role="list"
+          aria-label="Cartas de recomendación profesional"
+        >
           {recomendacionItems.map((item, index) => (
-            <RecommendationLetter
-              nombre={item.nombre}
-              cargo={item.cargo}
-              empresa={item.empresa}
-              href={item.href}
-              linkText={item.linkText}
-              target="_blank"
-              class="slide-up"
-            />
+            <div role="listitem">
+              <RecommendationLetter
+                nombre={item.nombre}
+                cargo={item.cargo}
+                empresa={item.empresa}
+                href={item.href}
+                linkText={item.linkText}
+                target="_blank"
+                class="slide-up"
+                linkAriaLabel={`Carta de recomendación de ${item.nombre}, ${item.cargo} en ${item.empresa}`}
+              />
+            </div>
           ))}
         </div>
       </div>
@@ -220,7 +267,44 @@ Estoy comprometido a seguir desafiando los límites del diseño y a liderar el c
   /* Importar estilos globales de layout */
   @import '../styles/layout.css';
   
-  /* Estilos específicos de la página Sobre mí */
+  /* ====================================
+     ACCESSIBILITY IMPROVEMENTS
+     ==================================== */
+  
+  /* Screen reader only content */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  /* ====================================
+     ESTILOS ESPECÍFICOS - INTRO SECTION
+     ==================================== */
+  
+  /* Contenedor para cada columna de texto */
+  .intro-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl); /* 32px entre párrafos */
+  }
+  
+
+  /* Texto destacado en blanco */
+  .intro-highlight {
+    color: var(--color-text-primary); /* #fefefe */
+    font-weight: var(--font-weight-medium); /* Mantiene el mismo peso */
+  }
+  
+  /* ====================================
+     ESTILOS ESPECÍFICOS - RESTO DE PÁGINA
+     ==================================== */
   
   .section-title {
     margin-bottom: var(--spacing-xl);
@@ -249,25 +333,46 @@ Estoy comprometido a seguir desafiando los límites del diseño y a liderar el c
     }
   }
   
-  /* Responsive adjustments específicos */
+  /* ====================================
+     RESPONSIVE ADJUSTMENTS - Basado en diseños específicos de Figma
+     ==================================== */
+  
+  /* Mobile breakpoint - exacto al diseño de Figma */
   @media (max-width: 767px) {
-    .text-columns {
-      flex-direction: column;
+    /* Skip links en móvil */
+    .skip-link {
+      font-size: var(--font-size-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
     }
     
-    .section--xl {
-      padding-top: var(--spacing-hg);
-      padding-bottom: var(--spacing-hg);
+    
+    /* Intro section responsive - mantiene tamaño según diseño mobile */
+    .intro-text {
+      gap: var(--spacing-lg); /* 16px según mobile spacing */
     }
     
-    .grid {
-      gap: var(--spacing-2xl);
+    /* Grids en móvil - una sola columna según diseño */
+    .grid--responsive-2 {
+      grid-template-columns: 1fr; /* Una columna en móvil */
+      gap: var(--spacing-lg); /* 16px según mobile spacing */
     }
     
+    /* Content blocks en móvil */
     .content-block {
-      gap: var(--spacing-xl);
+      gap: var(--spacing-lg); /* 16px según Figma mobile */
+    }
+    
+    /* Títulos de sección en móvil */
+    .section-title {
+      margin-bottom: var(--spacing-lg); /* 16px según mobile */
     }
   }
+
+  /* No necesitamos breakpoint más pequeño - el diseño mobile cubre hasta 480px */
+  
+  /* ====================================
+     ACCESSIBILITY & MOTION
+     ==================================== */
   
   /* Estados de reduced motion */
   @media (prefers-reduced-motion: reduce) {
@@ -277,5 +382,112 @@ Estoy comprometido a seguir desafiando los límites del diseño y a liderar el c
       opacity: 1;
       transform: none;
     }
+    
+    .skip-link {
+      transition: none;
+    }
+  }
+
+  /* Estados para high contrast */
+  @media (prefers-contrast: high) {
+    .paragraph {
+      color: var(--color-text-primary);
+    }
+    
+    .intro-highlight {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+    }
+    
+    .skip-link {
+      border: 3px solid var(--color-text-primary);
+    }
+  }
+  
+  /* ====================================
+     PRINT STYLES
+     ==================================== */
+  
+  @media print {
+
+    .slide-up,
+    .fade-in {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .intro-highlight {
+      font-weight: var(--font-weight-bold);
+      text-decoration: underline;
+    }
   }
 </style>
+
+<script>
+  // Mejoras de accesibilidad en el cliente
+  document.addEventListener('astro:page-load', () => {
+    // Anunciar cambios de página para screen readers
+    const pageTitle = document.title;
+    const announcement = document.createElement('div');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('aria-atomic', 'true');
+    announcement.className = 'sr-only';
+    announcement.textContent = `Página cargada: ${pageTitle}`;
+    
+    document.body.appendChild(announcement);
+    
+    setTimeout(() => {
+      if (document.body.contains(announcement)) {
+        document.body.removeChild(announcement);
+      }
+    }, 1000);
+
+    // Mejorar focus management para skip links
+    const skipLinks = document.querySelectorAll('.skip-link');
+    skipLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        const targetId = href ? href.substring(1) : '';
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          // Hacer el elemento focusable temporalmente si no lo es
+          const originalTabIndex = targetElement.getAttribute('tabindex');
+          if (!originalTabIndex) {
+            targetElement.setAttribute('tabindex', '-1');
+          }
+          
+          // Focus y scroll al elemento
+          targetElement.focus();
+          targetElement.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+          
+          // Restaurar tabindex original después del focus
+          if (!originalTabIndex) {
+            setTimeout(() => {
+              targetElement.removeAttribute('tabindex');
+            }, 100);
+          }
+        }
+      });
+    });
+
+    // Mejorar UX de animaciones según preferencias del usuario
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+      // Desactivar todas las animaciones si el usuario prefiere reduced motion
+      const animatedElements = document.querySelectorAll('.slide-up, .fade-in');
+      animatedElements.forEach(el => {
+        const element = el as HTMLElement;
+        element.style.animation = 'none';
+        element.style.opacity = '1';
+        element.style.transform = 'none';
+      });
+    }
+  });
+</script>
