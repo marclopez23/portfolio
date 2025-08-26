@@ -1,0 +1,147 @@
+---
+// src/layouts/PageLayout.astro
+import Layout from '../layouts/Layout.astro'
+import Menu from '../components/Menu.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title: string;
+  currentPage?: string;
+  description?: string;
+  keywords?: string;
+}
+
+const { 
+  title, 
+  currentPage = '',
+  description,
+  keywords 
+} = Astro.props;
+
+// Items del menú con detección automática de página activa
+const menuItems = [
+  { 
+    text: 'Inicio', 
+    href: '/', 
+    active: currentPage === '/' || currentPage === 'home' || currentPage === 'inicio'
+  },
+  { 
+    text: 'Sobre mí', 
+    href: '/sobre-mi', 
+    active: currentPage === '/sobre-mi' || currentPage === 'sobre-mi'
+  },
+  { 
+    text: 'CV', 
+    href: '/cv', 
+    active: currentPage === '/cv' || currentPage === 'cv'
+  },
+  { 
+    text: 'Proyectos', 
+    href: '/projects', 
+    active: currentPage === '/projects' || currentPage === 'projects'
+  }
+];
+
+// También puede detectar automáticamente desde la URL
+const pathname = Astro.url?.pathname || '';
+if (!currentPage && pathname) {
+  menuItems.forEach(item => {
+    if (pathname === '/' && item.href === '/') {
+      item.active = true;
+    } else if (pathname !== '/' && (pathname === item.href || pathname.endsWith(item.href))) {
+      item.active = true;
+    }
+  });
+}
+---
+
+<Layout title={title} description={description} keywords={keywords}>
+  <!-- Skip link para accesibilidad -->
+  <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+  
+  <div class="page">
+    <!-- Header fijo con menú -->
+    <header class="page__header">
+      <Menu 
+        menuItems={menuItems} 
+        logoHref="/"
+        logoAlt="Marc López - Diseñador UX/UI"
+        class="menu--fixed"
+      />
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="page__main" id="main-content">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <footer class="page__footer">
+      <Footer name="Marc López" />
+    </footer>
+  </div>
+
+  <style>
+    /* Estilos del layout con menú */
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--color-main-bg);
+    }
+
+    .page__header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background-color: var(--color-main-bg);
+    }
+
+    .page__main {
+      flex: 1;
+      padding-top: 90px; /* Altura del header fijo */
+    }
+
+    .page__footer {
+      margin-top: auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -40px;
+      left: 6px;
+      background: var(--color-text-tertiary);
+      color: var(--color-main-bg);
+      padding: 8px;
+      text-decoration: none;
+      border-radius: 4px;
+      z-index: 1000;
+      transition: top 0.3s;
+    }
+
+    .skip-link:focus {
+      top: 6px;
+    }
+
+    /* Menu fijo mejorado */
+    .menu--fixed {
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 767px) {
+      .page__main {
+        padding-top: 70px; /* Menos padding en móvil */
+      }
+    }
+
+    /* Mejoras para high contrast */
+    @media (prefers-contrast: high) {
+      .page__header {
+        border-bottom: 2px solid var(--color-text-primary);
+      }
+    }
+  </style>
+</Layout>

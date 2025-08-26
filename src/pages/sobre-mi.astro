@@ -1,0 +1,281 @@
+---
+// src/pages/sobre-mi.astro
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/Hero.astro';
+import Title from '../components/Title.astro';
+import TextBlock from '../components/TextBlock.astro';
+import Punto from '../components/Punto.astro';
+import RecommendationLetter from '../components/RecommendationLetter.astro';
+
+const pageTitle = "Sobre mí - Marc López";
+
+// Datos de los puntos "Como trabajo"
+const comoTrabajoItems = [
+  {
+    number: "1",
+    title: "Entender y analizar",
+    description: "Analizar a fondo las necesidades de los usuarios, el mercado y la idea de negocio o producto."
+  },
+  {
+    number: "2", 
+    title: "Idear",
+    description: "Trabajar en la concepción de posibles soluciones, definiendo los recorridos (journeys) y esbozando los primeros bocetos."
+  },
+  {
+    number: "3",
+    title: "Diseñar", 
+    description: "Sumergirse en la creación de la interfaz del producto, desarrollando tanto las pantallas como el sistema de diseño."
+  },
+  {
+    number: "4",
+    title: "Testar",
+    description: "Realizar pruebas con usuarios para evaluar el trabajo realizado en las etapas previas y determinar la efectividad del diseño."
+  },
+  {
+    number: "5",
+    title: "Celebración y mejora continua",
+    description: "Reconocer y felicitar al equipo por el excelente trabajo si todo ha salido bien. En caso contrario, identificar áreas de mejora y prepararse para iterar."
+  }
+];
+
+// Datos de los puntos "Qué aporto"
+const queAportoItems = [
+  {
+    title: "Enlace con desarrollo",
+    description: "Me siento muy cómodo hablando con los equipos de desarrollo. Para mí la unión entre diseño y desarrollo es vital para crear un buen producto."
+  },
+  {
+    title: "Calma y tranquilidad", 
+    description: "Gestiono muy bien situaciones complejas o de estrés."
+  },
+  {
+    title: "Colaboración",
+    description: "Me encanta trabajar en equipo y realizar todo tipo de actividades en grupo."
+  },
+  {
+    title: "Consejos",
+    description: "Intento aprender algo nuevo cada día y si veo que puede ser útil para el equipo lo comparto con ellos."
+  }
+];
+
+// Datos de las cartas de recomendación
+const recomendacionItems = [
+  {
+    nombre: "Mauricio Alpizar",
+    cargo: "Senior Product Designer",
+    empresa: "K-LAGAN",
+    href: "/cartas/mauricio-alpizar.pdf",
+    linkText: "Leer carta"
+  },
+  {
+    nombre: "Eszter Vass",
+    cargo: "Principal Product Management in Custody Banking",
+    empresa: "Epsom", 
+    href: "/cartas/eszter-vass.pdf",
+    linkText: "Leer carta"
+  }
+];
+---
+
+<PageLayout 
+  title={pageTitle}
+  currentPage="/sobre-mi"
+  description="Conoce más sobre Marc López, diseñador UX/UI especializado en crear experiencias digitales centradas en el usuario."
+  keywords="sobre mi, marc lopez, diseñador ux ui, experiencia usuario, portfolio"
+>
+  
+  <!-- Hero Section -->
+  <section class="section section--xl">
+    <div class="container">
+      <Hero 
+        title="Sobre mí"
+        titleTag="h1"
+        class="fade-in"
+      />
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="section section--lg section--with-border">
+    <div class="container">
+      <div class="text-columns slide-up">
+        <TextBlock 
+          size="xl"
+          title=""
+          description="Mi proceso creativo abarca desde la concepción inicial hasta la entrega final al equipo de desarrollo, garantizando que en cada etapa se tenga al usuario en el centro.
+
+En mi trayectoria profesional, he aprendido que la clave para el éxito radica en comprender las necesidades del usuario, alcanzar los objetivos comerciales y crear productos que impacten y sean accesibles para todos."
+          class="intro-text-left"
+        />
+        
+        <TextBlock
+          size="xl" 
+          title=""
+          description="Mi pasión por el diseño va más allá de las tendencias; se trata de crear soluciones significativas que no solo resuelvan problemas, sino que también inspiren y empoderen a quienes las utilizan.
+
+Estoy comprometido a seguir desafiando los límites del diseño y a liderar el camino hacia un futuro digital más inclusivo y emocionante."
+          class="intro-text-right"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Como trabajo Section -->
+  <section class="section section--lg section--with-border">
+    <div class="container">
+      <div class="content-block">
+        <!-- Título de sección -->
+        <Title 
+          text="Como trabajo"
+          size="big"
+          showDivider={false}
+          as="h2"
+          class="section-title"
+        />
+        
+        <!-- Grid de puntos -->
+        <div class="grid grid--responsive-2">
+          {comoTrabajoItems.map((item, index) => (
+            <Punto
+              number={item.number}
+              title={item.title}
+              description={item.description}
+              titleTag="h3"
+              class="slide-up"
+            />
+          ))}
+          
+          <!-- Último elemento invisible para mantener el grid -->
+          {comoTrabajoItems.length % 2 !== 0 && (
+            <div class="grid-placeholder" aria-hidden="true"></div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué aporto Section -->
+  <section class="section section--lg section--with-border">
+    <div class="container">
+      <div class="content-block">
+        <!-- Título de sección -->
+        <Title 
+          text="Qué aportaré al equipo"
+          size="big"
+          showDivider={false}
+          as="h2"
+          class="section-title"
+        />
+        
+        <!-- Grid de puntos sin números -->
+        <div class="grid grid--responsive-2">
+          {queAportoItems.map((item, index) => (
+            <Punto
+              title={item.title}
+              description={item.description}
+              showNumber={false}
+              titleTag="h3"
+              class="slide-up"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cartas de recomendación Section -->
+  <section class="section section--lg section--with-border">
+    <div class="container">
+      <div class="content-block">
+        <!-- Título de sección -->
+        <Title 
+          text="Cartas de recomendación"
+          size="big"
+          showDivider={false}
+          as="h2"
+          class="section-title"
+        />
+        
+        <!-- Grid de cartas -->
+        <div class="grid grid--responsive-2">
+          {recomendacionItems.map((item, index) => (
+            <RecommendationLetter
+              nombre={item.nombre}
+              cargo={item.cargo}
+              empresa={item.empresa}
+              href={item.href}
+              linkText={item.linkText}
+              target="_blank"
+              class="slide-up"
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  /* Importar estilos globales de layout */
+  @import '../styles/layout.css';
+  
+  /* Estilos específicos de la página Sobre mí */
+  
+  .section-title {
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .grid-placeholder {
+    opacity: 0;
+    pointer-events: none;
+    min-height: 1px;
+  }
+  
+  /* Animaciones escalonadas */
+  .slide-up {
+    opacity: 0;
+    animation: slideUpStagger 0.8s ease-out forwards;
+  }
+  
+  @keyframes slideUpStagger {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive adjustments específicos */
+  @media (max-width: 767px) {
+    .text-columns {
+      flex-direction: column;
+    }
+    
+    .section--xl {
+      padding-top: var(--spacing-hg);
+      padding-bottom: var(--spacing-hg);
+    }
+    
+    .grid {
+      gap: var(--spacing-2xl);
+    }
+    
+    .content-block {
+      gap: var(--spacing-xl);
+    }
+  }
+  
+  /* Estados de reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in,
+    .slide-up {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>
