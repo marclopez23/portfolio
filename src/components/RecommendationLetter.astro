@@ -1,0 +1,225 @@
+---
+// RecommendationLetter.astro
+import Link from './Link.astro';
+
+export interface Props {
+  /**
+   * Nombre de la persona que recomienda
+   */
+  nombre?: string;
+  
+  /**
+   * Cargo de la persona
+   */
+  cargo?: string;
+  
+  /**
+   * Empresa donde trabaja
+   */
+  empresa?: string;
+  
+  /**
+   * URL de la carta de recomendación
+   */
+  href?: string;
+  
+  /**
+   * Texto del enlace
+   */
+  linkText?: string;
+  
+  /**
+   * Target del enlace
+   */
+  target?: '_blank' | '_self' | '_parent' | '_top';
+  
+  /**
+   * Descripción accesible para el enlace
+   */
+  linkAriaLabel?: string;
+  
+  /**
+   * Clases CSS adicionales
+   */
+  class?: string;
+  
+  /**
+   * ID del elemento
+   */
+  id?: string;
+}
+
+const {
+  nombre = 'Mauricio Alpizar',
+  cargo = 'Product Designer',
+  empresa = 'K-LAGAN',
+  href = '#',
+  linkText = 'Leer carta',
+  target = '_blank',
+  linkAriaLabel,
+  class: className = '',
+  id
+} = Astro.props;
+
+// Clases CSS del componente
+const cardClasses = [
+  'recommendation-letter',
+  className
+].filter(Boolean).join(' ');
+
+// ID único para accesibilidad
+const cardId = id || `rec-letter-${nombre.toLowerCase().replace(/\s+/g, '-')}`;
+const titleId = `${cardId}-title`;
+
+// Aria label por defecto más descriptivo
+const defaultAriaLabel = `Leer carta de recomendación de ${nombre}, ${cargo} en ${empresa}`;
+const finalAriaLabel = linkAriaLabel || defaultAriaLabel;
+---
+
+<article 
+  class={cardClasses} 
+  id={cardId}
+  role="article"
+  aria-labelledby={titleId}
+>
+  <div class="recommendation-letter__info">
+    <h3 class="recommendation-letter__name" id={titleId}>
+      {nombre}<span class="recommendation-letter__dot" aria-hidden="true">.</span>
+    </h3>
+    <p class="recommendation-letter__position">
+      {cargo}
+    </p>
+    <p class="recommendation-letter__company">
+      {empresa}
+    </p>
+  </div>
+  
+  <div class="recommendation-letter__link">
+    <Link 
+      text={linkText}
+      href={href} 
+      target={target}
+      showArrow={false}
+      ariaLabel={finalAriaLabel}
+    />
+  </div>
+  
+  <slot />
+</article>
+
+<style>
+  .recommendation-letter {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+    
+    /* Spacing */
+    padding: var(--spacing-2xl);
+    
+    /* Appearance */
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    
+    /* Size */
+    width: 100%;
+  }
+
+  /* Sección de información */
+  .recommendation-letter__info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  /* Nombre */
+  .recommendation-letter__name {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    width: 100%;
+    margin: 0;
+  }
+
+  .recommendation-letter__dot {
+    color: var(--color-text-tertiary);
+  }
+
+  /* Cargo */
+  .recommendation-letter__position {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    width: 100%;
+    margin: 0;
+  }
+
+  /* Empresa */
+  .recommendation-letter__company {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    width: 100%;
+    margin: 0;
+  }
+
+  /* Sección del enlace */
+  .recommendation-letter__link {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--spacing-lg);
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Variantes del componente */
+  
+  /* Variante compacta */
+  .recommendation-letter--compact {
+    gap: var(--spacing-xl);
+    padding: var(--spacing-xl);
+  }
+
+  .recommendation-letter--compact .recommendation-letter__info {
+    gap: var(--spacing-xs);
+  }
+
+  .recommendation-letter--compact .recommendation-letter__name {
+    font-size: var(--font-size-xl);
+  }
+
+  .recommendation-letter--compact .recommendation-letter__position {
+    font-size: var(--font-size-lg);
+  }
+
+  .recommendation-letter--compact .recommendation-letter__company {
+    font-size: var(--font-size-md);
+  }
+
+  /* Variante alineada al centro */
+  .recommendation-letter--center .recommendation-letter__info {
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Variante sin enlace */
+  .recommendation-letter--no-link .recommendation-letter__link {
+    display: none;
+  }
+
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    .recommendation-letter {
+      gap: var(--spacing-2xl);
+    }
+  }
+</style>

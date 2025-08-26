@@ -1,0 +1,187 @@
+---
+// Title.astro
+export interface Props {
+  /**
+   * Texto del título
+   */
+  text?: string;
+  
+  /**
+   * Tamaño del título
+   */
+  size?: 'big' | 'small';
+  
+  /**
+   * Mostrar línea divisoria a la derecha
+   */
+  showDivider?: boolean;
+  
+  /**
+   * Elemento HTML a usar
+   */
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  
+  /**
+   * Clases CSS adicionales
+   */
+  class?: string;
+  
+  /**
+   * ID del elemento
+   */
+  id?: string;
+  
+  /**
+   * Label accesible personalizado
+   */
+  ariaLabel?: string;
+}
+
+const {
+  text = 'Sobre mí',
+  size = 'big',
+  showDivider = true,
+  as = 'h2',
+  class: className = '',
+  id,
+  ariaLabel
+} = Astro.props;
+
+// Clases CSS del componente
+const titleClasses = [
+  'title',
+  `title--${size}`,
+  showDivider && 'title--with-divider',
+  className
+].filter(Boolean).join(' ');
+
+// ID único para accesibilidad
+const titleId = id || `title-${text.toLowerCase().replace(/\s+/g, '-')}`;
+const TitleTag = as;
+---
+
+<div class={titleClasses} id={titleId}>
+  <TitleTag 
+    class="title__text" 
+    id={titleId && `${titleId}-text`}
+    aria-label={ariaLabel}
+  >
+    {text}<span class="title__dot" aria-hidden="true">.</span>
+  </TitleTag>
+  {showDivider && (
+    <div class="title__divider" aria-hidden="true"></div>
+  )}
+  <slot />
+</div>
+
+<style>
+  .title {
+    /* Layout */
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--spacing-2xl);
+    position: relative;
+    width: 100%;
+    
+    /* Spacing */
+    padding-left: 0;
+    padding-right: var(--spacing-2xl);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  /* Texto del título */
+  .title__text {
+    font-family: var(--font-family-primary);
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    margin: 0;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .title__dot {
+    color: var(--color-text-tertiary);
+  }
+
+  /* Tamaño Big */
+  .title--big .title__text {
+    font-size: var(--font-size-hg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-xhg);
+  }
+
+  /* Tamaño Small */
+  .title--small .title__text {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+  }
+
+  /* Línea divisoria */
+  .title__divider {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--color-divider);
+    pointer-events: none;
+  }
+
+  /* Variantes de alineación */
+  .title--center {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .title--right {
+    justify-content: flex-end;
+    text-align: right;
+  }
+
+  /* Variante sin padding lateral */
+  .title--no-padding {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Variante con divider a la izquierda */
+  .title--divider-left .title__divider {
+    right: auto;
+    left: 0;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .title {
+      gap: var(--spacing-xl);
+      padding-right: var(--spacing-xl);
+    }
+    
+    /* En móvil, usar tamaños más pequeños */
+    .title--big .title__text {
+      font-size: var(--font-size-4xl);
+      line-height: var(--line-height-normal);
+    }
+
+    .title--small .title__text {
+      font-size: var(--font-size-3xl);
+    }
+  }
+
+  /* Estados de hover para interactividad */
+  .title--interactive .title__text {
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .title--interactive .title__text:hover {
+    color: var(--color-text-tertiary);
+  }
+
+  .title--interactive .title__text:hover .title__dot {
+    color: var(--color-text-primary);
+  }
+</style>

@@ -1,0 +1,227 @@
+---
+// Hero.astro
+import Title from './Title.astro';
+
+export interface Props {
+  /**
+   * Texto del título principal
+   */
+  title?: string;
+  
+  /**
+   * Elemento HTML a usar para el título
+   */
+  titleTag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  
+  /**
+   * Altura mínima del hero
+   */
+  minHeight?: string;
+  
+  /**
+   * Alineación del contenido
+   */
+  align?: 'left' | 'center' | 'right';
+  
+  /**
+   * Clases CSS adicionales
+   */
+  class?: string;
+  
+  /**
+   * ID del elemento
+   */
+  id?: string;
+}
+
+const {
+  title = 'Sobre mí',
+  titleTag = 'h1',
+  minHeight = 'auto',
+  align = 'left',
+  class: className = '',
+  id
+} = Astro.props;
+
+// Clases CSS del componente
+const heroClasses = [
+  'hero',
+  `hero--${align}`,
+  className
+].filter(Boolean).join(' ');
+
+// Estilo inline para altura mínima personalizada
+const heroStyle = minHeight !== 'auto' ? { minHeight } : {};
+
+// ID único para accesibilidad
+const heroId = id || 'hero-main';
+const titleId = `${heroId}-title`;
+---
+
+<section 
+  class={heroClasses} 
+  id={heroId} 
+  style={heroStyle}
+  role="banner"
+  aria-labelledby={titleId}
+>
+  <div class="hero__content">
+    <Title 
+      text={title}
+      size="extra-large"
+      showDivider={false}
+      as={titleTag}
+      class="hero__title"
+      id={titleId}
+    />
+    <slot />
+  </div>
+</section>
+
+<style>
+  .hero {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    
+    /* Spacing */
+    padding: var(--spacing-xhg) var(--spacing-2xl);
+    gap: var(--spacing-2xl);
+    
+    /* Altura mínima por defecto */
+    min-height: 50vh;
+  }
+
+  /* Contenido del hero */
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    gap: var(--spacing-2xl);
+  }
+
+  /* Título del hero - tamaño extra grande */
+  .hero :global(.hero__title) {
+    font-size: var(--font-size-xhg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-xhg);
+    white-space: nowrap;
+  }
+
+  /* Variantes de alineación */
+  .hero--center {
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero--center .hero__content {
+    align-items: center;
+  }
+
+  .hero--right {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .hero--right .hero__content {
+    align-items: flex-end;
+  }
+
+  /* Variante de altura completa */
+  .hero--full-height {
+    min-height: 100vh;
+  }
+
+  /* Variante con menos padding */
+  .hero--compact {
+    padding: var(--spacing-hg) var(--spacing-2xl);
+    min-height: 40vh;
+  }
+
+  /* Variante con fondo personalizado */
+  .hero--with-background {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Overlay para mejorar legibilidad con fondos */
+  .hero--with-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(33, 33, 33, 0.7);
+    z-index: 1;
+  }
+
+  .hero--with-overlay .hero__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .hero {
+      padding: var(--spacing-hg) var(--spacing-2xl);
+      min-height: 40vh;
+    }
+    
+    .hero :global(.hero__title) {
+      font-size: var(--font-size-hg);
+      white-space: normal;
+      word-break: break-word;
+    }
+    
+    .hero__content {
+      gap: var(--spacing-xl);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: var(--spacing-4xl) var(--spacing-xl);
+    }
+    
+    .hero :global(.hero__title) {
+      font-size: var(--font-size-4xl);
+    }
+  }
+
+  /* Estados de animación - respetando preferencias de movimiento */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero--animated .hero__content {
+      animation: heroFadeIn 0.8s ease-out;
+    }
+  }
+
+  @keyframes heroFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Respeto a preferencias de movimiento reducido */
+  @media (prefers-reduced-motion: reduce) {
+    .hero--animated .hero__content {
+      animation: none;
+    }
+    
+    .hero * {
+      transition: none !important;
+    }
+  }
+</style>

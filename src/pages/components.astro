@@ -1,7 +1,12 @@
 ---
 // src/pages/components.astro
-import Layout from '../layouts/Layout.astro'; // Ajusta la ruta
-import Link from '../components/Link.astro'; // Ajusta la ruta
+import Layout from "../layouts/Layout.astro"; // Ajusta la ruta
+import Link from "../components/Link.astro"; // Ajusta la ruta
+import Button from "../components/Button.astro";
+import Punto from "../components/Punto.astro";
+import RecommendationLetter from "../components/RecommendationLetter.astro";
+import Title from "../components/Title.astro";
+import Hero from "../components/Hero.astro";
 
 const pageTitle = "Componentes";
 ---
@@ -15,23 +20,23 @@ const pageTitle = "Componentes";
     <!-- Link Component -->
     <section class="component-section">
       <h2 class="component-title">Link</h2>
-      
+
       <div class="variants-grid">
         <div class="variant">
           <span class="variant-label">Default</span>
           <Link />
         </div>
-        
+
         <div class="variant">
           <span class="variant-label">Sin flecha</span>
           <Link text="Contacto" showArrow={false} />
         </div>
-        
+
         <div class="variant">
           <span class="variant-label">Disabled</span>
           <Link text="No disponible" disabled={true} />
         </div>
-        
+
         <div class="variant">
           <span class="variant-label">Externo</span>
           <Link text="GitHub" href="https://github.com" target="_blank" />
@@ -39,35 +44,176 @@ const pageTitle = "Componentes";
       </div>
     </section>
 
-    <!-- Placeholder para próximos componentes -->
     <section class="component-section">
       <h2 class="component-title">Button</h2>
-      
       <div class="variants-grid">
         <div class="variant">
-          <span class="variant-label">Próximamente</span>
-          <div class="placeholder">Button Component</div>
+          <span class="variant-label">Default</span>
+          <Button />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Custom Text</span>
+          <Button text="Contáctame" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">As Link</span>
+          <Button as="a" href="#" text="Enlace" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Disabled</span>
+          <Button text="Deshabilitado" disabled />
         </div>
       </div>
     </section>
+    ---
 
+    <!-- Punto Component -->
     <section class="component-section">
-      <h2 class="component-title">Card</h2>
-      
+      <h2 class="component-title">Punto</h2>
       <div class="variants-grid">
         <div class="variant">
-          <span class="variant-label">Próximamente</span>
-          <div class="placeholder">Card Component</div>
+          <span class="variant-label">Default</span>
+          <Punto titleTag="h4" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Custom</span>
+          <Punto
+            number="2"
+            title="Diseñar solución"
+            description="Crear un diseño que resuelva los problemas identificados."
+            titleTag="h4"
+          />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Sin número</span>
+          <Punto
+            title="Información adicional"
+            description="Punto sin numeración para casos especiales."
+            showNumber={false}
+            titleTag="h4"
+          />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Paso 3</span>
+          <Punto
+            number="3"
+            title="Implementar y evaluar"
+            description="Desarrollar la solución y medir su efectividad."
+            titleTag="h4"
+          />
         </div>
       </div>
     </section>
 
+    <!-- RecommendationLetter Component -->
+    <section class="component-section">
+      <h2 class="component-title">RecommendationLetter</h2>
+      <div class="variants-grid">
+        <div class="variant">
+          <span class="variant-label">Default</span>
+          <RecommendationLetter />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Custom</span>
+          <RecommendationLetter
+            nombre="Ana García"
+            cargo="Senior UX Designer"
+            empresa="Google"
+            linkText="Ver carta"
+          />
+        </div>
+        <div class="variant">
+          <span class="variant-label">External Link</span>
+          <RecommendationLetter
+            nombre="Carlos López"
+            cargo="Tech Lead"
+            empresa="Microsoft"
+            href="https://linkedin.com/in/carlos"
+            target="_blank"
+            linkText="Ver perfil"
+          />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Custom Aria</span>
+          <RecommendationLetter
+            nombre="María Rodríguez"
+            cargo="Product Manager"
+            empresa="Meta"
+            linkText="Leer más"
+            linkAriaLabel="Leer recomendación completa de María Rodríguez"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Title Component -->
+    <section class="component-section">
+      <h2 class="component-title">Title</h2>
+      <div class="variants-grid" style="display: flex; flex-direction: column;">
+        <div class="variant">
+          <span class="variant-label">Big + Divider</span>
+          <Title as="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Small + Divider</span>
+          <Title size="small" text="Sobre mí" as="h4" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Big No Divider</span>
+          <Title showDivider={false} text="Sobre mí" as="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Small No Divider</span>
+          <Title size="small" showDivider={false} text="Sobre mí" as="h4" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Custom Text</span>
+          <Title text="Mis proyectos" size="small" as="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">With Aria Label</span>
+          <Title
+            text="Proyectos"
+            as="h3"
+            ariaLabel="Mis proyectos principales"
+          />
+        </div>
+      </div>
+    </section>
+    <section class="component-section">
+      <h2 class="component-title">Hero</h2>
+      <div class="variants-grid" style="display: flex; flex-direction: column;">
+        <div class="variant">
+          <span class="variant-label">Default</span>
+          <Hero titleTag="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Center</span>
+          <Hero title="Centrado" align="center" titleTag="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Custom Title</span>
+          <Hero title="Mi Portfolio" titleTag="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Compact</span>
+          <Hero title="Hola mundo" class="hero--compact" titleTag="h4" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Right Aligned</span>
+          <Hero title="Alineado" align="right" titleTag="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">With Animation</span>
+          <Hero title="Animado" class="hero--animated" titleTag="h3" />
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>
 
 <style>
   .components-page {
-    max-width: 1200px;
     margin: 0 auto;
     padding: var(--spacing-4xl) var(--spacing-2xl);
     background-color: var(--color-main-bg);
@@ -106,7 +252,7 @@ const pageTitle = "Componentes";
   }
 
   .variant {
-    background-color: var(--color-surface);
+    background-color: var(--color-main-bg);
     border-radius: var(--radius-lg);
     padding: var(--spacing-2xl);
     border: 1px solid var(--color-divider);
@@ -139,7 +285,7 @@ const pageTitle = "Componentes";
     .components-page {
       padding: var(--spacing-2xl) var(--spacing-xl);
     }
-    
+
     .variants-grid {
       grid-template-columns: 1fr;
     }

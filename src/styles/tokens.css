@@ -64,8 +64,8 @@
        LINE HEIGHTS
        ======================================== */
     --line-height-tight: 1;
-    --line-height-normal: 1.5;
-    --line-height-xhg: 100;  /* Specific for XHG/HG sizes */
+    --line-height-normal: 1.4;
+    --line-height-xhg: 1.5;  /* Specific for XHG/HG sizes */
     
     /* ========================================
        BORDER RADIUS

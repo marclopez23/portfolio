@@ -1,0 +1,187 @@
+---
+// Punto.astro
+export interface Props {
+  /**
+   * Número del punto
+   */
+  number?: string | number;
+  
+  /**
+   * Título del punto
+   */
+  title?: string;
+  
+  /**
+   * Descripción del punto
+   */
+  description?: string;
+  
+  /**
+   * Si mostrar o no el número
+   */
+  showNumber?: boolean;
+  
+  /**
+   * Elemento HTML a usar para el título
+   */
+  titleTag?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  
+  /**
+   * Clases CSS adicionales
+   */
+  class?: string;
+  
+  /**
+   * ID del elemento
+   */
+  id?: string;
+}
+
+const {
+  number = '1',
+  title = 'Entender y analizar',
+  description = 'Analizar a fondo las necesidades de los usuarios, el mercado y la idea de negocio o producto.',
+  showNumber = true,
+  titleTag = 'h3',
+  class: className = '',
+  id
+} = Astro.props;
+
+// Clases CSS del componente
+const pointClasses = [
+  'punto',
+  className
+].filter(Boolean).join(' ');
+
+// ID único para accesibilidad
+const pointId = id || `punto-${number}`;
+const titleId = `${pointId}-title`;
+const descId = `${pointId}-description`;
+const TitleTag = titleTag;
+---
+
+<article 
+  class={pointClasses} 
+  id={pointId}
+  role="article"
+  aria-labelledby={titleId}
+  aria-describedby={descId}
+>
+  {showNumber && (
+    <div class="punto__number" aria-label={`Paso ${number}`}>
+      <span class="punto__number-digit" aria-hidden="true">{number}</span><span class="punto__number-dot" aria-hidden="true">.</span>
+    </div>
+  )}
+  <TitleTag class="punto__title" id={titleId}>
+    {title}
+  </TitleTag>
+  <p class="punto__description" id={descId}>
+    {description}
+  </p>
+  <slot />
+</article>
+
+<style>
+  .punto {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--spacing-lg);
+    width: 100%;
+  }
+
+  /* Número del punto */
+  .punto__number {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xhg);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-xhg);
+    color: var(--color-text-primary);
+    width: 100%;
+    margin: 0;
+  }
+
+  .punto__number-digit {
+    color: var(--color-text-primary);
+  }
+
+  .punto__number-dot {
+    color: var(--color-text-tertiary);
+  }
+
+  /* Título del punto */
+  .punto__title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    width: 100%;
+    margin: 0;
+  }
+
+  /* Ajuste dinámico según titleTag */
+  .punto :global(h2.punto__title) {
+    font-size: var(--font-size-3xl);
+  }
+
+  .punto :global(h4.punto__title),
+  .punto :global(h5.punto__title),
+  .punto :global(h6.punto__title) {
+    font-size: var(--font-size-xl);
+  }
+
+  /* Descripción del punto */
+  .punto__description {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-point-description);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-secondary);
+    width: 100%;
+    margin: 0;
+  }
+
+  /* Responsive adjustments */
+  @media (min-width: 768px) {
+    .punto {
+      gap: var(--spacing-lg);
+    }
+  }
+
+  /* Variantes de tamaño */
+  .punto--compact {
+    gap: var(--spacing-md);
+  }
+
+  .punto--compact .punto__number {
+    font-size: var(--font-size-hg);
+  }
+
+  .punto--compact .punto__title {
+    font-size: var(--font-size-xl);
+  }
+
+  .punto--compact .punto__description {
+    font-size: var(--font-size-lg);
+  }
+
+  /* Sin número */
+  .punto--no-number .punto__title {
+    margin-top: 0;
+  }
+
+  /* Alineación centrada */
+  .punto--center {
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Alineación a la derecha */
+  .punto--right {
+    align-items: flex-end;
+    text-align: right;
+  }
+</style>
