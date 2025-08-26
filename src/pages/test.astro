@@ -1,0 +1,630 @@
+---
+// src/pages/test.astro
+import Layout from '../layouts/Layout.astro'; // Ajusta la ruta según tu estructura
+import Link from '../components/Link.astro'; // Ajusta la ruta
+// import OtroComponente from '../components/OtroComponente.astro';
+
+const pageTitle = "Prueba de Componentes";
+---
+
+<Layout title={pageTitle}>
+  <main class="test-container">
+    <header class="test-header">
+      <h1 class="test-title">🧪 Página de Prueba de Componentes</h1>
+      <p class="test-description">
+        Esta página sirve para probar y visualizar todos los componentes del proyecto
+      </p>
+    </header>
+
+    <!-- Link Component Tests -->
+    <section class="test-section">
+      <h2 class="section-title">Link Component - Accessibility Focused</h2>
+      
+      <div class="test-group">
+        <h3 class="test-group-title">Estados básicos</h3>
+        <div class="component-grid">
+          <div class="component-item">
+            <label>Default (del diseño Figma)</label>
+            <Link />
+          </div>
+          
+          <div class="component-item">
+            <label>Con texto personalizado</label>
+            <Link text="Ver Portfolio" />
+          </div>
+          
+          <div class="component-item">
+            <label>Sin flecha</label>
+            <Link text="Contacto" showArrow={false} />
+          </div>
+        </div>
+      </div>
+
+      <div class="test-group">
+        <h3 class="test-group-title">🚫 Estado Disabled (Accesible)</h3>
+        <div class="component-grid">
+          <div class="component-item">
+            <label>Disabled con flecha</label>
+            <Link text="No disponible" disabled={true} />
+          </div>
+          
+          <div class="component-item">
+            <label>Disabled sin flecha</label>
+            <Link text="Próximamente" disabled={true} showArrow={false} />
+          </div>
+          
+          <div class="component-item">
+            <label>Comparación: Normal vs Disabled</label>
+            <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+              <Link text="Normal" />
+              <Link text="Disabled" disabled={true} />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="test-group">
+        <h3 class="test-group-title">♿ Accesibilidad - Enlaces externos</h3>
+        <div class="component-grid">
+          <div class="component-item">
+            <label>Enlace externo (nueva ventana)</label>
+            <Link 
+              text="GitHub" 
+              href="https://github.com" 
+              target="_blank"
+            />
+          </div>
+          
+          <div class="component-item">
+            <label>Con aria-label personalizado</label>
+            <Link 
+              text="Portfolio" 
+              href="https://mi-portfolio.com"
+              target="_blank"
+              ariaLabel="Ver mi portfolio completo en nueva ventana"
+            />
+          </div>
+          
+          <div class="component-item">
+            <label>Enlace de email</label>
+            <Link 
+              text="Contáctame" 
+              href="mailto:test@example.com"
+              showArrow={false}
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="test-group">
+        <h3 class="test-group-title">🎯 Navegación interna</h3>
+        <div class="component-grid">
+          <div class="component-item">
+            <label>Enlace interno</label>
+            <Link text="Ir al inicio" href="/" />
+          </div>
+          
+          <div class="component-item">
+            <label>Enlace a sección</label>
+            <Link text="Ver proyectos" href="#proyectos" />
+          </div>
+          
+          <div class="component-item">
+            <label>Con clase personalizada</label>
+            <Link 
+              text="Servicios" 
+              href="/servicios" 
+              class="mi-clase-custom"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="test-group">
+        <h3 class="test-group-title">🧪 Pruebas de variaciones de contenido</h3>
+        <div class="component-grid">
+          <div class="component-item">
+            <label>Texto muy largo</label>
+            <Link text="Conoce más sobre mi experiencia profesional y proyectos realizados" />
+          </div>
+          
+          <div class="component-item">
+            <label>Texto muy corto</label>
+            <Link text="Ver" />
+          </div>
+          
+          <div class="component-item">
+            <label>Con caracteres especiales y emojis</label>
+            <Link text="¡Hola! ¿Cómo estás? 👋🚀" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessibility Testing Instructions -->
+    <section class="test-section">
+      <h2 class="section-title">♿ Guía de Testing de Accesibilidad</h2>
+      
+      <div class="accessibility-test-guide">
+        <div class="test-category">
+          <h3>🎹 Navegación por teclado</h3>
+          <ul>
+            <li><kbd>Tab</kbd> - Navegar entre enlaces</li>
+            <li><kbd>Enter</kbd> o <kbd>Space</kbd> - Activar enlace</li>
+            <li><kbd>Escape</kbd> - Quitar focus del enlace actual</li>
+            <li>Verifica que el orden de tabulación sea lógico</li>
+            <li>Comprueba que los enlaces disabled no reciban focus</li>
+          </ul>
+        </div>
+
+        <div class="test-category">
+          <h3>🔊 Screen Readers</h3>
+          <ul>
+            <li>Enlaces externos anuncian "se abre en nueva ventana"</li>
+            <li>Enlaces disabled anuncian "no disponible" o "disabled"</li>
+            <li>El texto del enlace es descriptivo y claro</li>
+            <li>Las flechas están marcadas como decorativas (aria-hidden)</li>
+          </ul>
+        </div>
+
+        <div class="test-category">
+          <h3>🎨 Contraste y Visual</h3>
+          <ul>
+            <li>Estado disabled usa colores específicos (no opacidad)</li>
+            <li>Focus ring es visible con 3px de grosor</li>
+            <li>Prueba con modo alto contraste del sistema</li>
+            <li>Verifica que el tamaño mínimo táctil sea 44px</li>
+          </ul>
+        </div>
+
+        <div class="test-category">
+          <h3>⚡ Reduced Motion</h3>
+          <ul>
+            <li>Activa "Reduce motion" en tu sistema operativo</li>
+            <li>Verifica que las animaciones de flecha se desactiven</li>
+            <li>Las transiciones deben respetarse según preferencia</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección para agregar más componentes -->
+    <section class="test-section">
+      <h2 class="section-title">Otros Componentes</h2>
+      
+      <div class="test-group">
+        <h3 class="test-group-title">Próximos componentes</h3>
+        <div class="component-grid">
+          <div class="component-item">
+            <label>Botón (pendiente)</label>
+            <div class="placeholder">Componente pendiente</div>
+          </div>
+          
+          <div class="component-item">
+            <label>Card (pendiente)</label>
+            <div class="placeholder">Componente pendiente</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de información de desarrollo -->
+    <section class="test-section">
+      <h2 class="section-title">Información de desarrollo</h2>
+      
+      <div class="dev-info">
+        <h3>Cómo usar esta página:</h3>
+        <ul>
+          <li>✅ Verifica que los componentes se rendericen correctamente</li>
+          <li>✅ Prueba las interacciones (hover, click, focus)</li>
+          <li>✅ Verifica responsividad (redimensiona la ventana)</li>
+          <li>✅ Comprueba accesibilidad (navegación con tab)</li>
+          <li>✅ Valida que los enlaces funcionen</li>
+        </ul>
+        
+        <h3>Para desarrolladores:</h3>
+        <ul>
+          <li>📱 Usa las DevTools para probar en diferentes dispositivos</li>
+          <li>🎨 Verifica que se usen los design tokens correctos</li>
+          <li>🔍 Inspecciona el HTML generado y atributos ARIA</li>
+          <li>⚡ Mide el performance con Lighthouse</li>
+          <li>♿ Ejecuta auditorías de accesibilidad (axe-core)</li>
+          <li>🎹 Prueba navegación completa solo con teclado</li>
+          <li>🔊 Verifica con screen readers (VoiceOver, NVDA)</li>
+          <li>🌗 Activa modo alto contraste y reduced motion</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .test-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-4xl) var(--spacing-2xl);
+    background-color: var(--color-main-bg);
+    min-height: 100vh;
+  }
+
+  .test-header {
+    text-align: center;
+    margin-bottom: var(--spacing-4xl);
+  }
+
+  .test-title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .test-description {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-2xl);
+  }
+
+  .test-section {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-3xl);
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .section-title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-2xl);
+    border-bottom: 2px solid var(--color-divider);
+    padding-bottom: var(--spacing-lg);
+  }
+
+  .test-group {
+    margin-bottom: var(--spacing-3xl);
+  }
+
+  .test-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .test-group-title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .component-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-2xl);
+  }
+
+  .component-item {
+    background-color: var(--color-main-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+    border: 1px solid var(--color-divider);
+  }
+
+  .component-item label {
+    display: block;
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-tertiary);
+    margin-bottom: var(--spacing-lg);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .placeholder {
+    background-color: var(--color-divider);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-family: var(--font-family-primary);
+    font-style: italic;
+    border: 2px dashed var(--color-text-secondary);
+  }
+
+  .dev-info {
+    background-color: var(--color-main-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+    border-left: 4px solid var(--color-text-tertiary);
+  }
+
+  .dev-info h3 {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+  }
+
+  .dev-info h3:first-child {
+    margin-top: 0;
+  }
+
+  .dev-info ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .dev-info li {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+    position: relative;
+  }
+
+  .dev-info li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-text-tertiary);
+    border-radius: 50%;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .test-container {
+      padding: var(--spacing-2xl) var(--spacing-xl);
+    }
+    
+    .component-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .test-section {
+      padding: var(--spacing-2xl);
+    }
+  }
+
+  /* Accessibility Testing Guide Styles */
+  .accessibility-test-guide {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-2xl);
+    margin-top: var(--spacing-2xl);
+  }
+
+  .test-category {
+    background-color: var(--color-main-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+    border-left: 4px solid var(--color-text-tertiary);
+  }
+
+  .test-category h3 {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-lg);
+    margin-top: 0;
+  }
+
+  .test-category ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .test-category li {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-xl);
+    position: relative;
+    line-height: var(--line-height-normal);
+  }
+
+  .test-category li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--color-text-tertiary);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* Keyboard key styling */
+  kbd {
+    background-color: var(--color-surface);
+    border: 2px solid var(--color-divider);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: monospace;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-medium);
+  }
+</style>
+
+<script>
+  // Enhanced utilities for accessibility testing
+  console.log('🧪 Página de prueba cargada');
+  console.log('📊 Componentes disponibles:', document.querySelectorAll('.component-item').length);
+  
+  // Function to test accessibility compliance
+  window.testAccessibilityCompliance = function() {
+    console.log('🔍 Iniciando auditoría de accesibilidad...');
+    
+    const Links = document.querySelectorAll('.link-component');
+    const disabledComponents = document.querySelectorAll('.link-component--disabled');
+    const externalLinks = document.querySelectorAll('a[target="_blank"]');
+    
+    console.log(`🔗 ${Links.length} componentes Link encontrados`);
+    console.log(`🚫 ${disabledComponents.length} componentes disabled encontrados`);
+    console.log(`🌐 ${externalLinks.length} enlaces externos encontrados`);
+    
+    // Check disabled components accessibility
+    disabledComponents.forEach((component, index) => {
+      const hasAriaDisabled = component.getAttribute('aria-disabled') === 'true';
+      const hasTabIndex = component.getAttribute('tabindex') === '-1';
+      const hasNoHref = !component.hasAttribute('href');
+      
+      console.log(`Disabled component ${index + 1}:`, {
+        ariaDisabled: hasAriaDisabled,
+        tabIndex: hasTabIndex,
+        noHref: hasNoHref,
+        accessible: hasAriaDisabled && hasTabIndex && hasNoHref
+      });
+    });
+    
+    // Check external links
+    externalLinks.forEach((link, index) => {
+      const hasRel = link.getAttribute('rel')?.includes('noopener');
+      const hasAriaLabel = link.getAttribute('aria-label')?.includes('nueva ventana');
+      
+      console.log(`External link ${index + 1}:`, {
+        hasRel,
+        hasAriaLabel,
+        accessible: hasRel && hasAriaLabel
+      });
+    });
+  };
+
+  // Function to test keyboard navigation
+  window.testKeyboardNavigation = function() {
+    console.log('⌨️ Iniciando prueba de navegación por teclado...');
+    
+    const focusableElements = document.querySelectorAll('.link-component:not(.link-component--disabled)');
+    console.log(`🎯 ${focusableElements.length} elementos navegables encontrados`);
+    
+    let index = 0;
+    const navigateNext = () => {
+      if (index < focusableElements.length) {
+        const element = focusableElements[index] as HTMLElement;
+        element.focus();
+        
+        // Visual highlight for testing
+        element.style.boxShadow = '0 0 0 4px #00ff00';
+        
+        console.log(`Focus en: "${element.getAttribute('data-text')}" (${index + 1}/${focusableElements.length})`);
+        
+        setTimeout(() => {
+          element.style.boxShadow = '';
+          index++;
+          if (index < focusableElements.length) {
+            setTimeout(navigateNext, 800);
+          } else {
+            console.log('✅ Prueba de navegación por teclado completada');
+          }
+        }, 1200);
+      }
+    };
+    
+    navigateNext();
+  };
+
+  // Function to test reduced motion
+  window.testReducedMotion = function() {
+    console.log('🎬 Simulando preferencia de reduced motion...');
+    
+    // Temporarily add reduced motion media query simulation
+    const style = document.createElement('style');
+    style.textContent = `
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .link-component:hover .link-arrow {
+        transform: none !important;
+      }
+    `;
+    document.head.appendChild(style);
+    
+    console.log('🔇 Reduced motion aplicado temporalmente');
+    console.log('💡 Prueba hover en los enlaces - no deberían animarse');
+    
+    // Remove after 10 seconds
+    setTimeout(() => {
+      document.head.removeChild(style);
+      console.log('🎬 Reduced motion removido - animaciones restauradas');
+    }, 10000);
+  };
+
+  // Function to simulate high contrast mode
+  window.testHighContrast = function() {
+    console.log('🌓 Simulando modo alto contraste...');
+    
+    const style = document.createElement('style');
+    style.textContent = `
+      @media (prefers-contrast: high) {
+        .link-component {
+          border: 2px solid var(--color-interactive-link-active) !important;
+        }
+        .link-component:focus {
+          outline: 4px solid var(--color-accessibility-focus-ring) !important;
+        }
+        .link-component--disabled {
+          border-color: var(--color-accessibility-disabled-border) !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    
+    // Force high contrast styles
+    document.documentElement.style.setProperty('--simulate-high-contrast', 'true');
+    
+    console.log('🔆 Alto contraste simulado por 8 segundos');
+    
+    setTimeout(() => {
+      document.head.removeChild(style);
+      console.log('🌓 Alto contraste removido');
+    }, 8000);
+  };
+
+  // Performance monitoring
+  window.addEventListener('load', () => {
+    const loadTime = performance.now();
+    console.log(`⚡ Página cargada en ${loadTime.toFixed(2)}ms`);
+    
+    // Count components
+    const Links = document.querySelectorAll('.link-component').length;
+    console.log(`🔗 ${Links} Link Components renderizados`);
+  });
+
+  // Accessibility testing helper
+  window.testAccessibility = function() {
+    const focusableElements = document.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    console.log(`♿ ${focusableElements.length} elementos focuseables encontrados`);
+    
+    // Test tab navigation
+    let index = 0;
+    const highlightNext = () => {
+      if (index < focusableElements.length) {
+        const element = focusableElements[index];
+        element.focus();
+        element.style.outline = '3px solid #00ff00';
+        setTimeout(() => {
+          element.style.outline = '';
+          index++;
+          if (index < focusableElements.length) {
+            setTimeout(highlightNext, 500);
+          }
+        }, 1000);
+      }
+    };
+    highlightNext();
+  };
+</script>

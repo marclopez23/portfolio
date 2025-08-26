@@ -1,0 +1,430 @@
+
+   :root {
+    /* ========================================
+       FONT FAMILY
+       ======================================== */
+    --font-family-primary: "Inter Tight", -apple-system, BlinkMacSystemFont, "Segoe UI", roboto, sans-serif;
+    
+    /* ========================================
+       FONT WEIGHTS
+       ======================================== */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* ========================================
+       FONT SIZES - MOBILE (Default)
+       ======================================== */
+    --font-size-sm: 10px;
+    --font-size-md: 12px;
+    --font-size-lg: 14px;
+    --font-size-xl: 16px;
+    --font-size-2xl: 20px;
+    --font-size-3xl: 24px;
+    --font-size-4xl: 32px;
+    --font-size-hg: 36px;
+    --font-size-xhg: 40px;
+    
+    /* ========================================
+       SEMANTIC FONT SIZES - MOBILE (Default)
+       ======================================== */
+    --font-size-button: var(--font-size-2xl);                   /* size/2xl - 20px mobile */
+    --font-size-link: var(--font-size-xl);                      /* size/xl - 16px mobile */
+    --font-size-point-description: var(--font-size-xl);         /* size/xl - 16px mobile */
+    --font-size-job-description: var(--font-size-xl);           /* size/xl - 16px mobile */
+    --font-size-badge: var(--font-size-xl);                     /* size/xl - 16px mobile */
+    --font-size-text-block-sm-title: var(--font-size-2xl);      /* size/2xl - 20px mobile */
+    --font-size-text-block-sm-text: var(--font-size-xl);        /* size/xl - 16px mobile */
+    --font-size-text-block-xl-title: var(--font-size-3xl);      /* size/3xl - 24px mobile */
+    --font-size-text-block-xl-description: var(--font-size-xl); /* size/xl - 16px mobile */
+    
+    /* ========================================
+       SPACING - MOBILE (Default)
+       ======================================== */
+    --spacing-xs: 2px;
+    --spacing-sm: 4px;
+    --spacing-md: 8px;
+    --spacing-lg: 12px;
+    --spacing-xl: 16px;
+    --spacing-2xl: 24px;
+    --spacing-3xl: 32px;
+    --spacing-4xl: 40px;
+    --spacing-hg: 48px;
+    --spacing-xhg: 64px;
+    
+    /* ========================================
+       SEMANTIC SPACING - MOBILE (Default)
+       ======================================== */
+    --section-horizontal: var(--spacing-2xl);    /* spacing-2xl - 24px mobile */
+    --section-gap: var(--spacing-xl);            /* spacing-xl - 16px mobile */
+    --menu-horizontal: var(--spacing-2xl);       /* spacing-2xl - 24px mobile */
+    
+    /* ========================================
+       LINE HEIGHTS
+       ======================================== */
+    --line-height-tight: 1;
+    --line-height-normal: 1.5;
+    --line-height-xhg: 100;  /* Specific for XHG/HG sizes */
+    
+    /* ========================================
+       BORDER RADIUS
+       ======================================== */
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-xxl: 128px;
+    
+    /* ========================================
+       COLORS - SEMANTIC
+       ======================================== */
+    --color-main-bg: #212121;
+    --color-surface: #3f3f3f;
+    --color-divider: #3f3f3f;
+    
+    /* Text Colors */
+    --color-text-primary: #fefefe;
+    --color-text-secondary: #a09f9f;
+    --color-text-tertiary: #e95e49;
+    
+    /* Interactive Colors */
+    --color-interactive-primary-hover: #fefefe;
+    --color-interactive-primary-active: #3f3f3f;
+    --color-interactive-primary-on-decorative: #e95e49;
+    --color-interactive-primary-on-active: #fefefe;
+    --color-interactive-link-active: #e95e49;
+
+    
+    /* ========================================
+     ACCESSIBILITY TOKENS
+     ======================================== */
+  --color-accessibility-disabled-text: #6b7280;        /* Texto deshabilitado */
+  --color-accessibility-disabled-background: #f3f4f6;  /* Fondo deshabilitado */
+  --color-accessibility-disabled-border: #d1d5db;      /* Borde deshabilitado */
+  --color-accessibility-focus-ring: #3b82f6;           /* Color del focus ring */
+  --color-accessibility-focus-ring-offset: #ffffff;    /* Color offset del focus */
+  --spacing-accessibility-focus-offset: 2px;           /* Distancia del focus ring */
+  --spacing-accessibility-touch-target: 44px;          /* Tamaño mínimo de toque */
+}
+    
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+
+  /* ========================================
+     DESKTOP BREAKPOINT - 768px and above
+     ======================================== */
+  
+  @media (min-width: 768px) {
+    :root {
+      /* ========================================
+         FONT SIZES - DESKTOP
+         ======================================== */
+      --font-size-sm: 16px;
+      --font-size-md: 20px;
+      --font-size-lg: 24px;
+      --font-size-xl: 32px;
+      --font-size-2xl: 40px;
+      --font-size-3xl: 48px;
+      --font-size-4xl: 54px;
+      --font-size-hg: 80px;
+      --font-size-xhg: 100px;
+      
+      /* ========================================
+         SEMANTIC FONT SIZES - DESKTOP
+         Los semanticos cambian automáticamente porque usan var()
+         ======================================== */
+         --font-size-button: var(--font-size-g);                   
+         --font-size-link: var(--font-size-md);                      
+         --font-size-point-description: var(--font-size-lg);        
+         --font-size-job-description: var(--font-size-md);          
+         --font-size-badge: var(--font-size-md);                     
+         --font-size-text-block-sm-title: var(--font-size-lg);      
+         --font-size-text-block-sm-text: var(--font-size-md);        
+         --font-size-text-block-xl-title: var(--font-size-2xl);      
+         --font-size-text-block-xl-description: var(--font-size-md); 
+      
+      /* ========================================
+         SPACING - DESKTOP
+         ======================================== */
+      --spacing-xs: 4px;
+      --spacing-sm: 8px;
+      --spacing-md: 12px;
+      --spacing-lg: 16px;
+      --spacing-xl: 24px;
+      --spacing-2xl: 32px;
+      --spacing-3xl: 40px;
+      --spacing-4xl: 48px;
+      --spacing-hg: 64px;
+      --spacing-xhg: 128px;
+      
+      /* ========================================
+         SEMANTIC SPACING - DESKTOP
+         ======================================== */
+         --section-horizontal: var(--spacing-2xl);    
+         --section-gap: var(--spacing-4xl);            
+         --menu-horizontal: var(--spacing-2xl);       
+    }
+  }
+  
+  /* ========================================
+     TYPOGRAPHY CLASSES
+     ======================================== */
+  
+  /* Base Typography Styles */
+  .text-regular { font-weight: var(--font-weight-regular); }
+  .text-medium { font-weight: var(--font-weight-medium); }
+  .text-semibold { font-weight: var(--font-weight-semibold); }
+  .text-bold { font-weight: var(--font-weight-bold); }
+  
+  /* Size + Weight Combinations */
+  .text-sm-regular {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-md-regular {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-md-medium {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-lg-regular {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-lg-medium {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-lg-semibold {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-lg-bold {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-xl-medium {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-xl-semibold {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-xl-bold {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-2xl-bold {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-3xl-semibold {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-4xl-bold {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-hg-semibold {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-hg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-xhg);
+  }
+  
+  .text-hg-bold {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-hg);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-xhg);
+  }
+  
+  .text-xhg-semibold {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xhg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-xhg);
+  }
+  
+  .text-xhg-bold {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xhg);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-xhg);
+  }
+  
+  /* ========================================
+     SEMANTIC TEXT CLASSES
+     ======================================== */
+  
+  .text-button {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-button);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-link {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-link);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-badge {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-badge);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-point-description {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-point-description);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-job-description {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-job-description);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-block-sm-title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-text-block-sm-title);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-block-sm-text {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-text-block-sm-text);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-block-xl-title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-text-block-xl-title);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+  }
+  
+  .text-block-xl-description {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-text-block-xl-description);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+  }
+  
+  /* ========================================
+     UTILITY CLASSES
+     ======================================== */
+  
+  /* Spacing Utilities */
+  .spacing-xs { margin: var(--spacing-xs); }
+  .spacing-sm { margin: var(--spacing-sm); }
+  .spacing-md { margin: var(--spacing-md); }
+  .spacing-lg { margin: var(--spacing-lg); }
+  .spacing-xl { margin: var(--spacing-xl); }
+  .spacing-2xl { margin: var(--spacing-2xl); }
+  .spacing-3xl { margin: var(--spacing-3xl); }
+  .spacing-4xl { margin: var(--spacing-4xl); }
+  .spacing-hg { margin: var(--spacing-hg); }
+  .spacing-xhg { margin: var(--spacing-xhg); }
+  
+  /* Padding Utilities */
+  .p-xs { padding: var(--spacing-xs); }
+  .p-sm { padding: var(--spacing-sm); }
+  .p-md { padding: var(--spacing-md); }
+  .p-lg { padding: var(--spacing-lg); }
+  .p-xl { padding: var(--spacing-xl); }
+  .p-2xl { padding: var(--spacing-2xl); }
+  .p-3xl { padding: var(--spacing-3xl); }
+  .p-4xl { padding: var(--spacing-4xl); }
+  .p-hg { padding: var(--spacing-hg); }
+  .p-xhg { padding: var(--spacing-xhg); }
+  
+  /* Margin Utilities */
+  .m-xs { margin: var(--spacing-xs); }
+  .m-sm { margin: var(--spacing-sm); }
+  .m-md { margin: var(--spacing-md); }
+  .m-lg { margin: var(--spacing-lg); }
+  .m-xl { margin: var(--spacing-xl); }
+  .m-2xl { margin: var(--spacing-2xl); }
+  .m-3xl { margin: var(--spacing-3xl); }
+  .m-4xl { margin: var(--spacing-4xl); }
+  .m-hg { margin: var(--spacing-hg); }
+  .m-xhg { margin: var(--spacing-xhg); }
+  
+  /* Section Utilities */
+  .section-horizontal { padding-left: var(--section-horizontal); padding-right: var(--section-horizontal); }
+  .section-gap { margin-bottom: var(--section-gap); }
+  .menu-horizontal { padding-left: var(--menu-horizontal); padding-right: var(--menu-horizontal); }
+  
+  /* Border Radius Utilities */
+  .radius-lg { border-radius: var(--radius-lg); }
+  .radius-xl { border-radius: var(--radius-xl); }
+  .radius-xxl { border-radius: var(--radius-xxl); }
+  
+  /* Color Utilities */
+  .bg-main { background-color: var(--color-main-bg); }
+  .bg-surface { background-color: var(--color-surface); }
+  .text-primary { color: var(--color-text-primary); }
+  .text-secondary { color: var(--color-text-secondary); }
+  .text-tertiary { color: var(--color-text-tertiary); }

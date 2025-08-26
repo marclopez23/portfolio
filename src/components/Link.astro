@@ -1,0 +1,445 @@
+---
+// LinkComponent.astro
+export interface Props {
+  text?: string;
+  href?: string;
+  showArrow?: boolean;
+  class?: string;
+  ariaLabel?: string;
+  target?: '_blank' | '_self' | '_parent' | '_top';
+  rel?: string;
+  disabled?: boolean;
+}
+
+const { 
+  text = "Cónoceme", 
+  href = "#", 
+  showArrow = true, 
+  class: className = "",
+  ariaLabel,
+  target,
+  rel,
+  disabled = false
+} = Astro.props;
+
+// Auto-generate rel for external links
+const isExternal = href.startsWith('http') || href.startsWith('//');
+const computedRel = rel || (isExternal && target === '_blank' ? 'noopener noreferrer' : undefined);
+
+// Auto-generate aria-label if not provided
+const computedAriaLabel = ariaLabel || (isExternal ? `${text} (se abre en nueva ventana)` : text);
+---
+
+<a 
+  href={disabled ? undefined : href}
+  class={`link-component ${disabled ? 'link-component--disabled' : ''} ${className}`}
+  data-text={text}
+  data-show-arrow={showArrow}
+  aria-label={computedAriaLabel}
+  target={target}
+  rel={computedRel}
+  role={disabled ? 'button' : undefined}
+  aria-disabled={disabled ? 'true' : undefined}
+  tabindex={disabled ? '-1' : '0'}
+>
+  <span class="link-text">{text}</span>
+  {showArrow && (
+    <div class="link-arrow" aria-hidden="true" role="presentation">
+      <svg 
+        viewBox="0 0 52 16" 
+        fill="none" 
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path 
+          d="M1 8H51M51 8L44 1M51 8L44 15" 
+          stroke="currentColor" 
+          stroke-width="2" 
+          stroke-linecap="round" 
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+  )}
+  {isExternal && (
+    <span class="sr-only"> (se abre en nueva ventana)</span>
+  )}
+</a>
+
+<style>
+
+  .link-component {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: var(--spacing-md) var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    position: relative;
+    
+    min-height: var(--spacing-accessibility-touch-target);
+
+    border: 2px solid transparent;
+  }
+
+  .link-component .link-text {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-link);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+    color: var(--color-interactive-link-active);
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+
+  .link-component .link-arrow {
+    width: 52px;
+    height: 16px;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    color: var(--color-interactive-link-active);
+  }
+
+  .link-component .link-arrow svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ========================================
+     INTERACTIVE STATES
+     ======================================== */
+
+  /* Hover state */
+  .link-component:hover:not(.link-component--disabled) .link-text {
+    color: var(--color-interactive-primary-hover);
+  }
+
+  .link-component:hover:not(.link-component--disabled) .link-arrow {
+    transform: translateX(4px);
+    color: var(--color-interactive-primary-hover);
+  }
+
+  /* Focus state - WCAG compliant */
+  .link-component:focus {
+    outline: 3px solid var(--color-accessibility-focus-ring);
+    outline-offset: var(--spacing-accessibility-focus-offset);
+  }
+
+  /* Focus-visible (only when navigating with keyboard) */
+  .link-component:focus-visible {
+    outline: 3px solid var(--color-accessibility-focus-ring);
+    outline-offset: var(--spacing-accessibility-focus-offset);
+  }
+
+  .link-component:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Active/Click state */
+  .link-component:active:not(.link-component--disabled) {
+    transform: scale(0.95);
+    transition: transform 0.1s ease;
+  }
+
+  /* ========================================
+     DISABLED STATE - ACCESSIBLE VERSION
+     ======================================== */
+  
+  .link-component--disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .link-component--disabled .link-text {
+    color: var(--color-accessibility-disabled-text);
+  }
+
+  .link-component--disabled .link-arrow {
+    color: var(--color-accessibility-disabled-text);
+  }
+
+  /* Optional: Add subtle background for disabled state */
+  .link-component--disabled {
+   
+  }
+
+  /* ========================================
+     HIGH CONTRAST MODE SUPPORT
+     ======================================== */
+  
+  @media (prefers-contrast: high) {
+    .link-component {
+      border: 2px solid var(--color-interactive-link-active);
+    }
+
+    .link-component:focus {
+      outline: 4px solid var(--color-accessibility-focus-ring);
+      outline-offset: 2px;
+    }
+
+    .link-component--disabled {
+      border-color: var(--color-accessibility-disabled-border);
+      background-color: var(--color-accessibility-disabled-background);
+    }
+  }
+
+  /* ========================================
+     REDUCED MOTION SUPPORT
+     ======================================== */
+  
+  @media (prefers-reduced-motion: reduce) {
+    .link-component,
+    .link-component .link-arrow,
+    .link-component:active {
+      transition: none;
+    }
+
+    .link-component:hover .link-arrow {
+      transform: none;
+    }
+  }
+
+  /* ========================================
+     PRINT STYLES
+     ======================================== */
+  
+  @media print {
+    .link-component {
+      color: black !important;
+      text-decoration: underline;
+    }
+    
+    .link-component .link-arrow {
+      display: none;
+    }
+    
+    .link-component[href]::after {
+      content: " (" attr(href) ")";
+      font-size: smaller;
+    }
+  }
+</style>
+
+<script>
+  // Simplified Link component focused on accessibility
+  class AccessibleLinkComponent {
+    constructor(element: HTMLElement) {
+      this.element = element as HTMLAnchorElement;
+      this.text = this.element.getAttribute('data-text') || 'Link';
+      this.hasArrow = this.element.getAttribute('data-show-arrow') === 'true';
+      this.isDisabled = this.element.classList.contains('link-component--disabled');
+      
+      this.init();
+    }
+
+    private element: HTMLAnchorElement;
+    private text: string;
+    private hasArrow: boolean;
+    private isDisabled: boolean;
+
+    init() {
+      // Handle clicks with accessibility considerations
+      this.element.addEventListener('click', this.handleClick.bind(this));
+      
+      // Enhanced keyboard navigation
+      this.element.addEventListener('keydown', this.handleKeyDown.bind(this));
+      
+      // Arrow color changes for accessibility
+      if (this.hasArrow && !this.isDisabled) {
+        this.setupArrowAccessibility();
+      }
+    }
+
+    private handleClick(event: Event) {
+      if (this.isDisabled) {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+
+      // Visual feedback for successful interaction
+      console.log(`Link activated: ${this.text}`);
+      
+      // Add subtle visual feedback
+      this.element.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        this.element.style.transform = '';
+      }, 150);
+
+      // Announce navigation for screen readers (SPA context)
+      if (this.element.href && this.element.href.startsWith(window.location.origin)) {
+        this.announceNavigation();
+      }
+    }
+
+    private handleKeyDown(event: KeyboardEvent) {
+      if (this.isDisabled) {
+        event.preventDefault();
+        return;
+      }
+
+      // Space and Enter activation
+      if (event.key === ' ' || event.key === 'Enter') {
+        // Prevent page scroll on space
+        if (event.key === ' ') {
+          event.preventDefault();
+        }
+        
+        this.element.click();
+      }
+
+      // Escape to remove focus
+      if (event.key === 'Escape') {
+        this.element.blur();
+      }
+    }
+
+    private setupArrowAccessibility() {
+      const arrowPath = this.element.querySelector('.link-arrow path') as SVGPathElement;
+      
+      if (arrowPath) {
+        // Mouse interactions
+        this.element.addEventListener('mouseenter', () => {
+          if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            arrowPath.style.stroke = 'var(--color-interactive-primary-hover)';
+          }
+        });
+        
+        this.element.addEventListener('mouseleave', () => {
+          arrowPath.style.stroke = 'var(--color-interactive-link-active)';
+        });
+
+        // Keyboard focus interactions
+        this.element.addEventListener('focus', () => {
+          arrowPath.style.stroke = 'var(--color-interactive-primary-hover)';
+        });
+
+        this.element.addEventListener('blur', () => {
+          arrowPath.style.stroke = 'var(--color-interactive-link-active)';
+        });
+      }
+    }
+
+    private announceNavigation() {
+      // Create accessible announcement for navigation
+      const announcement = document.createElement('div');
+      announcement.setAttribute('aria-live', 'polite');
+      announcement.setAttribute('aria-atomic', 'true');
+      announcement.className = 'sr-only';
+      announcement.textContent = `Navegando a ${this.text}`;
+      
+      document.body.appendChild(announcement);
+      
+      setTimeout(() => {
+        if (document.body.contains(announcement)) {
+          document.body.removeChild(announcement);
+        }
+      }, 1000);
+    }
+
+    // Essential public methods
+    setText(newText: string) {
+      this.text = newText;
+      const textElement = this.element.querySelector('.link-text');
+      if (textElement) {
+        textElement.textContent = newText;
+      }
+      
+      // Update accessible label
+      const isExternal = this.element.href?.startsWith('http');
+      const newAriaLabel = isExternal ? `${newText} (se abre en nueva ventana)` : newText;
+      this.element.setAttribute('aria-label', newAriaLabel);
+      this.element.setAttribute('data-text', newText);
+    }
+
+    setDisabled(disabled: boolean) {
+      this.isDisabled = disabled;
+      
+      if (disabled) {
+        this.element.classList.add('link-component--disabled');
+        this.element.setAttribute('aria-disabled', 'true');
+        this.element.setAttribute('tabindex', '-1');
+        this.element.removeAttribute('href');
+        this.element.setAttribute('role', 'button');
+      } else {
+        this.element.classList.remove('link-component--disabled');
+        this.element.removeAttribute('aria-disabled');
+        this.element.setAttribute('tabindex', '0');
+        this.element.removeAttribute('role');
+        // Note: href would need to be restored from original value
+      }
+    }
+  }
+
+  // Initialize components
+  document.addEventListener('DOMContentLoaded', function() {
+    const linkComponents = document.querySelectorAll('.link-component:not([data-initialized])');
+    
+    linkComponents.forEach((element) => {
+      new AccessibleLinkComponent(element as HTMLElement);
+      element.setAttribute('data-initialized', 'true');
+    });
+
+    console.log(`♿ ${linkComponents.length} accessible link components initialized`);
+  });
+
+  // Utility function for dynamic creation
+  (window as any).createAccessibleLink = function(
+    text: string, 
+    href: string = '#', 
+    options: { hasArrow?: boolean; target?: string; disabled?: boolean } = {}
+  ): HTMLAnchorElement {
+    
+    const { hasArrow = true, target, disabled = false } = options;
+    const isExternal = href.startsWith('http');
+    
+    const link = document.createElement('a');
+    if (!disabled) link.href = href;
+    link.className = `link-component ${disabled ? 'link-component--disabled' : ''}`;
+    link.setAttribute('data-text', text);
+    link.setAttribute('data-show-arrow', hasArrow.toString());
+    
+    const ariaLabel = isExternal ? `${text} (se abre en nueva ventana)` : text;
+    link.setAttribute('aria-label', ariaLabel);
+    
+    if (target) link.setAttribute('target', target);
+    if (isExternal && target === '_blank') link.setAttribute('rel', 'noopener noreferrer');
+    if (disabled) {
+      link.setAttribute('aria-disabled', 'true');
+      link.setAttribute('tabindex', '-1');
+      link.setAttribute('role', 'button');
+    }
+    
+    const textSpan = document.createElement('span');
+    textSpan.className = 'link-text';
+    textSpan.textContent = text;
+    link.appendChild(textSpan);
+    
+    if (hasArrow) {
+      const arrowDiv = document.createElement('div');
+      arrowDiv.className = 'link-arrow';
+      arrowDiv.setAttribute('aria-hidden', 'true');
+      arrowDiv.innerHTML = `
+        <svg viewBox="0 0 52 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <path d="M1 8H51M51 8L44 1M51 8L44 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      `;
+      link.appendChild(arrowDiv);
+    }
+    
+    if (isExternal) {
+      const srSpan = document.createElement('span');
+      srSpan.className = 'sr-only';
+      srSpan.textContent = ' (se abre en nueva ventana)';
+      link.appendChild(srSpan);
+    }
+    
+    new AccessibleLinkComponent(link);
+    link.setAttribute('data-initialized', 'true');
+    
+    return link;
+  };
+</script>
