@@ -1,0 +1,222 @@
+---
+// MenuItem.astro
+export interface Props {
+  /**
+   * Texto del elemento del menú
+   */
+  text?: string;
+  
+  /**
+   * URL de destino
+   */
+  href?: string;
+  
+  /**
+   * Si el elemento está activo/seleccionado
+   */
+  active?: boolean;
+  
+  /**
+   * Target del enlace
+   */
+  target?: '_blank' | '_self' | '_parent' | '_top';
+  
+  /**
+   * Clases CSS adicionales
+   */
+  class?: string;
+  
+  /**
+   * ID del elemento
+   */
+  id?: string;
+  
+  /**
+   * Aria label personalizado
+   */
+  ariaLabel?: string;
+  
+  /**
+   * Si el elemento está deshabilitado
+   */
+  disabled?: boolean;
+}
+
+const {
+  text = 'Menu item',
+  href = '#',
+  active = false,
+  target = '_self',
+  class: className = '',
+  id,
+  ariaLabel,
+  disabled = false
+} = Astro.props;
+
+// Clases CSS del componente
+const menuItemClasses = [
+  'menu-item',
+  active && 'menu-item--active',
+  disabled && 'menu-item--disabled',
+  className
+].filter(Boolean).join(' ');
+
+// ID único para accesibilidad
+const itemId = id || `menu-item-${text.toLowerCase().replace(/\s+/g, '-')}`;
+---
+
+<a 
+  class={menuItemClasses}
+  href={disabled ? undefined : href}
+  target={target}
+  rel={target === '_blank' ? 'noopener noreferrer' : undefined}
+  id={itemId}
+  aria-label={ariaLabel}
+  aria-current={active ? 'page' : undefined}
+  aria-disabled={disabled}
+  tabindex={disabled ? -1 : 0}
+>
+  <span class="menu-item__text">
+    {text}
+  </span>
+</a>
+
+<style>
+  .menu-item {
+    /* Reset */
+    text-decoration: none;
+    
+    /* Layout */
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: relative;
+    
+    /* Typography */
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    
+    /* Interaction */
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    
+    /* Focus */
+    outline: none;
+    border-radius: 2px;
+  }
+
+  .menu-item__text {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Estados interactivos */
+  .menu-item:hover:not(.menu-item--disabled) {
+    color: var(--color-text-tertiary);
+    transform: translateY(-1px);
+  }
+
+  .menu-item:active:not(.menu-item--disabled) {
+    transform: translateY(0);
+  }
+
+  /* Focus state para accesibilidad */
+  .menu-item:focus-visible {
+    outline: 2px solid var(--color-text-tertiary);
+    outline-offset: 4px;
+  }
+
+  /* Estado activo */
+  .menu-item--active {
+    color: var(--color-text-tertiary);
+  }
+
+  .menu-item--active .menu-item__text::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--color-text-tertiary);
+    border-radius: 1px;
+  }
+
+  /* Estado deshabilitado */
+  .menu-item--disabled {
+    color: var(--color-text-secondary);
+    cursor: not-allowed;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  /* Efectos de hover adicionales */
+  .menu-item:not(.menu-item--active):not(.menu-item--disabled)::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-text-tertiary);
+    border-radius: 1px;
+    transition: all 0.2s ease-in-out;
+    transform: translateX(-50%);
+  }
+
+  .menu-item:hover:not(.menu-item--active):not(.menu-item--disabled)::before {
+    width: 100%;
+  }
+
+  /* Variante para menú móvil */
+  .menu-item--mobile {
+    font-size: var(--font-size-xl);
+    padding: var(--spacing-md) 0;
+    width: 100%;
+  }
+
+  .menu-item--mobile:hover:not(.menu-item--disabled) {
+    transform: translateX(4px);
+  }
+
+  /* Variante compacta */
+  .menu-item--compact {
+    font-size: var(--font-size-md);
+  }
+
+  /* Estados de pressed para mobile */
+  @media (hover: none) and (pointer: coarse) {
+    .menu-item:active:not(.menu-item--disabled) {
+      background-color: rgba(233, 94, 73, 0.1);
+      padding: var(--spacing-xs) var(--spacing-sm);
+      margin: calc(-1 * var(--spacing-xs)) calc(-1 * var(--spacing-sm));
+      border-radius: 4px;
+    }
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .menu-item {
+      font-size: var(--font-size-xl);
+    }
+  }
+
+  /* Estados para reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .menu-item {
+      transition: none;
+    }
+    
+    .menu-item:hover:not(.menu-item--disabled) {
+      transform: none;
+    }
+    
+    .menu-item--mobile:hover:not(.menu-item--disabled) {
+      transform: none;
+    }
+  }
+</style>

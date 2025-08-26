@@ -1,0 +1,158 @@
+---
+// Footer.astro
+export interface Props {
+  /**
+   * Nombre para el copyright
+   */
+  name?: string;
+  
+  /**
+   * Año específico (opcional - por defecto usa el año actual)
+   */
+  year?: number;
+  
+  /**
+   * Texto de copyright personalizado
+   */
+  copyrightText?: string;
+  
+  /**
+   * Clases CSS adicionales
+   */
+  class?: string;
+  
+  /**
+   * ID del elemento
+   */
+  id?: string;
+}
+
+const {
+  name = 'Marc López',
+  year,
+  copyrightText,
+  class: className = '',
+  id
+} = Astro.props;
+
+// Clases CSS del componente
+const footerClasses = [
+  'footer',
+  className
+].filter(Boolean).join(' ');
+
+// ID único para accesibilidad
+const footerId = id || 'main-footer';
+
+// Año actual automático
+const currentYear = year || new Date().getFullYear();
+
+// Texto de copyright
+const defaultCopyrightText = `${currentYear} © ${name}`;
+const finalCopyrightText = copyrightText || defaultCopyrightText;
+---
+
+<footer 
+  class={footerClasses} 
+  id={footerId}
+  role="contentinfo"
+  aria-label="Información del sitio web"
+>
+  <!-- Borde superior decorativo -->
+  <div class="footer__border" aria-hidden="true"></div>
+  
+  <!-- Contenido del footer -->
+  <div class="footer__content">
+    <p class="footer__copyright">
+      <span aria-label={`Copyright ${currentYear} ${name}`}>
+        {finalCopyrightText}
+      </span>
+    </p>
+    
+    <!-- Slot para contenido adicional (si necesitas) -->
+    <slot />
+  </div>
+</footer>
+
+<style>
+  .footer {
+    /* Layout */
+    position: relative;
+    width: 100%;
+    
+    /* Background */
+    background-color: var(--color-main-bg);
+  }
+
+  /* Borde superior */
+  .footer__border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: var(--color-divider);
+    pointer-events: none;
+  }
+
+  /* Contenido principal */
+  .footer__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-4xl);
+    padding: var(--spacing-2xl);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Copyright */
+  .footer__copyright {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  /* Variantes del footer */
+  
+  /* Footer compacto */
+  .footer--compact .footer__content {
+    padding: var(--spacing-xl);
+  }
+
+  .footer--compact .footer__copyright {
+    font-size: var(--font-size-sm);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 480px) {
+    .footer__content {
+      padding: var(--spacing-xl);
+    }
+    
+    .footer__copyright {
+      font-size: var(--font-size-sm);
+      white-space: normal;
+      text-align: center;
+      word-break: break-word;
+    }
+  }
+
+  /* Estados para reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none;
+    }
+  }
+
+  /* Estados para high contrast */
+  @media (prefers-contrast: high) {
+    .footer__border {
+      background-color: var(--color-text-primary);
+    }
+  }
+</style>

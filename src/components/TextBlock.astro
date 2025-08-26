@@ -1,0 +1,232 @@
+---
+// TextBlock.astro
+export interface Props {
+  /**
+   * Título del bloque de texto
+   */
+  title?: string;
+  
+  /**
+   * Descripción/contenido del bloque
+   */
+  description?: string;
+  
+  /**
+   * Tamaño del bloque de texto
+   */
+  size?: 'sm' | 'xl';
+  
+  /**
+   * Elemento HTML a usar para el título
+   */
+  titleTag?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  
+  /**
+   * Alineación del contenido
+   */
+  align?: 'left' | 'center' | 'right';
+  
+  /**
+   * Clases CSS adicionales
+   */
+  class?: string;
+  
+  /**
+   * ID del elemento
+   */
+  id?: string;
+  
+  /**
+   * Aria label personalizado para el título
+   */
+  titleAriaLabel?: string;
+}
+
+const {
+  size = 'sm',
+  title = size === 'xl' ? 'Title + description XL' : 'Title + description SM',
+  description = size === 'xl' 
+    ? 'Uno de los principales desafíos del proyecto fue comprender los diversos productos específicos del país, los cuales son únicos en la región y difieren considerablemente de los que estamos familiarizados a utilizar aquí en Europa.\n\nSuperar este desafío fue posible gracias a las reuniones y entrevistas con stakeholders del banco y expertos en banca saudí.'
+    : 'Rediseñar la aplicación dirigida a los clientes retail del banco buscando la mejor experiencia de usuario del país.',
+  titleTag = 'h3',
+  align = 'left',
+  class: className = '',
+  id,
+  titleAriaLabel
+} = Astro.props;
+
+// Clases CSS del componente
+const textBlockClasses = [
+  'text-block',
+  `text-block--${size}`,
+  `text-block--${align}`,
+  className
+].filter(Boolean).join(' ');
+
+// ID único para accesibilidad
+const blockId = id || `text-block-${title.toLowerCase().replace(/\s+/g, '-').substring(0, 20)}`;
+const titleId = `${blockId}-title`;
+const descId = `${blockId}-description`;
+const TitleTag = titleTag;
+
+// Procesar párrafos de la descripción
+const paragraphs = description.split('\n\n').filter(p => p.trim());
+---
+
+<article 
+  class={textBlockClasses} 
+  id={blockId}
+  role="article"
+  aria-labelledby={titleId}
+  aria-describedby={descId}
+>
+  <TitleTag 
+    class="text-block__title" 
+    id={titleId}
+    aria-label={titleAriaLabel}
+  >
+    {title}
+  </TitleTag>
+  
+  <div class="text-block__content" id={descId}>
+    {paragraphs.map((paragraph, index) => (
+      <p class="text-block__paragraph">
+        {paragraph.trim()}
+      </p>
+    ))}
+  </div>
+  
+  <slot />
+</article>
+
+<style>
+  .text-block {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--spacing-lg);
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  /* Título del bloque */
+  .text-block__title {
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    width: 100%;
+    margin: 0;
+    line-height: var(--line-height-normal);
+  }
+
+  /* Contenido/descripción */
+  .text-block__content {
+    width: 100%;
+  }
+
+  .text-block__paragraph {
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-secondary);
+    width: 100%;
+    margin: 0;
+    line-height: var(--line-height-normal);
+  }
+
+  .text-block__paragraph + .text-block__paragraph {
+    margin-top: var(--spacing-lg);
+  }
+
+  /* Variante Small */
+  .text-block--sm .text-block__title {
+    font-size: var(--font-size-text-block-sm-title);
+  }
+
+  .text-block--sm .text-block__paragraph {
+    font-size: var(--font-size-text-block-sm-text);
+  }
+
+  /* Variante XL */
+  .text-block--xl .text-block__title {
+    font-size: var(--font-size-text-block-xl-title);
+  }
+
+  .text-block--xl .text-block__paragraph {
+    font-size: var(--font-size-text-block-xl-description);
+  }
+
+  /* Variantes de alineación */
+  .text-block--center {
+    align-items: center;
+    text-align: center;
+  }
+
+  .text-block--right {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  /* Variante compacta */
+  .text-block--compact {
+    gap: var(--spacing-md);
+  }
+
+  .text-block--compact .text-block__paragraph + .text-block__paragraph {
+    margin-top: var(--spacing-md);
+  }
+
+  /* Variante con fondo */
+  .text-block--with-background {
+    padding: var(--spacing-2xl);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Variante destacada */
+  .text-block--featured .text-block__title {
+    color: var(--color-text-tertiary);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .text-block {
+      gap: var(--spacing-md);
+    }
+    
+    .text-block--xl .text-block__title {
+      font-size: var(--font-size-text-block-sm-title);
+    }
+    
+    .text-block__paragraph + .text-block__paragraph {
+      margin-top: var(--spacing-md);
+    }
+  }
+
+  /* Estados de hover para interactividad */
+  .text-block--interactive {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+  }
+
+  .text-block--interactive:hover {
+    background-color: var(--color-surface);
+    transform: translateY(-2px);
+  }
+
+  .text-block--interactive:focus-visible {
+    outline: 2px solid var(--color-text-tertiary);
+    outline-offset: 2px;
+  }
+
+  /* Mejora para lectores de pantalla */
+  .text-block__content:empty::before {
+    content: 'Sin contenido disponible';
+    color: var(--color-text-secondary);
+    font-style: italic;
+  }
+</style>

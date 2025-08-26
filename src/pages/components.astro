@@ -7,6 +7,10 @@ import Punto from "../components/Punto.astro";
 import RecommendationLetter from "../components/RecommendationLetter.astro";
 import Title from "../components/Title.astro";
 import Hero from "../components/Hero.astro";
+import TextBlock from "../components/TextBlock.astro"
+import MenuItem from "../components/MenuItem.astro"
+import Menu from "../components/Menu.astro"
+import Footer from "../components/Footer.astro"
 
 const pageTitle = "Componentes";
 ---
@@ -209,6 +213,85 @@ const pageTitle = "Componentes";
         </div>
       </div>
     </section>
+    <section class="component-section">
+  <h2 class="component-title">TextBlock</h2>
+  <div class="variants-grid">
+    <div class="variant">
+      <span class="variant-label">Small</span>
+      <TextBlock titleTag="h4" />
+    </div>
+    <div class="variant">
+      <span class="variant-label">XL</span>
+      <TextBlock 
+        size="xl" 
+        titleTag="h4"
+      />
+    </div>
+    <div class="variant">
+      <span class="variant-label">Custom</span>
+      <TextBlock 
+        title="Mi experiencia"
+        description="Como diseñador UX/UI, he trabajado en proyectos que van desde startups hasta grandes corporaciones."
+        size="sm"
+        titleTag="h4"
+      />
+    </div>
+    <div class="variant">
+      <span class="variant-label">Center Aligned</span>
+      <TextBlock 
+        title="Centrado"
+        description="Contenido alineado al centro"
+        align="center"
+        titleTag="h4"
+      />
+    </div>
+  </div>
+</section>
+<section class="component-section">
+  <h2 class="component-title">MenuItem</h2>
+  <div class="variants-grid">
+    <div class="variant">
+      <span class="variant-label">Default</span>
+      <MenuItem />
+    </div>
+    <div class="variant">
+      <span class="variant-label">Active</span>
+      <MenuItem text="Sobre mí" active={true} />
+    </div>
+    <div class="variant">
+      <span class="variant-label">Disabled</span>
+      <MenuItem text="Deshabilitado" disabled={true} />
+    </div>
+  </div>
+</section>
+
+<section class="component-section">
+  <h2 class="component-title">Menu</h2>
+  <div class="variants-grid">
+    <div class="variant">
+      <span class="variant-label">Complete Menu</span>
+      <Menu />
+    </div>
+  </div>
+</section>
+
+<section class="component-section">
+  <h2 class="component-title">Footer</h2>
+  <div class="variants-grid">
+    <div class="variant">
+      <span class="variant-label">Default</span>
+      <Footer />
+    </div>
+    <div class="variant">
+      <span class="variant-label">Custom Name</span>
+      <Footer name="Jane Doe" />
+    </div>
+    <div class="variant">
+      <span class="variant-label">Compact</span>
+      <Footer class="footer--compact" />
+    </div>
+  </div>
+</section>
   </main>
 </Layout>
 

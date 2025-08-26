@@ -1,0 +1,488 @@
+---
+// Menu.astro
+import MenuItem from './MenuItem.astro';
+
+export interface Props {
+  /**
+   * Items del menú
+   */
+  menuItems?: Array<{
+    text: string;
+    href: string;
+    active?: boolean;
+    target?: '_blank' | '_self' | '_parent' | '_top';
+    disabled?: boolean;
+  }>;
+  
+  /**
+   * URL del logo (enlace a inicio)
+   */
+  logoHref?: string;
+  
+  /**
+   * Texto alternativo del logo
+   */
+  logoAlt?: string;
+  
+  /**
+   * Clases CSS adicionales
+   */
+  class?: string;
+  
+  /**
+   * ID del elemento
+   */
+  id?: string;
+}
+
+const {
+  menuItems = [
+    { text: 'Sobre mí', href: '/about' },
+    { text: 'CV', href: '/cv' },
+    { text: 'Proyectos', href: '/projects' }
+  ],
+  logoHref = '/',
+  logoAlt = 'Marc Lopez - Inicio',
+  class: className = '',
+  id
+} = Astro.props;
+
+// Clases CSS del componente
+const menuClasses = [
+  'menu',
+  className
+].filter(Boolean).join(' ');
+
+// ID único para accesibilidad
+const menuId = id || 'main-menu';
+---
+
+<header class={menuClasses} id={menuId} role="banner">
+  <!-- Fondo con borde inferior -->
+  <div class="menu__background" aria-hidden="true"></div>
+  
+  <!-- Contenido del menú -->
+  <div class="menu__content">
+    <!-- Logo -->
+    <a 
+      href={logoHref}
+      class="menu__logo"
+      aria-label={logoAlt}
+    >
+      <img 
+        src="/assets/logo.svg" 
+        alt={logoAlt}
+        class="logo"
+        width="225" 
+        height="42"
+      />
+    </a>
+
+    <!-- Navegación desktop -->
+    <nav class="menu__nav menu__nav--desktop" aria-label="Navegación principal">
+      <ul class="menu__list" role="list">
+        {menuItems.map((item) => (
+          <li class="menu__item" role="listitem">
+            <MenuItem 
+              text={item.text}
+              href={item.href}
+              active={item.active}
+              target={item.target}
+              disabled={item.disabled}
+            />
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Botón hamburger para móvil -->
+    <button 
+      class="menu__toggle"
+      aria-label="Abrir menú de navegación"
+      aria-expanded="false"
+      aria-controls={`${menuId}-mobile-nav`}
+      data-menu-toggle
+    >
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M4 8H28M4 16H28M4 24H28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Navegación móvil (overlay) -->
+  <div 
+    class="menu__mobile-overlay"
+    id={`${menuId}-mobile-nav`}
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby={`${menuId}-mobile-title`}
+    data-mobile-menu
+  >
+    <div class="menu__mobile-content">
+      <!-- Header del menú móvil -->
+      <div class="menu__mobile-header">
+        <h2 id={`${menuId}-mobile-title`} class="menu__mobile-title">
+          Menú de navegación
+        </h2>
+        <button 
+          class="menu__close"
+          aria-label="Cerrar menú"
+          data-menu-close
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Items del menú móvil -->
+      <nav class="menu__nav menu__nav--mobile" aria-label="Navegación móvil">
+        <ul class="menu__mobile-list" role="list">
+          {menuItems.map((item) => (
+            <li class="menu__mobile-item" role="listitem">
+              <MenuItem 
+                text={item.text}
+                href={item.href}
+                active={item.active}
+                target={item.target}
+                disabled={item.disabled}
+                class="menu-item--mobile"
+              />
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  .menu {
+    /* Layout */
+    position: relative;
+    width: 100%;
+    
+    /* Background */
+    background-color: var(--color-main-bg);
+    
+    /* Z-index para estar sobre otros elementos */
+    z-index: 100;
+  }
+
+  /* Fondo con borde */
+  .menu__background {
+    position: absolute;
+    inset: 0;
+    border-bottom: 1px solid var(--color-divider);
+    pointer-events: none;
+  }
+
+  /* Contenido principal */
+  .menu__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--section-horizontal) var(--menu-horizontal);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Logo */
+  .menu__logo {
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .menu__logo:hover {
+    transform: scale(1.05);
+  }
+
+  .menu__logo:focus-visible {
+    outline: 2px solid var(--color-text-tertiary);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+
+  .logo {
+    width: 225px;
+    height: 42px;
+    display: block;
+  }
+
+  /* Navegación desktop */
+  .menu__nav--desktop {
+    display: flex;
+  }
+
+  .menu__list {
+    display: flex;
+    gap: var(--spacing-lg);
+    align-items: flex-start;
+    justify-content: flex-start;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu__item {
+    flex-shrink: 0;
+  }
+
+  /* Botón hamburger */
+  .menu__toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .menu__toggle svg {
+    width: 32px;
+    height: 32px;
+    display: block;
+    color: var(--color-text-tertiary);
+    transition: color 0.2s ease-in-out;
+  }
+
+  .menu__toggle:hover svg {
+    color: var(--color-text-tertiary);
+  }
+
+  .menu__toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+  }
+
+  .menu__toggle:focus-visible {
+    outline: 2px solid var(--color-text-tertiary);
+    outline-offset: 2px;
+  }
+
+  /* Overlay móvil */
+  .menu__mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(33, 33, 33, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    
+    /* Animación */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .menu__mobile-overlay.menu__mobile-overlay--open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .menu__mobile-content {
+    position: relative;
+    height: 100%;
+    padding: var(--spacing-2xl);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-main-bg);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .menu__mobile-overlay.menu__mobile-overlay--open .menu__mobile-content {
+    transform: translateX(0);
+  }
+
+  /* Header del menú móvil */
+  .menu__mobile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--spacing-2xl);
+    padding-bottom: var(--spacing-xl);
+    border-bottom: 1px solid var(--color-divider);
+  }
+
+  .menu__mobile-title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin: 0;
+  }
+
+  .menu__close {
+    background: none;
+    border: none;
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-2xl);
+    cursor: pointer;
+    padding: var(--spacing-sm);
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    line-height: 1;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu__close:hover {
+    background-color: var(--color-text-tertiary);
+    color: var(--color-main-bg);
+  }
+
+  .menu__close:focus-visible {
+    outline: 2px solid var(--color-text-tertiary);
+    outline-offset: 2px;
+  }
+
+  /* Lista móvil */
+  .menu__mobile-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .menu__mobile-item {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  /* Responsive */
+  @media (max-width: 767px) {
+    .menu__nav--desktop {
+      display: none;
+    }
+    
+    .menu__toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .logo {
+      width: 150px;
+      height: 28px;
+    }
+  }
+
+  /* Prevent scroll cuando el menú móvil está abierto */
+  .menu__mobile-overlay--open {
+    overflow: hidden;
+  }
+
+  /* Animaciones para reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .menu__toggle,
+    .menu__logo,
+    .menu__mobile-overlay,
+    .menu__mobile-content {
+      transition: none;
+    }
+    
+    .menu__logo:hover {
+      transform: none;
+    }
+    
+    .menu__toggle:hover {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  // @ts-nocheck
+  // Script para funcionalidad del menú móvil
+  function initMobileMenu() {
+    const menuToggle = document.querySelector('[data-menu-toggle]');
+    const menuClose = document.querySelector('[data-menu-close]');
+    const mobileMenu = document.querySelector('[data-mobile-menu]');
+    const body = document.body;
+    
+    if (!menuToggle || !menuClose || !mobileMenu) {
+      console.warn('Menu elements not found:', { menuToggle, menuClose, mobileMenu });
+      return;
+    }
+    
+    // Función para abrir el menú
+    const openMenu = () => {
+      mobileMenu.classList.add('menu__mobile-overlay--open');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      body.style.overflow = 'hidden';
+      
+      // Focus trap - enfocar el botón de cerrar
+      setTimeout(() => menuClose.focus(), 100);
+    };
+    
+    // Función para cerrar el menú
+    const closeMenu = () => {
+      mobileMenu.classList.remove('menu__mobile-overlay--open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      body.style.overflow = '';
+      
+      // Devolver el focus al botón toggle
+      setTimeout(() => menuToggle.focus(), 100);
+    };
+    
+    // Remover event listeners existentes para evitar duplicados
+    menuToggle.removeEventListener('click', openMenu);
+    menuClose.removeEventListener('click', closeMenu);
+    
+    // Event listeners
+    menuToggle.addEventListener('click', openMenu);
+    menuClose.addEventListener('click', closeMenu);
+    
+    // Cerrar con Escape
+    const handleEscape = (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('menu__mobile-overlay--open')) {
+        closeMenu();
+      }
+    };
+    
+    document.removeEventListener('keydown', handleEscape);
+    document.addEventListener('keydown', handleEscape);
+    
+    // Cerrar al hacer click en el overlay (fuera del contenido)
+    const handleOverlayClick = (e) => {
+      if (e.target === mobileMenu) {
+        closeMenu();
+      }
+    };
+    
+    mobileMenu.removeEventListener('click', handleOverlayClick);
+    mobileMenu.addEventListener('click', handleOverlayClick);
+    
+    // Cerrar cuando se navega (click en un enlace del menú)
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+      const handleLinkClick = () => {
+        setTimeout(closeMenu, 100);
+      };
+      
+      link.removeEventListener('click', handleLinkClick);
+      link.addEventListener('click', handleLinkClick);
+    });
+    
+    console.log('Mobile menu initialized successfully');
+  }
+  
+  // Inicializar en carga de página
+  document.addEventListener('DOMContentLoaded', initMobileMenu);
+  
+  // Reinicializar en navegación de Astro
+  document.addEventListener('astro:page-load', initMobileMenu);
+  
+  // También inicializar inmediatamente por si el DOM ya está listo
+  if (document.readyState === 'loading') {
+    // DOM aún se está cargando
+  } else {
+    // DOM ya está listo
+    initMobileMenu();
+  }
+</script>

@@ -58,7 +58,7 @@
        ======================================== */
     --section-horizontal: var(--spacing-2xl);    /* spacing-2xl - 24px mobile */
     --section-gap: var(--spacing-xl);            /* spacing-xl - 16px mobile */
-    --menu-horizontal: var(--spacing-2xl);       /* spacing-2xl - 24px mobile */
+    --menu-horizontal: var(--spacing-xl);       /* spacing-2xl - 16px mobile */
     
     /* ========================================
        LINE HEIGHTS
