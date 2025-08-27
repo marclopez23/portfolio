@@ -7,8 +7,10 @@ import { getCollection, type CollectionEntry } from 'astro:content';
 
 const pageTitle = "Proyectos - Marc López";
 
-// Obtener todos los proyectos ordenados
-const allProjects = await getCollection('projects');
+// Obtener solo proyectos no protegidos para mostrar públicamente
+const allProjects = await getCollection('projects', ({ data }) => {
+  return data.protected !== true;
+});
 const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => a.data.order - b.data.order);
 ---
 
@@ -20,13 +22,21 @@ const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: Collection
 >
 
   <!-- Hero Section -->
-  <section role="banner" aria-labelledby="hero-title">
+  <section 
+    class="section" 
+    id="hero"
+    role="banner"
+    aria-labelledby="hero-title"
+  >
+    <div class="container">
       <Hero 
         title="Proyectos"
+        align="left"
         titleTag="h1"
-        class="fade-in"
         id="hero-title"
+        class="hero--projects"
       />
+    </div>
   </section>
 
   <!-- Projects Grid Section -->

@@ -9,22 +9,33 @@ role: "Lead UX/UI Designer"
 duration: "9 meses"
 team: "Marc López, 2 Product Designers, 1 Research Specialist, Product Manager"
 
-# Secciones del proyecto
-sections:
-  - title: "Digitalización de procesos offline"
-    layout: "image-left"
-    image: "/images/projects/aljuf/digitalization.jpg"
-    content: "El mayor desafío fue transformar procesos financieros tradicionalmente offline en una experiencia digital completa. Mapeamos todos los flujos existentes de solicitud y aprobación de créditos, identificando puntos de fricción y oportunidades de automatización. Desarrollamos formularios inteligentes que se adaptan según el tipo de empresa y financiamiento solicitado, con validaciones en tiempo real y carga de documentos optimizada. La plataforma integra verificaciones automáticas de datos empresariales y scoring crediticio, reduciendo el tiempo de evaluación de semanas a días."
-    
-  - title: "Generar una versión desktop con poco impacto en desarrollo"
-    layout: "image-right"
-    image: "/images/projects/aljuf/desktop-version.jpg" 
-    content: "Creamos una versión desktop completa reutilizando al máximo los componentes y lógica de la versión móvil. Implementamos un sistema de responsive design inteligente que adapta automáticamente los flujos móviles a pantallas grandes, reorganizando elementos para aprovechar el espacio adicional sin duplicar código. Utilizamos técnicas de progressive enhancement donde la funcionalidad base funciona en móvil y se enriquece automáticamente en desktop, minimizando el esfuerzo de desarrollo mientras ofrecemos experiencias optimizadas para cada dispositivo."
-    
-  - title: "El flujo del auto lease y sus configuraciones"
-    layout: "image-left"
-    image: "/images/projects/aljuf/auto-lease-flow.jpg"
-    content: "Diseñamos un flujo específico para financiamiento de vehículos que maneja la complejidad de múltiples configuraciones: lease operativo, lease financiero, compra directa, y opciones de seguro. Creamos un configurador visual interactivo donde los usuarios pueden ver en tiempo real cómo sus selecciones afectan las cuotas mensuales, términos del contrato, y beneficios fiscales. El sistema maneja automáticamente diferentes modelos de vehículos, variaciones en precios según concesionario, y cálculos complejos de depreciación y valor residual, presentando toda esta información de manera clara y comprensible."
+# Proceso del proyecto
+process:
+  title: "Transformación digital de procesos legacy"
+  content: "El proyecto requirió un approach híbrido que combinara service design con UX tradicional para mapear y digitalizar procesos complejos existentes. Iniciamos con shadowing sessions en oficinas físicas para entender flujos actuales, seguido de stakeholder interviews con personal de créditos y clientes actuales. Utilizamos design sprints de 5 días para cada módulo principal, con prototipado rápido y validación continua. El proceso incluyó workshops de co-diseño con el equipo legal y compliance, testing de usabilidad con empresarios reales, y un programa piloto de 3 meses con 50 empresas para refinar la experiencia antes del lanzamiento completo."
+  image: "/assets/proyectos/proceso-aljuf.jpg"
+
+# Retos del proyecto
+challenges:
+  title: "Retos del proyecto"
+  items:
+    - title: "Digitalización de procesos offline"
+      layout: "image-left"
+      image: "/images/projects/aljuf/digitalization.jpg"
+      content: "El mayor desafío fue transformar procesos financieros tradicionalmente offline en una experiencia digital completa. Mapeamos todos los flujos existentes de solicitud y aprobación de créditos, identificando puntos de fricción y oportunidades de automatización. Desarrollamos formularios inteligentes que se adaptan según el tipo de empresa y financiamiento solicitado, con validaciones en tiempo real y carga de documentos optimizada. La plataforma integra verificaciones automáticas de datos empresariales y scoring crediticio, reduciendo el tiempo de evaluación de semanas a días."
+      
+    - title: "Generar una versión desktop con poco impacto en desarrollo"
+      layout: "image-right"
+      image: "/images/projects/aljuf/desktop-version.jpg" 
+      content: "Creamos una versión desktop completa reutilizando al máximo los componentes y lógica de la versión móvil. Implementamos un sistema de responsive design inteligente que adapta automáticamente los flujos móviles a pantallas grandes, reorganizando elementos para aprovechar el espacio adicional sin duplicar código. Utilizamos técnicas de progressive enhancement donde la funcionalidad base funciona en móvil y se enriquece automáticamente en desktop, minimizando el esfuerzo de desarrollo mientras ofrecemos experiencias optimizadas para cada dispositivo."
+      
+    - title: "El flujo del auto lease y sus configuraciones"
+      layout: "image-left"
+      image: "/images/projects/aljuf/auto-lease-flow.jpg"
+      content: "Diseñamos un flujo específico para financiamiento de vehículos que maneja la complejidad de múltiples configuraciones: lease operativo, lease financiero, compra directa, y opciones de seguro. Creamos un configurador visual interactivo donde los usuarios pueden ver en tiempo real cómo sus selecciones afectan las cuotas mensuales, términos del contrato, y beneficios fiscales. El sistema maneja automáticamente diferentes modelos de vehículos, variaciones en precios según concesionario, y cálculos complejos de depreciación y valor residual, presentando toda esta información de manera clara y comprensible."
+
+# Video del proyecto (opcional)
+projectVideo: "/assets/proyectos/video-aljuf.mp4"
 
 # Proyectos relacionados  
 relatedProjects: ["saudi-national-bank", "bayn"]
@@ -33,7 +44,6 @@ relatedProjects: ["saudi-national-bank", "bayn"]
 description: "Digitalización completa de procesos de financiamiento para PyMES con enfoque en auto lease y configuraciones complejas."
 publishDate: 2023-01-25
 featured: false
+protected: false
 order: 3
 ---
-
-Abdul Latif Jameel Finance demostró cómo la digitalización estratégica puede transformar industrias tradicionales, mejorando significativamente la experiencia del cliente mientras optimiza los procesos internos de evaluación y aprobación.

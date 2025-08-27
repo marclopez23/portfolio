@@ -1,0 +1,653 @@
+---
+// src/pages/proyectos/[slug].astro
+import { getCollection, type CollectionEntry } from "astro:content";
+import PageLayout from "../../layouts/PageLayout.astro";
+import Hero from "../../components/Hero.astro";
+import Title from "../../components/Title.astro";
+import ProjectThumbnail from "../../components/ProjectThumbnail.astro";
+import TextBlock from "../../components/TextBlock.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const {
+  title,
+  heroImage,
+  logo,
+  objective,
+  role,
+  duration,
+  team,
+  process,
+  challenges,
+  projectVideo,
+  relatedProjects,
+  description,
+} = project.data;
+
+// Obtener proyectos relacionados
+let relatedProjectsData: CollectionEntry<"projects">[] = [];
+if (relatedProjects && relatedProjects.length > 0) {
+  const allProjects = await getCollection("projects");
+  relatedProjectsData = allProjects.filter(
+    (p) => relatedProjects.includes(p.slug) && p.data.protected !== true
+  );
+}
+
+const pageTitle = `${title} - Marc López`;
+---
+
+<PageLayout
+  title={pageTitle}
+  currentPage="/projects"
+  description={description}
+  keywords={`proyecto ${title}, UX UI design, caso de estudio, Marc López`}
+>
+  <!-- Project Hero Section -->
+  <!-- Hero Section -->
+  <section role="banner" aria-labelledby="hero-title">
+    <Hero title={title} titleTag="h1" class="fade-in" id="hero-title" />
+  </section>
+  <section
+    class="section project-hero"
+    id="hero"
+    role="banner"
+    aria-labelledby="project-title"
+  >
+    <div class="container">
+      <div class="project-hero__content project-hero__image-container">
+        <!-- Project Hero Image -->
+        <img
+          src={heroImage}
+          alt={`Vista principal del proyecto ${title}`}
+          class="project-hero__image"
+          loading="eager"
+          decoding="sync"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Information Section -->
+  <section
+    class="section section--with-border"
+    id="project-info"
+    role="region"
+    aria-labelledby="project-info-title"
+  >
+    <div class="container">
+      <div class="content-block with-logo">
+        <Title
+          text="Información del proyecto"
+          size="big"
+          showDivider={false}
+          as="h2"
+          id="project-info-title"
+        />
+
+        {
+          logo && (
+            <img
+              src={logo}
+              alt={`Logo de ${title}`}
+              class="project-hero__logo"
+              loading="lazy"
+              decoding="async"
+            />
+          )
+        }
+
+        <div class="project-info">
+          <TextBlock
+            title="Objetivo"
+            description={objective}
+            size="sm"
+            titleTag="h4"
+          />
+          <TextBlock title="Rol" description={role} size="sm" titleTag="h4" />
+
+          <TextBlock
+            title="Duración"
+            description={duration}
+            size="sm"
+            titleTag="h4"
+          />
+
+          <TextBlock
+            title="Equipo de diseño"
+            description={team}
+            size="sm"
+            titleTag="h4"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  {
+    process && (
+      <section
+        class="section section--with-border"
+        id="process"
+        role="region"
+        aria-labelledby="process-title"
+      >
+        <div class="container">
+          <div class="content-block">
+            <Title
+              text={process.title}
+              size="big"
+              showDivider={false}
+              as="h2"
+              id="process-title"
+            />
+
+            <div class="process-content">
+              <div class="process-content__text">
+                <p class="process-text"set:html={process.content}></p>
+              </div>
+              {process.image && (
+                <div class="process-content__image">
+                  <img
+                    src={process.image}
+                    alt={`Proceso del proyecto ${title}`}
+                    class="process-image"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Challenges Section -->
+  {
+    challenges && challenges.items && challenges.items.length > 0 && (
+      <section
+        class="section section--with-border"
+        id="challenges"
+        role="region"
+        aria-labelledby="challenges-title"
+      >
+        <div class="container">
+          <div class="content-block">
+            <Title
+              text={challenges.title}
+              size="big"
+              showDivider={false}
+              as="h2"
+              id="challenges-title"
+            />
+
+            <div class="challenges-list">
+              {challenges.items.map((challenge, index) => (
+                <div
+                  class={`challenge challenge--${challenge.layout}`}
+                  role="article"
+                  aria-labelledby={`challenge-${index}-title`}
+                >
+                  <div class="challenge__content">
+                    <TextBlock
+                      title={challenge.title}
+                      description={challenge.content}
+                      size="xl"
+                      titleTag="h3"
+                      class="challenge__content"
+                    />
+                  </div>
+
+                  {challenge.image && (
+                    <div class="challenge__media">
+                      <img
+                        src={challenge.image}
+                        alt={`Ilustración de ${challenge.title}`}
+                        class="challenge__image"
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </div>
+                  )}
+
+                  {challenge.video && (
+                    <div class="challenge__media">
+                      <video
+                        src={challenge.video}
+                        class="challenge__video"
+                        controls
+                        preload="metadata"
+                        aria-label={`Video demostrativo de ${challenge.title}`}
+                      >
+                        Tu navegador no soporta el elemento video.
+                      </video>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Project Video Section -->
+  {
+    projectVideo && (
+      <section
+        class="section section--with-border"
+        id="project-video"
+        role="region"
+        aria-labelledby="video-title"
+      >
+        <div class="container">
+          <div class="content-block">
+            <Title
+              text="Video del proyecto"
+              size="big"
+              showDivider={false}
+              as="h2"
+              id="video-title"
+            />
+
+            <div class="project-video">
+              <video
+                src={projectVideo}
+                class="project-video__player"
+                controls
+                preload="metadata"
+                aria-label={`Video completo del proyecto ${title}`}
+              >
+                Tu navegador no soporta el elemento video.
+              </video>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Related Projects Section -->
+  {
+    relatedProjectsData && relatedProjectsData.length > 0 && (
+      <section
+        class="section"
+        id="related-projects"
+        role="region"
+        aria-labelledby="related-projects-title"
+      >
+        <div class="container">
+          <div class="content-block">
+            <Title
+              text="Otros proyectos"
+              size="big"
+              showDivider={false}
+              as="h2"
+              id="related-projects-title"
+            />
+
+            <div class="related-projects">
+              {relatedProjectsData.map((relatedProject) => (
+                <div class="related-project">
+                  <ProjectThumbnail
+                    title={relatedProject.data.title}
+                    linkText="Ver proyecto"
+                    href={`/proyectos/${relatedProject.slug}`}
+                    imageSrc={relatedProject.data.heroImage}
+                    imageAlt={`Vista previa del proyecto ${relatedProject.data.title}`}
+                    variant="medium"
+                    ariaLabel={`Ver detalles del proyecto ${relatedProject.data.title}`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+</PageLayout>
+
+<style>
+  /* Importar estilos globales de layout */
+  @import "../../styles/layout.css";
+
+  /* ====================================
+     PROJECT HERO SECTION
+     ====================================  */
+
+  .project-hero {
+    padding-top: 0px;
+  }
+
+  .project-hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+    align-items: center;
+    text-align: center;
+  }
+
+  .project-hero__image-container {
+    width: 100%;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background-color: var(--color-surface);
+  }
+
+  .project-hero__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  .project-hero__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg);
+  }
+
+  .project-hero__logo {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .project-hero__title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin: 0;
+    line-height: var(--line-height-normal);
+  }
+
+  /* ====================================
+     PROJECT INFORMATION SECTION
+     ====================================  */
+
+  .project-info {
+    display: grid;
+    gap: var(--spacing-2xl);
+    grid-template-columns: 1fr;
+  }
+
+  .with-logo {
+    align-items: flex-start;
+  }
+
+  /* ====================================
+     PROCESS SECTION
+     ====================================  */
+
+  .process-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+  }
+
+  .process-content__image {
+    order: 1;
+  }
+
+  .process-content__text {
+    order: 2;
+  }
+
+  .process-image {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+  }
+
+  .process-text {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-normal);
+    margin: 0;
+  }
+
+  /* ====================================
+     CHALLENGES SECTION
+     ====================================  */
+
+  .challenges-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-gap);
+  }
+
+  .challenge {
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-gap);
+    padding-top: var(--spacing-2xl);
+  }
+
+  .challenge__content {
+    order: 2;
+  }
+
+  .challenge__media {
+    order: 1;
+  }
+
+  .challenge__title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin: 0 0 var(--spacing-lg) 0;
+    line-height: var(--line-height-normal);
+  }
+
+  .challenge__text {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-normal);
+  }
+
+  .challenge__text p {
+    margin: 0 0 var(--spacing-lg) 0;
+  }
+
+  .challenge__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .challenge__image,
+  .challenge__video {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+  }
+
+  /* ====================================
+     PROJECT VIDEO SECTION
+     ====================================  */
+
+  .project-video {
+    display: flex;
+    justify-content: center;
+  }
+
+  .project-video__player {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    border-radius: var(--radius-lg);
+  }
+
+  /* ====================================
+     RELATED PROJECTS SECTION
+     ====================================  */
+
+  .related-projects {
+    display: grid;
+    gap: var(--spacing-2xl);
+    grid-template-columns: 1fr;
+  }
+
+  /* ====================================
+     DESKTOP RESPONSIVE
+     ====================================  */
+
+  @media (min-width: 768px) {
+    .project-hero__title {
+      font-size: var(--font-size-4xl);
+    }
+
+    .project-hero__logo {
+      height: 80px;
+    }
+
+    /* Project info in 4 columns on desktop */
+
+    .with-logo {
+      align-items: flex-start;
+    }
+
+    .project-info {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--spacing-3xl);
+    }
+
+    /* Process section desktop layout */
+    .process-content {
+      flex-direction: row;
+      align-items: flex-start;
+      gap: var(--spacing-4xl);
+    }
+
+    .process-content__image {
+      order: 2;
+      flex: 0 0 40%;
+    }
+
+    .process-content__text {
+      order: 1;
+      flex: 1;
+    }
+
+    .process-text {
+      font-size: var(--font-size-md);
+      column-count: 2;
+      column-gap: var(--section-gap);
+    }
+
+    /* Challenges desktop layouts */
+
+    .challenge{
+      display: grid;
+    flex-direction: column;
+    grid-template-columns: 1fr 1fr;
+    }
+
+    .challenge--image-left {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .challenge--image-left .challenge__media {
+      order: 1;
+      flex: 0 0 50%;
+    }
+
+    .challenge--image-left .challenge__content {
+      order: 2;
+      flex: 1;
+    }
+
+    .challenge--image-right {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .challenge--image-right .challenge__media {
+      order: 2;
+      flex: 0 0 50%;
+    }
+
+    .challenge--image-right .challenge__content {
+      order: 1;
+      flex: 1;
+    }
+
+    .challenge--full-width .challenge__media {
+      order: 1;
+    }
+
+    .challenge--full-width .challenge__content {
+      order: 2;
+    }
+
+    .challenge__title {
+      font-size: var(--font-size-3xl);
+    }
+
+    .challenge__text {
+      font-size: var(--font-size-xl);
+    }
+
+    /* Related projects grid */
+    .related-projects {
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-3xl);
+    }
+  }
+
+  /* ====================================
+     ACCESSIBILITY & MOTION
+     ====================================  */
+
+  /* Reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .challenge,
+    .process-content {
+      transition: none;
+    }
+  }
+
+  /* High contrast mode improvements */
+  @media (prefers-contrast: high) {
+    .project-hero__image-container,
+    .process-image,
+    .challenge__image {
+      outline: 2px solid var(--color-text-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  /* Touch device improvements */
+  @media (hover: none) and (pointer: coarse) {
+    .challenge {
+      gap: var(--spacing-2xl);
+    }
+
+    .process-content {
+      gap: var(--spacing-2xl);
+    }
+  }
+</style>
