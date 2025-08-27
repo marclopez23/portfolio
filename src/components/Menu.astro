@@ -39,7 +39,7 @@ const {
   menuItems = [
     { text: 'Sobre mí', href: '/about' },
     { text: 'CV', href: '/cv' },
-    { text: 'Proyectos', href: '/projects' }
+    { text: 'Proyectos', href: '/proyectos' }
   ],
   logoHref = '/',
   logoAlt = 'Marc Lopez - Inicio',
@@ -120,9 +120,6 @@ const menuId = id || 'main-menu';
     <div class="menu__mobile-content">
       <!-- Header del menú móvil -->
       <div class="menu__mobile-header">
-        <h2 id={`${menuId}-mobile-title`} class="menu__mobile-title">
-          Menú de navegación
-        </h2>
         <button 
           class="menu__close"
           aria-label="Cerrar menú"

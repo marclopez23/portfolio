@@ -11,6 +11,7 @@ import TextBlock from "../components/TextBlock.astro"
 import MenuItem from "../components/MenuItem.astro"
 import Menu from "../components/Menu.astro"
 import Footer from "../components/Footer.astro"
+import ProjectThumbnail from "../components/ProjectThumbnail.astro"
 
 const pageTitle = "Componentes";
 ---
@@ -292,6 +293,39 @@ const pageTitle = "Componentes";
     </div>
   </div>
 </section>
+<!-- ProjectThumbnail Component -->
+    <section class="component-section">
+      <h2 class="component-title">ProjectThumbnail</h2>
+      <div class="variants-grid" style="display: flex; flex-direction: column;">
+        <div class="variant">
+          <span class="variant-label">Big</span>
+          <ProjectThumbnail 
+            variant="big"
+            title="Plataforma E-commerce"
+            linkText="Ver proyecto"
+            href="/proyectos/ecommerce"
+          />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Medium</span>
+          <ProjectThumbnail 
+            variant="medium"
+            title="Dashboard Analytics"
+            linkText="Ver más"
+            href="/proyectos/dashboard"
+          />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Small</span>
+          <ProjectThumbnail 
+            variant="small"
+            title="Sitio Corporativo"
+            href="/proyectos/sitio-corporativo"
+          />
+        </div>
+        
+      </div>
+    </section>
   </main>
 </Layout>
 

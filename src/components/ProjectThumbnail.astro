@@ -1,0 +1,183 @@
+---
+// ProjectThumbnail.astro
+import Link from './Link.astro';
+
+export interface Props {
+  title?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  variant?: 'big' | 'medium' | 'small';
+  href?: string;
+  target?: '_blank' | '_self';
+  linkText?: string;
+  ariaLabel?: string;
+  class?: string;
+}
+
+const {
+  title = "Nombre del proyecto",
+  imageSrc = "https://via.placeholder.com/400x300/F5E6D3/000000?text=Preview",
+  imageAlt = "Vista previa del proyecto",
+  variant = "medium",
+  href = "#",
+  target = "_self",
+  linkText = "Ver más",
+  ariaLabel,
+  class: className = "",
+} = Astro.props;
+
+const baseClasses = "project-thumbnail";
+const variantClass = `project-thumbnail--${variant}`;
+const allClasses = [baseClasses, variantClass, className].filter(Boolean).join(" ");
+---
+
+<article class={allClasses}>
+  <div class="project-thumbnail__image-container">
+    <img 
+      src={imageSrc}
+      alt={imageAlt}
+      class="project-thumbnail__image"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  
+  <div class="project-thumbnail__content">
+    <h3 class="project-thumbnail__title">{title}</h3>
+    <Link 
+      text={linkText}
+      href={href}
+      target={target}
+      ariaLabel={ariaLabel}
+      class="project-thumbnail__link"
+    />
+  </div>
+</article>
+
+<style>
+  .project-thumbnail {
+    position: relative;
+    width: 100%;
+  }
+  
+  .project-thumbnail__image-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-xl);
+    background-color: #F5E6D3;
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .project-thumbnail__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .project-thumbnail__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  /* Big variant: título y enlace en la misma fila */
+  .project-thumbnail--big .project-thumbnail__content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--spacing-lg);
+  }
+  
+  .project-thumbnail__title {
+    font-family: var(--font-family-primary);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-primary);
+    margin: 0;
+    line-height: var(--line-height-normal);
+    
+    /* Truncate text - máximo 2 líneas */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Big variant: solo 1 línea de texto */
+  .project-thumbnail--big .project-thumbnail__title {
+    -webkit-line-clamp: 1;
+  }
+
+  /* Mobile: todos los tamaños iguales */
+  .project-thumbnail--big .project-thumbnail__title,
+  .project-thumbnail--medium .project-thumbnail__title,
+  .project-thumbnail--small .project-thumbnail__title {
+    font-size: var(--font-size-lg); /* mismo tamaño en mobile */
+  }
+
+  /* Mobile: todos los enlaces van abajo */
+  .project-thumbnail--big .project-thumbnail__content {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  /* Variantes de aspect ratio */
+  .project-thumbnail--big .project-thumbnail__image-container {
+    aspect-ratio: 16 / 10;
+  }
+  
+  .project-thumbnail--medium .project-thumbnail__image-container {
+    aspect-ratio: 16 / 11;
+  }
+  
+  .project-thumbnail--small .project-thumbnail__image-container {
+    aspect-ratio: 16 / 12;
+  }
+
+  /* Desktop adjustments */
+  @media (min-width: 768px) {
+    .project-thumbnail__image-container {
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .project-thumbnail__content {
+      gap: var(--spacing-md);
+    }
+
+    /* Desktop: diferentes tamaños de título */
+    .project-thumbnail--big .project-thumbnail__title {
+      font-size: var(--font-size-3xl);
+    }
+    
+    .project-thumbnail--medium .project-thumbnail__title {
+      font-size: var(--font-size-2xl);
+    }
+    
+    .project-thumbnail--small .project-thumbnail__title {
+      font-size: var(--font-size-xl);
+    }
+
+    /* Desktop: Big variant con enlace a la derecha */
+    .project-thumbnail--big .project-thumbnail__content {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--spacing-lg);
+    }
+    
+    /* Desktop: aspect ratios ajustados */
+    .project-thumbnail--big .project-thumbnail__image-container {
+      aspect-ratio: 16 / 9;
+    }
+    
+    .project-thumbnail--medium .project-thumbnail__image-container {
+      aspect-ratio: 16 / 10;
+    }
+    
+    .project-thumbnail--small .project-thumbnail__image-container {
+      aspect-ratio: 16 / 11;
+    }
+  }
+</style>

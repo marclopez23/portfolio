@@ -1,0 +1,185 @@
+---
+// src/pages/projects.astro
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/Hero.astro';
+import ProjectThumbnail from '../components/ProjectThumbnail.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+const pageTitle = "Proyectos - Marc López";
+
+// Obtener todos los proyectos ordenados
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => a.data.order - b.data.order);
+---
+
+<PageLayout 
+  title={pageTitle}
+  currentPage="/projects"
+  description="Explora los proyectos de Marc López en diseño UX/UI. Desde aplicaciones móviles hasta sistemas de diseño y plataformas web."
+  keywords="proyectos UX UI, portfolio diseño, casos de estudio, Marc López"
+>
+
+  <!-- Hero Section -->
+  <section role="banner" aria-labelledby="hero-title">
+      <Hero 
+        title="Proyectos"
+        titleTag="h1"
+        class="fade-in"
+        id="hero-title"
+      />
+  </section>
+
+  <!-- Projects Grid Section -->
+  <section 
+    class="section section--with-border" 
+    id="projects-grid"
+    role="main"
+    aria-labelledby="projects-title"
+  >
+    <div class="container">
+      <div class="content-block">
+        <!-- Grid de proyectos -->
+        <div 
+          class="projects-grid"
+          role="list"
+          aria-label="Lista de proyectos destacados"
+        >
+          {projects.map((project: CollectionEntry<'projects'>) => (
+            <div role="listitem">
+              <ProjectThumbnail
+                title={project.data.title}
+                linkText="Ver proyecto"
+                href={`/proyectos/${project.slug}`}
+                imageSrc={project.data.heroImage}
+                imageAlt={`Vista previa del proyecto ${project.data.title}`}
+                variant="medium"
+                class="slide-up"
+                ariaLabel={`Ver detalles del proyecto ${project.data.title}`}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  /* Importar estilos globales de layout */
+  @import '../styles/layout.css';
+  
+  /* ====================================
+     ACCESSIBILITY IMPROVEMENTS
+     ==================================== */
+
+  /* ====================================
+     PROJECTS GRID LAYOUT
+     ==================================== */
+  
+  .projects-grid {
+    display: grid;
+    gap: var(--spacing-2xl);
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  /* Desktop: 2 columnas, todos iguales */
+  @media (min-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-3xl);
+    }
+  }
+
+  /* ====================================
+     HERO ESPECÍFICO PARA PROYECTOS
+     ==================================== */
+  
+  .hero--projects {
+    /* Estilos específicos para el hero de proyectos si es necesario */
+  }
+
+  /* ====================================
+     ANIMACIONES ESCALONADAS
+     ==================================== */
+  
+  .slide-up {
+    opacity: 0;
+    animation: slideUpStagger 0.8s ease-out forwards;
+  }
+  
+  @keyframes slideUpStagger {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Escalonar las animaciones */
+  .projects-grid__item:nth-child(1) .slide-up { animation-delay: 0.1s; }
+  .projects-grid__item:nth-child(2) .slide-up { animation-delay: 0.2s; }
+  .projects-grid__item:nth-child(3) .slide-up { animation-delay: 0.3s; }
+  .projects-grid__item:nth-child(4) .slide-up { animation-delay: 0.4s; }
+  .projects-grid__item:nth-child(5) .slide-up { animation-delay: 0.5s; }
+
+  /* ====================================
+     RESPONSIVE ADJUSTMENTS
+     ==================================== */
+  
+  /* Mobile específico */
+  @media (max-width: 767px) {
+    .projects-grid {
+      gap: var(--spacing-xl);
+    }
+
+    /* En mobile todos los proyectos se ven igual de grandes */
+    .projects-grid__item--big,
+    .projects-grid__item--medium,
+    .projects-grid__item--small {
+      /* Todos tienen el mismo tratamiento en mobile */
+    }
+  }
+
+  /* Tablet adjustments */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .projects-grid {
+      gap: var(--spacing-2xl);
+    }
+  }
+
+  /* ====================================
+     ACCESIBILIDAD Y MOTION
+     ==================================== */
+
+  /* Reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .slide-up {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* High contrast mode improvements */
+  @media (prefers-contrast: high) {
+    .projects-grid__item {
+      outline: 1px solid var(--color-text-primary);
+      outline-offset: 2px;
+    }
+  }
+
+  /* ====================================
+     MEJORAS PARA TOUCH DEVICES
+     ==================================== */
+
+  @media (hover: none) and (pointer: coarse) {
+    .projects-grid {
+      gap: var(--spacing-lg);
+    }
+  }
+</style>
