@@ -1,0 +1,107 @@
+---
+// src/components/SentenceProcessor.astro
+// Componente que convierte oraciones en párrafos separados respetando el layout padre
+
+export interface Props {
+  /**
+   * Contenido de texto a procesar
+   */
+  content: string;
+  
+  /**
+   * Clases CSS adicionales
+   */
+  class?: string;
+  
+  /**
+   * ID del elemento
+   */
+  id?: string;
+  
+  /**
+   * Elemento HTML a usar (div por defecto para no interferir con layouts)
+   */
+  as?: 'div' | 'section' | 'article';
+}
+
+const { 
+  content, 
+  class: className = '', 
+  id,
+  as: Element = 'div' 
+} = Astro.props;
+
+// Generar ID único para el procesamiento
+const uniqueId = id || `sentence-processor-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<Element 
+  class={`sentence-processor ${className}`.trim()}
+  id={uniqueId}
+  set:html={content}
+/>
+
+<script define:vars={{ uniqueId }}>
+  function processSentences() {
+    const element = document.getElementById(uniqueId);
+    if (!element) return;
+    
+    const text = element.textContent?.trim();
+    if (!text) return;
+    
+    // Dividir por punto + espacio + mayúscula (evitando abreviaciones comunes)
+    const sentences = text.split(/\.\s+(?=[A-Z])/)
+      .map(s => s.trim())
+      .filter(s => s.length > 0)
+      .map(sentence => {
+        // Asegurar que termine en punto
+        return sentence.endsWith('.') ? sentence : sentence + '.';
+      });
+    
+    // Solo procesar si hay múltiples oraciones
+    if (sentences.length > 1) {
+      const html = sentences.map(sentence => `<p>${sentence}</p>`).join('');
+      element.innerHTML = html;
+    }
+  }
+  
+  // Ejecutar cuando el DOM esté listo
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', processSentences);
+  } else {
+    processSentences();
+  }
+  
+  // También ejecutar en navegación de Astro (si usas View Transitions)
+  document.addEventListener('astro:page-load', processSentences);
+</script>
+
+<style>
+  .sentence-processor {
+    /* Estilos base que no interfieren con el layout padre */
+    display: contents; /* No afecta el layout padre */
+  }
+  
+  /* Estilos para los párrafos generados */
+  .sentence-processor p {
+    margin: 0 0 1em 0;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    line-height: 1.6;
+  }
+  
+  .sentence-processor p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .sentence-processor p:first-child {
+    margin-top: 0;
+  }
+  
+  /* Mejoras para columnas CSS */
+  .sentence-processor p {
+    break-inside: avoid-column;
+    page-break-inside: avoid;
+  }
+</style>

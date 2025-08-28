@@ -155,7 +155,7 @@ const pageTitle = `${title} - Marc López`;
 
             <div class="process-content">
               <div class="process-content__text">
-                <p class="process-text"set:html={process.content}></p>
+                <div class="process-text auto-sentences" set:html={process.content} />
               </div>
               {process.image && (
                 <div class="process-content__image">
@@ -426,6 +426,20 @@ const pageTitle = `${title} - Marc López`;
     margin: 0;
   }
 
+  .process-text p {
+  margin: 0 0 1em 0;
+  line-height: 1.6;
+}
+
+.process-text p:last-child {
+  margin-bottom: 0;
+}
+
+.process-text p:first-child {
+  margin-top: 0;
+}
+
+
   /* ====================================
      CHALLENGES SECTION
      ====================================  */
@@ -495,7 +509,6 @@ const pageTitle = `${title} - Marc López`;
 
   .project-video__player {
     width: 100%;
-    max-width: 800px;
     height: auto;
     border-radius: var(--radius-lg);
   }
@@ -557,12 +570,13 @@ const pageTitle = `${title} - Marc López`;
       column-gap: var(--section-gap);
     }
 
+
     /* Challenges desktop layouts */
 
-    .challenge{
+    .challenge {
       display: grid;
-    flex-direction: column;
-    grid-template-columns: 1fr 1fr;
+      flex-direction: column;
+      grid-template-columns: 1fr 1fr;
     }
 
     .challenge--image-left {
@@ -651,3 +665,31 @@ const pageTitle = `${title} - Marc López`;
     }
   }
 </style>
+
+<script is:inline>
+  function convertToSentences() {
+    document.querySelectorAll('.auto-sentences').forEach(element => {
+      const text = element.textContent?.trim();
+      
+      if (!text) return;
+      
+      const sentences = text.split(/\.\s+(?=[A-Z])/)
+        .filter(s => s.trim())
+        .map(s => s.trim().endsWith('.') ? s.trim() : s.trim() + '.');
+      
+      if (sentences.length > 1) {
+        element.innerHTML = sentences.map(s => 
+          `<p style="margin: 0 0 1em 0; line-height: 1.6;">${s}</p>`
+        ).join('');
+        
+        // Quitar margen del último
+        const lastP = element.querySelector('p:last-child');
+        if (lastP) lastP.style.marginBottom = '0';
+        
+      }
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', convertToSentences);
+  document.addEventListener('astro:page-load', convertToSentences);
+</script>
