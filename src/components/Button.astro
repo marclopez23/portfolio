@@ -178,6 +178,7 @@ const commonProps = {
 
   /* Active/Pressed state */
   .button:active:not(:disabled):not([aria-disabled="true"]) {
+    transition: none;
     background-color: var(--color-text-tertiary);
     color: var(--color-text-primary);
     transform: translateY(0);

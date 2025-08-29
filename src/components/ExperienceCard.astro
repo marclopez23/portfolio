@@ -154,7 +154,7 @@ const tasksId = `${cardId}-tasks`;
   }
 
   .experience-card__logo-img {
-    max-height: 50px;
+    height: 50px;
     width: auto;
     max-width: 200px;
     object-fit: contain;
@@ -256,47 +256,35 @@ const tasksId = `${cardId}-tasks`;
     }
     
     .experience-card__title {
-      font-size: var(--font-size-md);
+      font-size: var(--font-size-xl);
     }
     
     .experience-card__company {
-      font-size: var(--font-size-md);
+      font-size: var(--font-size-lg);
     }
     
     .experience-card__period {
-      font-size: var(--font-size-sm);
+      font-size: var(--font-size-md);
     }
     
     .experience-card__tasks {
-      font-size: var(--font-size-sm);
+      font-size: var(--font-size-md);
     }
     
     .experience-card__task {
       padding-left: var(--spacing-xl);
     }
+
+    li.experience-card__task
+ {
+    font-size: var(--font-size-lg);
+}
     
     .experience-card__task::before {
       left: var(--spacing-sm);
     }
   }
 
-  /* Estados de hover para interactividad */
-  .experience-card--interactive {
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    padding: var(--spacing-xl);
-    border-radius: var(--radius-lg);
-  }
-
-  .experience-card--interactive:hover {
-    background-color: rgba(255, 255, 255, 0.02);
-    transform: translateY(-2px);
-  }
-
-  .experience-card--interactive:focus-visible {
-    outline: 2px solid var(--color-text-tertiary);
-    outline-offset: 2px;
-  }
 
   /* Mejoras de accesibilidad */
   @media (prefers-reduced-motion: reduce) {

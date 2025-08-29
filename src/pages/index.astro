@@ -85,10 +85,12 @@ const projectsToShow = featuredProjects
         <div class="projects__content">
           <!-- Title sidebar -->
           <div class="projects__sidebar">
-            <h2 class="section-title" id="projects-title">
-              Proyectos<span class="accent-dot">.</span>
-            </h2>
-          </div>
+  <div class="projects__sticky-container">
+    <h2 class="section-title" id="projects-title">
+      Proyectos<span class="accent-dot">.</span>
+    </h2>
+  </div>
+</div>
 
           <!-- Projects grid - Dinámico desde content collections -->
           <div class="projects__grid">
@@ -213,6 +215,67 @@ const projectsToShow = featuredProjects
       </div>
     </section>
   </div>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const stickyContainer = document.querySelector('.projects__sticky-container');
+    const projectsSection = document.getElementById('proyectos');
+    
+    if (stickyContainer && projectsSection && window.innerWidth > 1200) {
+      // Observer para detectar cuando la sección está visible
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            stickyContainer.classList.remove('is-sticky');
+          } else {
+            const rect = entry.boundingClientRect;
+            if (rect.bottom > 0) {
+              // La sección aún es visible por abajo
+              stickyContainer.classList.add('is-sticky');
+            } else {
+              // La sección ya no es visible
+              stickyContainer.classList.remove('is-sticky');
+            }
+          }
+        });
+      }, {
+        rootMargin: '-120px 0px 0px 0px', // Offset por el header
+        threshold: [0, 1]
+      });
+
+      observer.observe(projectsSection);
+
+      // Cleanup en resize
+      window.addEventListener('resize', () => {
+        if (window.innerWidth <= 1200) {
+          observer.disconnect();
+          stickyContainer.classList.remove('is-sticky');
+        }
+      });
+    }
+
+    // Smooth scroll para enlaces internos (fix TypeScript)
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        if (!href) return;
+        
+        const targetId = href.substring(1);
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          const headerHeight = 120; // Ajustar según tu header
+          const elementPosition = targetElement.offsetTop - headerHeight;
+          
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  });
+</script>
 </PageLayout>
 
 <style>
@@ -336,7 +399,7 @@ const projectsToShow = featuredProjects
     padding-right: var(--spacing-2xl);
     border-right: 2px solid var(--color-divider);
     position: sticky;
-    top: 0;
+    top: 170px;
   }
 
   .section-title {
@@ -459,6 +522,47 @@ const projectsToShow = featuredProjects
     .contact__links {
       flex-direction: column;
       width: 100%;
+    }
+  }
+
+   /* ========================================
+     ENHANCED STICKY BEHAVIOR
+     ======================================== */
+
+  /* Mejora el comportamiento sticky para desktop */
+  @media (min-width: 1201px) {
+    .projects__sticky-container {
+      position: sticky;
+      top: 120px; /* Ajustar según altura de tu header */
+      z-index: 10;
+      background-color: var(--color-main-bg);
+      padding: var(--spacing-md) 0;
+      transition: all 0.2s ease-in-out;
+    }
+
+    /* Línea superior cuando está sticky */
+    .projects__sticky-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -var(--spacing-2xl);
+      right: 0;
+      height: 1px;
+      background-color: transparent;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .projects__sticky-container.is-sticky::before {
+      background-color: var(--color-divider);
+    }
+  }
+
+  /* En responsive mantener comportamiento normal */
+  @media (max-width: 1200px) {
+    .projects__sticky-container {
+      position: relative;
+      top: auto;
+      padding: 0;
     }
   }
 

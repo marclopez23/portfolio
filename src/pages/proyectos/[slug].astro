@@ -6,6 +6,7 @@ import Hero from "../../components/Hero.astro";
 import Title from "../../components/Title.astro";
 import ProjectThumbnail from "../../components/ProjectThumbnail.astro";
 import TextBlock from "../../components/TextBlock.astro";
+import SkeletonImage from "../../components/SkeletonImage.astro";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -68,14 +69,13 @@ const pageTitle = `${title} - Marc López`;
     <div class="container">
       <div class="project-hero__content project-hero__image-container">
         <!-- Project Hero Image -->
-        <img
-          src={heroImage}
-          alt={`Vista principal del proyecto ${title}`}
-          class="project-hero__image"
-          loading="eager"
-          decoding="sync"
-        />
-      </div>
+        <SkeletonImage
+  src={heroImage}
+  alt={`Vista principal del proyecto ${title}`}
+  class="project-hero__image"
+  loading="eager"
+  decoding="sync"
+/>
     </div>
   </section>
 
@@ -214,13 +214,13 @@ const pageTitle = `${title} - Marc López`;
 
                   {challenge.image && (
                     <div class="challenge__media">
-                      <img
-                        src={challenge.image}
-                        alt={`Ilustración de ${challenge.title}`}
-                        class="challenge__image"
-                        loading="lazy"
-                        decoding="async"
-                      />
+                      <SkeletonImage
+  src={challenge.image}
+  alt={`Ilustración de ${challenge.title}`}
+  class="challenge__image"
+  loading="lazy"
+  decoding="async"
+/>
                     </div>
                   )}
                 </div>
@@ -258,11 +258,13 @@ const pageTitle = `${title} - Marc López`;
                 data-video-src={projectVideo}
                 data-video-title={`Video completo del proyecto ${title}`}
               >
-                <img 
-                  src={videoThumbnail || heroImage || '/placeholder-video.jpg'} 
-                  alt={`Video completo del proyecto ${title}`}
-                  class="video-poster"
-                />
+                <SkeletonImage
+  src={videoThumbnail || heroImage || '/placeholder-video.jpg'}
+  alt={`Video completo del proyecto ${title}`}
+  class="video-poster"
+  loading="lazy"
+  decoding="async"
+/>
                 <div class="video-play-button">
                   <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
                     <circle cx="40" cy="40" r="40" fill="rgba(255, 255, 255, 0.95)"/>

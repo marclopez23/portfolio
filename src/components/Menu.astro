@@ -184,26 +184,139 @@ const menuId = id || 'main-menu';
   }
 
   /* Logo */
-  .menu__logo {
-    text-decoration: none;
-    transition: transform 0.2s ease-in-out;
-  }
+  /* SOLUCIÓN ESPECÍFICA PARA EL LOGO "marc lópez" */
 
-  .menu__logo:hover {
-    transform: scale(1.05);
-  }
+.menu__logo {
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
 
-  .menu__logo:focus-visible {
-    outline: 2px solid var(--color-text-tertiary);
-    outline-offset: 4px;
-    border-radius: 4px;
-  }
+.logo {
+  width: 225px;
+  height: 42px;
+  display: block;
+  transition: none;
+}
 
-  .logo {
-    width: 225px;
-    height: 42px;
-    display: block;
+
+
+/* Focus states */
+.menu__logo:focus-visible {
+  outline: 2px solid var(--color-text-tertiary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .logo,
+  .logo-base,
+  .logo-inline {
+    width: 150px;
+    height: 28px;
   }
+  
+  .menu__logo::after {
+    background-size: 150px 28px;
+  }
+  
+  .menu__logo-mask::before {
+    mask-size: 150px 28px;
+    -webkit-mask-size: 150px 28px;
+  }
+  
+  .logo-text {
+    font-size: 20px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .menu__logo::after,
+  .logo-inline path,
+  .logo-inline g path,
+  .menu__logo-mask::before,
+  .logo-text .letter {
+    transition: none !important;
+  }
+  
+  .menu__logo:hover::after {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+  
+  .menu__logo:hover .logo-inline path,
+  .menu__logo:hover .logo-inline g path,
+  .menu__logo:hover .logo-text .letter,
+  .menu__logo:hover .logo-text .word:last-child .letter {
+    fill: #E95E49;
+    color: #E95E49;
+    transition-delay: 0ms !important;
+  }
+  
+  .menu__logo-mask:hover::before {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Focus states */
+.menu__logo:focus-visible {
+  outline: 2px solid var(--color-text-tertiary);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+  .logo,
+  .logo-base,
+  .logo-inline {
+    width: 150px;
+    height: 28px;
+  }
+  
+  .menu__logo::after {
+    background-size: 150px 28px;
+  }
+  
+  .menu__logo-mask::before {
+    mask-size: 150px 28px;
+    -webkit-mask-size: 150px 28px;
+  }
+  
+  .logo-text {
+    font-size: 20px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .menu__logo::after,
+  .logo-inline path,
+  .logo-inline g path,
+  .menu__logo-mask::before,
+  .logo-text .letter {
+    transition: none !important;
+  }
+  
+  .menu__logo:hover::after {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  }
+  
+  .menu__logo:hover .logo-inline path,
+  .menu__logo:hover .logo-inline g path,
+  .menu__logo:hover .logo-text .letter,
+  .menu__logo:hover .logo-text .word:last-child .letter {
+    fill: #FEFEFE;
+    color: #FEFEFE;
+    transition-delay: 0ms !important;
+  }
+  
+  .menu__logo-mask:hover::before {
+    clip-path: inset(0 0 0 0);
+  }
+}
 
   /* Navegación desktop */
   .menu__nav--desktop {

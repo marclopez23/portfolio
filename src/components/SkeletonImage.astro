@@ -1,0 +1,236 @@
+---
+// src/components/SkeletonImage.astro
+export interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  class?: string;
+  loading?: 'eager' | 'lazy';
+  decoding?: 'async' | 'sync' | 'auto';
+  showSkeleton?: boolean;
+  aspectRatio?: string; // e.g., "16/9", "1/1", "3/2"
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  class: className = '',
+  loading = 'lazy',
+  decoding = 'async',
+  showSkeleton = false,
+  aspectRatio
+} = Astro.props;
+
+// ID único para el componente
+const componentId = `skeleton-image-${Math.random().toString(36).substr(2, 9)}`;
+
+// Clases CSS
+const containerClasses = [
+  'skeleton-image',
+  showSkeleton && 'skeleton-image--force-skeleton',
+  className
+].filter(Boolean).join(' ');
+---
+
+<div class={containerClasses} id={componentId}>
+  <!-- Skeleton placeholder -->
+  <div class="skeleton-image__skeleton" aria-hidden="true">
+    <div class="skeleton-shimmer"></div>
+  </div>
+  
+  <!-- Imagen real -->
+  <img 
+    src={src}
+    alt={alt}
+    class="skeleton-image__img"
+    width={width}
+    height={height}
+    loading={loading}
+    decoding={decoding}
+    onload={`
+      const container = document.getElementById('${componentId}');
+      if (container) container.classList.add('skeleton-image--loaded');
+    `}
+    onerror={`
+      const container = document.getElementById('${componentId}');
+      if (container) container.classList.add('skeleton-image--error');
+    `}
+  />
+</div>
+
+<style>
+  .skeleton-image {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+  }
+
+  /* Aspect ratio si se especifica */
+  .skeleton-image[data-aspect-ratio] {
+    aspect-ratio: var(--aspect-ratio);
+  }
+
+  /* ========================================
+     SKELETON
+     ======================================== */
+
+  .skeleton-image__skeleton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, #d1d5db 25%, #9ca3af 50%, #d1d5db 75%);
+    background-size: 200% 100%;
+    z-index: 1;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Animación del skeleton */
+  .skeleton-shimmer {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 25%,
+      rgba(255, 255, 255, 0.5) 50%,
+      transparent 75%
+    );
+    background-size: 200% 100%;
+    animation: skeleton-loading 2s infinite;
+  }
+
+  @keyframes skeleton-loading {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* ========================================
+     IMAGEN
+     ======================================== */
+
+  .skeleton-image__img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 2;
+    opacity: 0; /* Inicialmente oculta */
+  }
+
+  /* ========================================
+     ESTADOS
+     ======================================== */
+
+  /* Estado inicial */
+  .skeleton-image .skeleton-image__skeleton {
+    opacity: 1;
+  }
+
+  .skeleton-image .skeleton-image__img {
+    opacity: 0;
+  }
+
+  /* Imagen cargada */
+  .skeleton-image.skeleton-image--loaded .skeleton-image__skeleton {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .skeleton-image.skeleton-image--loaded .skeleton-image__img {
+    opacity: 1;
+  }
+
+  /* Error de carga */
+  .skeleton-image.skeleton-image--error .skeleton-image__skeleton {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    opacity: 1;
+  }
+
+  .skeleton-image.skeleton-image--error .skeleton-image__skeleton::after {
+    content: '📷';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    opacity: 0.7;
+  }
+
+  .skeleton-image.skeleton-image--error .skeleton-image__img {
+    opacity: 0;
+  }
+
+  /* Forzar skeleton */
+  .skeleton-image--force-skeleton .skeleton-image__skeleton {
+    opacity: 1;
+  }
+
+  .skeleton-image--force-skeleton .skeleton-image__img {
+    opacity: 0;
+  }
+
+  /* ========================================
+     ACCESSIBILITY
+     ======================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    .skeleton-image__skeleton,
+    .skeleton-image__img {
+      transition: none;
+    }
+
+    .skeleton-shimmer {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  // JavaScript para manejar casos edge
+  document.addEventListener('DOMContentLoaded', function() {
+    const skeletonImages = document.querySelectorAll('.skeleton-image');
+    
+    skeletonImages.forEach(container => {
+      const img = container.querySelector('.skeleton-image__img') as HTMLImageElement;
+      
+      if (img) {
+        // Si la imagen ya está cargada (desde cache)
+        if (img.complete && img.naturalHeight !== 0) {
+          container.classList.add('skeleton-image--loaded');
+        } else {
+          // Asegurar que skeleton esté visible
+          container.classList.remove('skeleton-image--loaded');
+        }
+      }
+    });
+  });
+
+  // Para Astro page transitions
+  document.addEventListener('astro:page-load', function() {
+    const skeletonImages = document.querySelectorAll('.skeleton-image');
+    
+    skeletonImages.forEach(container => {
+      const img = container.querySelector('.skeleton-image__img') as HTMLImageElement;
+      
+      if (img) {
+        if (img.complete && img.naturalHeight !== 0) {
+          container.classList.add('skeleton-image--loaded');
+        } else {
+          container.classList.remove('skeleton-image--loaded');
+        }
+      }
+    });
+  });
+</script>
