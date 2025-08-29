@@ -1,16 +1,16 @@
 ---
 // src/pages/index.astro
-import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
-import PageLayout from '../layouts/PageLayout.astro';
-import Button from '../components/Button.astro';
-import ProjectThumbnail from '../components/ProjectThumbnail.astro';
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import PageLayout from "../layouts/PageLayout.astro";
+import Button from "../components/Button.astro";
+import ProjectThumbnail from "../components/ProjectThumbnail.astro";
 
 // Import solo para la imagen crítica del hero
-import profilePhoto from '../assets/profile-photo.png';
+import profilePhoto from "../assets/profile-photo.png";
 
 // Obtener proyectos destacados dinámicamente
-const featuredProjects = await getCollection('projects', ({ data }) => {
+const featuredProjects = await getCollection("projects", ({ data }) => {
   return data.featured === true && data.protected !== true;
 });
 
@@ -22,16 +22,14 @@ const projectsToShow = featuredProjects
 
 <PageLayout title="Marc López - Product & System Designer" currentPage="/">
   <div class="home-page">
-    
     <!-- Hero Section -->
     <section class="hero" id="hero" aria-labelledby="hero-title">
       <div class="container">
         <div class="hero__content">
-          
           <!-- Foto perfil - Optimizada con Astro Image -->
           <div class="hero__image">
             <div class="hero__image-container">
-              <Image 
+              <Image
                 src={profilePhoto}
                 alt="Foto de Marc López, Product & System Designer"
                 class="hero__photo"
@@ -48,33 +46,43 @@ const projectsToShow = featuredProjects
           <!-- Contenido texto -->
           <div class="hero__text">
             <div class="hero__intro">
-              <p class="hero__subtitle">Marc López, Product & System Designer</p>
+              <p class="hero__subtitle">
+                Marc López, Product & System Designer
+              </p>
               <h1 class="hero__title" id="hero-title">
-                Transformo ideas complejas en experiencias simples y memorables<span class="accent-dot">.</span>
+                Transformo ideas complejas en experiencias simples y memorables<span
+                  class="accent-dot">.</span
+                >
               </h1>
               <p class="hero__description">
-                Creo productos escalables que resuelven problemas reales, conectando las necesidades de los usuarios con los objetivos del negocio para construir experiencias que realmente funcionan<span class="accent-dot">.</span>
+                Creo productos escalables que resuelven problemas reales,
+                conectando las necesidades de los usuarios con los objetivos del
+                negocio para construir experiencias que realmente funcionan<span
+                  class="accent-dot">.</span
+                >
               </p>
             </div>
             <div class="hero__actions">
-              <Button 
-                text="Cónoceme" 
+              <Button
+                text="Cónoceme"
                 href="/sobre-mi"
                 as="a"
                 class="hero__cta"
               />
             </div>
           </div>
-          
         </div>
       </div>
     </section>
 
     <!-- Proyectos Section -->
-    <section class="projects" id="proyectos" aria-labelledby="projects-title">
+    <section
+      class="section section--with-border"
+      id="proyectos"
+      aria-labelledby="projects-title"
+    >
       <div class="container">
         <div class="projects__content">
-          
           <!-- Title sidebar -->
           <div class="projects__sidebar">
             <h2 class="section-title" id="projects-title">
@@ -84,40 +92,43 @@ const projectsToShow = featuredProjects
 
           <!-- Projects grid - Dinámico desde content collections -->
           <div class="projects__grid">
-            
-            {projectsToShow.map((project) => (
-              <ProjectThumbnail
-                title={project.data.title}
-                imageSrc={project.data.heroImage}
-                imageAlt={`Vista previa del proyecto ${project.data.title}`}
-                href={`/proyectos/${project.slug}`}
-                linkText="Ver proyecto"
-                variant="big"
-                loading="lazy"
-                class="project-card"
-              />
-            ))}
+            {
+              projectsToShow.map((project) => (
+                <ProjectThumbnail
+                  title={project.data.title}
+                  imageSrc={project.data.heroImage}
+                  imageAlt={`Vista previa del proyecto ${project.data.title}`}
+                  href={`/proyectos/${project.slug}`}
+                  linkText="Ver proyecto"
+                  variant="big"
+                  loading="lazy"
+                  class="project-card"
+                />
+              ))
+            }
 
             <!-- Ver todos button -->
             <div class="projects__all-button">
-              <Button 
-                text="Ver todos los proyectos" 
+              <Button
+                text="Ver todos los proyectos"
                 href="/proyectos"
                 as="a"
                 class="projects__cta"
               />
             </div>
-            
           </div>
         </div>
       </div>
     </section>
 
     <!-- Contacto Section -->
-    <section class="contact" id="contacto" aria-labelledby="contact-title">
+    <section
+      class="section section--with-border"
+      id="contacto"
+      aria-labelledby="contact-title"
+    >
       <div class="container">
         <div class="contact__content">
-          
           <!-- Title sidebar -->
           <div class="contact__sidebar">
             <h2 class="section-title" id="contact-title">
@@ -127,44 +138,85 @@ const projectsToShow = featuredProjects
 
           <!-- Contact links -->
           <div class="contact__links">
-            <a 
-              href="https://www.linkedin.com/in/marc-lopez-pujol/" 
+            <a
+              href="https://www.linkedin.com/in/marc-lopez-pujol/"
               target="_blank"
               rel="noopener noreferrer"
               class="contact__link"
             >
               <div class="contact__icon">
-                <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8.33333 8.33333C8.33333 6.49238 9.82571 5 11.6667 5H38.3333C40.1743 5 41.6667 6.49238 41.6667 8.33333V41.6667C41.6667 43.5076 40.1743 45 38.3333 45H11.6667C9.82571 45 8.33333 43.5076 8.33333 41.6667V8.33333Z" fill="#0A66C2"/>
-                  <path d="M14.1667 18.3333H19.8333V35.8333H14.1667V18.3333ZM17 15.8333C18.3807 15.8333 19.5 14.714 19.5 13.3333C19.5 11.9526 18.3807 10.8333 17 10.8333C15.6193 10.8333 14.5 11.9526 14.5 13.3333C14.5 14.714 15.6193 15.8333 17 15.8333Z" fill="white"/>
-                  <path d="M22.5 18.3333H28V21.1667H28.0833C28.8333 19.75 30.5833 18.25 33.0833 18.25C38.9167 18.25 40 21.9167 40 26.5V35.8333H34.3333V27.5833C34.3333 25.5 33.9167 24.0833 32 24.0833C29.5833 24.0833 28.1667 25.6667 28.1667 27.5833V35.8333H22.5V18.3333Z" fill="white"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="50"
+                  height="51"
+                  viewBox="0 0 50 51"
+                  fill="none"
+                >
+                  <g clip-path="url(#clip0_333_1981)">
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M5.55556 50.5H44.4444C47.5127 50.5 50 48.0127 50 44.9444V6.05556C50 2.98731 47.5127 0.5 44.4444 0.5H5.55556C2.48731 0.5 0 2.98731 0 6.05556V44.9444C0 48.0127 2.48731 50.5 5.55556 50.5Z"
+                      fill="#212121"></path>
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M43.0554 43.5554H35.6357V30.918C35.6357 27.4532 34.3192 25.5169 31.5768 25.5169C28.5934 25.5169 27.0347 27.5319 27.0347 30.918V43.5554H19.8842V19.4814H27.0347V22.7241C27.0347 22.7241 29.1846 18.7459 34.2933 18.7459C39.3997 18.7459 43.0554 21.8641 43.0554 28.3132V43.5554ZM11.3536 16.3291C8.91799 16.3291 6.94434 14.3399 6.94434 11.8867C6.94434 9.43347 8.91799 7.44434 11.3536 7.44434C13.7892 7.44434 15.7617 9.43347 15.7617 11.8867C15.7617 14.3399 13.7892 16.3291 11.3536 16.3291ZM7.66139 43.5554H15.1175V19.4814H7.66139V43.5554Z"
+                      fill="#A09F9F"></path>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_333_1981">
+                      <rect
+                        width="50"
+                        height="50"
+                        fill="white"
+                        transform="translate(0 0.5)"></rect>
+                    </clipPath>
+                  </defs>
                 </svg>
               </div>
               <span class="contact__text">Marc López</span>
             </a>
 
-            <a 
-              href="mailto:marclopez23496@gmail.com"
-              class="contact__link"
-            >
+            <a href="mailto:marclopez23496@gmail.com" class="contact__link">
               <div class="contact__icon">
-                <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="5" y="10" width="40" height="30" rx="5" fill="#E95E49"/>
-                  <path d="M5 12.5L25 25L45 12.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="50"
+                  height="51"
+                  viewBox="0 0 50 51"
+                  fill="none"
+                >
+                  <g clip-path="url(#clip0_333_1987)">
+                    <path
+                      d="M11.5186 0.583008H38.4813C44.8166 0.583008 49.9169 5.68324 49.9169 12.0185V38.9813C49.9169 45.3166 44.8166 50.4169 38.4813 50.4169H11.5186C5.18327 50.4169 0.0830078 45.3166 0.0830078 38.9813V12.0185C0.0830078 5.68324 5.18327 0.583008 11.5186 0.583008Z"
+                      fill="#212121"></path>
+                    <path
+                      d="M11.0014 14.7549C10.7388 14.7549 10.4915 14.8002 10.2574 14.8933L14.9466 19.721L19.6877 24.6351L19.7742 24.739L19.9127 24.8774L20.0511 25.0158L20.3279 25.31L24.3943 29.4801C24.462 29.5222 24.6582 29.7039 24.8114 29.7805C25.0089 29.8792 25.2229 29.9702 25.4435 29.9781C25.6815 29.9866 25.9249 29.9184 26.1391 29.8142C26.2995 29.7362 26.3708 29.6243 26.5572 29.4801L31.2637 24.6178L36.0222 19.721L40.6076 14.9971C40.3132 14.8376 39.9872 14.7549 39.6386 14.7549H11.0014ZM9.56521 15.3432C9.06515 15.817 8.75195 16.5293 8.75195 17.3331V33.183C8.75195 33.8338 8.96098 34.425 9.30566 34.8788L9.96319 34.2558L14.8601 29.4974L19.2032 25.2927L19.1167 25.1889L14.3583 20.292L9.59982 15.3778L9.56521 15.3432ZM41.2305 15.4989L36.5932 20.292L31.852 25.1889L31.7655 25.2754L36.2817 29.6531L41.1786 34.4116L41.4727 34.6884C41.7364 34.2654 41.888 33.7443 41.888 33.183V17.3331C41.888 16.6164 41.6397 15.9666 41.2305 15.4989ZM19.7569 25.8637L15.4311 30.0684L10.5169 34.8269L9.89398 35.4325C10.2224 35.644 10.5961 35.7786 11.0014 35.7786H39.6386C40.1258 35.7786 40.5678 35.5911 40.9363 35.2941L40.6249 34.9826L35.7107 30.2242L31.1945 25.8637L27.1282 30.0511C26.9081 30.197 26.7611 30.3588 26.5462 30.4582C26.2003 30.6182 25.8213 30.7534 25.4403 30.7476C25.0582 30.7417 24.6837 30.5923 24.3408 30.4236C24.1687 30.339 24.077 30.2548 23.8752 30.0857L19.7569 25.8637Z"
+                      fill="#A09F9F"></path>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_333_1987">
+                      <rect
+                        width="50"
+                        height="50"
+                        fill="white"
+                        transform="translate(0 0.5)"></rect>
+                    </clipPath>
+                  </defs>
                 </svg>
               </div>
               <span class="contact__text">marclopez23496@gmail.com</span>
             </a>
           </div>
-          
         </div>
       </div>
     </section>
-
   </div>
 </PageLayout>
 
 <style>
+  @import "../styles/layout.css";
   /* ========================================
      HOME PAGE STYLES
      ======================================== */
@@ -191,7 +243,7 @@ const projectsToShow = featuredProjects
 
   .hero {
     padding: var(--spacing-xhg) 0;
-    min-height: 784px;
+    min-height: 50dvh;
     display: flex;
     align-items: center;
   }
@@ -352,7 +404,6 @@ const projectsToShow = featuredProjects
   }
 
   .contact__link:hover {
-    transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
 
