@@ -31,6 +31,7 @@ const {
   process,
   challenges,
   projectVideo,
+  videoThumbnail,
   relatedProjects,
   description,
 } = project.data;
@@ -222,20 +223,6 @@ const pageTitle = `${title} - Marc López`;
                       />
                     </div>
                   )}
-
-                  {challenge.video && (
-                    <div class="challenge__media">
-                      <video
-                        src={challenge.video}
-                        class="challenge__video"
-                        controls
-                        preload="metadata"
-                        aria-label={`Video demostrativo de ${challenge.title}`}
-                      >
-                        Tu navegador no soporta el elemento video.
-                      </video>
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
@@ -265,15 +252,26 @@ const pageTitle = `${title} - Marc López`;
             />
 
             <div class="project-video">
-              <video
-                src={projectVideo}
-                class="project-video__player"
-                controls
-                preload="metadata"
-                aria-label={`Video completo del proyecto ${title}`}
+              <!-- Thumbnail clickeable en lugar de video directo -->
+              <div 
+                class="video-thumbnail"
+                data-video-src={projectVideo}
+                data-video-title={`Video completo del proyecto ${title}`}
               >
-                Tu navegador no soporta el elemento video.
-              </video>
+                <img 
+                  src={videoThumbnail || heroImage || '/placeholder-video.jpg'} 
+                  alt={`Video completo del proyecto ${title}`}
+                  class="video-poster"
+                />
+                <div class="video-play-button">
+                  <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                    <circle cx="40" cy="40" r="40" fill="rgba(255, 255, 255, 0.95)"/>
+                    <path d="M52 40L32 52V28L52 40Z" fill="#000"/>
+                  </svg>
+                </div>
+                <div class="video-overlay">
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -320,6 +318,22 @@ const pageTitle = `${title} - Marc López`;
       </section>
     )
   }
+
+  <!-- Modal para video fullscreen -->
+  <div id="video-modal" class="video-modal">
+    <div class="video-modal-content">
+      <button class="video-modal-close" aria-label="Cerrar video">&times;</button>
+      <video 
+        id="modal-video"
+        class="modal-video"
+        controls
+        preload="none"
+      >
+        <p>Tu navegador no soporta el elemento video.</p>
+      </video>
+    </div>
+  </div>
+
 </PageLayout>
 
 <style>
@@ -490,8 +504,60 @@ const pageTitle = `${title} - Marc López`;
     margin-bottom: 0;
   }
 
-  .challenge__image,
-  .challenge__video {
+  /* ====================================
+     VIDEO THUMBNAIL STYLES
+     ====================================  */
+
+  .video-thumbnail {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    transition: transform 0.3s ease;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .video-thumbnail:hover {
+    transform: scale(1.02);
+  }
+
+  .video-poster {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .video-play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: transform 0.3s ease;
+    z-index: 2;
+  }
+
+  .video-thumbnail:hover .video-play-button {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+
+  .video-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: white;
+    padding: 24px 16px 16px;
+    text-align: center;
+  }
+
+  .video-overlay p {
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  .challenge__image {
     width: 100%;
     height: auto;
     border-radius: var(--radius-lg);
@@ -507,10 +573,8 @@ const pageTitle = `${title} - Marc López`;
     justify-content: center;
   }
 
-  .project-video__player {
+  .project-video .video-thumbnail {
     width: 100%;
-    height: auto;
-    border-radius: var(--radius-lg);
   }
 
   /* ====================================
@@ -521,6 +585,66 @@ const pageTitle = `${title} - Marc López`;
     display: grid;
     gap: var(--spacing-2xl);
     grid-template-columns: 1fr;
+  }
+
+  /* ====================================
+     VIDEO MODAL STYLES
+     ====================================  */
+
+  .video-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .video-modal-content {
+    position: relative;
+    max-width: 90vw;
+    max-height: 90vh;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-video {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+  }
+
+  .video-modal-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    border: none;
+    background: none;
+    cursor: pointer;
+    z-index: 10001;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+  }
+
+  .video-modal-close:hover {
+    background: rgba(0, 0, 0, 0.8);
   }
 
   /* ====================================
@@ -630,6 +754,40 @@ const pageTitle = `${title} - Marc López`;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: var(--spacing-3xl);
     }
+
+    .video-modal-close {
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .video-modal-close {
+      top: 10px;
+      right: 15px;
+      font-size: 30px;
+      width: 40px;
+      height: 40px;
+    }
+
+    section#hero {
+      padding: 0;
+}
+
+.project-hero__image-container{
+  border-radius: 0;
+}
+
+.project-hero__image{
+  height: 300px;
+}
+
+
+
   }
 
   /* ====================================
@@ -692,4 +850,66 @@ const pageTitle = `${title} - Marc López`;
   
   document.addEventListener('DOMContentLoaded', convertToSentences);
   document.addEventListener('astro:page-load', convertToSentences);
+</script>
+
+<script is:inline>
+  function setupVideoModal() {
+    const modal = document.getElementById('video-modal');
+    const modalVideo = document.getElementById('modal-video');
+    const closeBtn = document.querySelector('.video-modal-close');
+    
+    // Hacer clickeables todos los thumbnails de video
+    document.querySelectorAll('.video-thumbnail').forEach(thumbnail => {
+      thumbnail.addEventListener('click', function() {
+        const videoSrc = this.dataset.videoSrc;
+        const videoTitle = this.dataset.videoTitle;
+        
+        // Configurar video del modal
+        modalVideo.src = videoSrc;
+        modalVideo.load();
+        
+        // Mostrar modal
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Solo reproducir automáticamente (SIN fullscreen)
+        modalVideo.play().catch(err => {
+          console.log('Autoplay no disponible:', err);
+        });
+      });
+    });
+    
+    // Cerrar modal
+    function closeModal() {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      
+      // Pausar y resetear el video
+      modalVideo.pause();
+      modalVideo.currentTime = 0; // Volver al inicio
+      modalVideo.src = '';
+      
+      // Salir de fullscreen si estaba activo
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
+    }
+    
+    closeBtn?.addEventListener('click', closeModal);
+    
+    modal?.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+    
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.style.display === 'flex') {
+        closeModal();
+      }
+    });
+  }
+  
+  document.addEventListener('DOMContentLoaded', setupVideoModal);
+  document.addEventListener('astro:page-load', setupVideoModal);
 </script>

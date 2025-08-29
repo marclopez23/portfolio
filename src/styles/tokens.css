@@ -72,8 +72,8 @@
     /* ========================================
        BORDER RADIUS
        ======================================== */
-    --radius-lg: 16px;
-    --radius-xl: 24px;
+    --radius-lg: 8px;
+    --radius-xl: 16px;
     --radius-xxl: 128px;
     
     /* ========================================
@@ -175,7 +175,15 @@
          --section-vertical: var(--spacing-hg); 
          --section-horizontal: var(--spacing-2xl);    
          --section-gap: var(--spacing-4xl);            
-         --menu-horizontal: var(--spacing-2xl);       
+         --menu-horizontal: var(--spacing-2xl); 
+         
+            /* ========================================
+       BORDER RADIUS DESKTOP
+       ======================================== */
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-xxl: 128px;
+    
     }
   }
   

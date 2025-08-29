@@ -35,6 +35,7 @@ challenges:
 
 # Video del proyecto (opcional)
 projectVideo: "/assets/proyectos/snb/snb-video.mp4"
+videoThumbnail: "/assets/proyectos/snb/video-snb.png"
 
 # Proyectos relacionados  
 relatedProjects: ["bayn", "aljuf-finance"]

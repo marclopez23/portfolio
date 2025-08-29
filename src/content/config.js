@@ -37,6 +37,7 @@ const projectsCollection = defineCollection({
     
     // Video del proyecto (opcional)
     projectVideo: z.string().optional(),
+     videoThumbnail: z.string().optional(),
     
     // Proyectos relacionados (opcional)
     relatedProjects: z.array(z.string()).optional(),
