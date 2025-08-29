@@ -1,11 +1,473 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// src/pages/index.astro
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import PageLayout from '../layouts/PageLayout.astro';
+import Button from '../components/Button.astro';
+import ProjectThumbnail from '../components/ProjectThumbnail.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Import solo para la imagen crítica del hero
+import profilePhoto from '../assets/profile-photo.png';
+
+// Obtener proyectos destacados dinámicamente
+const featuredProjects = await getCollection('projects', ({ data }) => {
+  return data.featured === true && data.protected !== true;
+});
+
+// Ordenar por orden y tomar solo los primeros 3
+const projectsToShow = featuredProjects
+  .sort((a, b) => (a.data.order || 0) - (b.data.order || 0))
+  .slice(0, 3);
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<PageLayout title="Marc López - Product & System Designer" currentPage="/">
+  <div class="home-page">
+    
+    <!-- Hero Section -->
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero__content">
+          
+          <!-- Foto perfil - Optimizada con Astro Image -->
+          <div class="hero__image">
+            <div class="hero__image-container">
+              <Image 
+                src={profilePhoto}
+                alt="Foto de Marc López, Product & System Designer"
+                class="hero__photo"
+                width={425}
+                height={451}
+                loading="eager"
+                format="webp"
+                quality={90}
+                densities={[1, 2]}
+              />
+            </div>
+          </div>
+
+          <!-- Contenido texto -->
+          <div class="hero__text">
+            <div class="hero__intro">
+              <p class="hero__subtitle">Marc López, Product & System Designer</p>
+              <h1 class="hero__title" id="hero-title">
+                Transformo ideas complejas en experiencias simples y memorables<span class="accent-dot">.</span>
+              </h1>
+              <p class="hero__description">
+                Creo productos escalables que resuelven problemas reales, conectando las necesidades de los usuarios con los objetivos del negocio para construir experiencias que realmente funcionan<span class="accent-dot">.</span>
+              </p>
+            </div>
+            <div class="hero__actions">
+              <Button 
+                text="Cónoceme" 
+                href="/sobre-mi"
+                as="a"
+                class="hero__cta"
+              />
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- Proyectos Section -->
+    <section class="projects" id="proyectos" aria-labelledby="projects-title">
+      <div class="container">
+        <div class="projects__content">
+          
+          <!-- Title sidebar -->
+          <div class="projects__sidebar">
+            <h2 class="section-title" id="projects-title">
+              Proyectos<span class="accent-dot">.</span>
+            </h2>
+          </div>
+
+          <!-- Projects grid - Dinámico desde content collections -->
+          <div class="projects__grid">
+            
+            {projectsToShow.map((project) => (
+              <ProjectThumbnail
+                title={project.data.title}
+                imageSrc={project.data.heroImage}
+                imageAlt={`Vista previa del proyecto ${project.data.title}`}
+                href={`/proyectos/${project.slug}`}
+                linkText="Ver proyecto"
+                variant="big"
+                loading="lazy"
+                class="project-card"
+              />
+            ))}
+
+            <!-- Ver todos button -->
+            <div class="projects__all-button">
+              <Button 
+                text="Ver todos los proyectos" 
+                href="/proyectos"
+                as="a"
+                class="projects__cta"
+              />
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contacto Section -->
+    <section class="contact" id="contacto" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact__content">
+          
+          <!-- Title sidebar -->
+          <div class="contact__sidebar">
+            <h2 class="section-title" id="contact-title">
+              Contacto<span class="accent-dot">.</span>
+            </h2>
+          </div>
+
+          <!-- Contact links -->
+          <div class="contact__links">
+            <a 
+              href="https://www.linkedin.com/in/marc-lopez-pujol/" 
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact__link"
+            >
+              <div class="contact__icon">
+                <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M8.33333 8.33333C8.33333 6.49238 9.82571 5 11.6667 5H38.3333C40.1743 5 41.6667 6.49238 41.6667 8.33333V41.6667C41.6667 43.5076 40.1743 45 38.3333 45H11.6667C9.82571 45 8.33333 43.5076 8.33333 41.6667V8.33333Z" fill="#0A66C2"/>
+                  <path d="M14.1667 18.3333H19.8333V35.8333H14.1667V18.3333ZM17 15.8333C18.3807 15.8333 19.5 14.714 19.5 13.3333C19.5 11.9526 18.3807 10.8333 17 10.8333C15.6193 10.8333 14.5 11.9526 14.5 13.3333C14.5 14.714 15.6193 15.8333 17 15.8333Z" fill="white"/>
+                  <path d="M22.5 18.3333H28V21.1667H28.0833C28.8333 19.75 30.5833 18.25 33.0833 18.25C38.9167 18.25 40 21.9167 40 26.5V35.8333H34.3333V27.5833C34.3333 25.5 33.9167 24.0833 32 24.0833C29.5833 24.0833 28.1667 25.6667 28.1667 27.5833V35.8333H22.5V18.3333Z" fill="white"/>
+                </svg>
+              </div>
+              <span class="contact__text">Marc López</span>
+            </a>
+
+            <a 
+              href="mailto:marclopez23496@gmail.com"
+              class="contact__link"
+            >
+              <div class="contact__icon">
+                <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="5" y="10" width="40" height="30" rx="5" fill="#E95E49"/>
+                  <path d="M5 12.5L25 25L45 12.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="contact__text">marclopez23496@gmail.com</span>
+            </a>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+  </div>
+</PageLayout>
+
+<style>
+  /* ========================================
+     HOME PAGE STYLES
+     ======================================== */
+
+  .home-page {
+    background-color: var(--color-main-bg);
+    color: var(--color-text-primary);
+  }
+
+  .container {
+    max-width: 1512px;
+    margin: 0 auto;
+    padding: 0 var(--section-horizontal);
+  }
+
+  /* Accent dot styling */
+  .accent-dot {
+    color: var(--color-text-tertiary);
+  }
+
+  /* ========================================
+     HERO SECTION
+     ======================================== */
+
+  .hero {
+    padding: var(--spacing-xhg) 0;
+    min-height: 784px;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero__content {
+    display: flex;
+    gap: var(--spacing-hg);
+    align-items: center;
+    width: 100%;
+  }
+
+  /* Hero Image */
+  .hero__image {
+    flex-shrink: 0;
+    width: 425px;
+    height: 451px;
+    position: relative;
+  }
+
+  .hero__image-container {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: linear-gradient(135deg, #3f3f3f 0%, #2a2a2a 100%);
+  }
+
+  .hero__photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Hero Text */
+  .hero__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+  }
+
+  .hero__subtitle {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-tertiary);
+    margin: 0 0 var(--spacing-lg) 0;
+    line-height: var(--line-height-normal);
+  }
+
+  .hero__title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+    margin: 0 0 var(--spacing-lg) 0;
+    line-height: var(--line-height-normal);
+    max-width: 975px;
+  }
+
+  .hero__description {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-regular);
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: var(--line-height-normal);
+    max-width: 975px;
+  }
+
+  /* ========================================
+     PROJECTS SECTION
+     ======================================== */
+
+  .projects {
+    border-top: 1px solid var(--color-divider);
+    padding: var(--spacing-xl) 0;
+  }
+
+  .projects__content {
+    display: flex;
+    gap: var(--spacing-hg);
+    align-items: flex-start;
+  }
+
+  .projects__sidebar {
+    flex-shrink: 0;
+    width: 418px;
+    padding-right: var(--spacing-2xl);
+    border-right: 2px solid var(--color-divider);
+    position: sticky;
+    top: 0;
+  }
+
+  .section-title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-hg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin: 0;
+    line-height: 1.25;
+  }
+
+  .projects__grid {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-hg);
+  }
+
+  .projects__all-button {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: var(--spacing-lg);
+  }
+
+  /* ========================================
+     CONTACT SECTION
+     ======================================== */
+
+  .contact {
+    border-top: 1px solid var(--color-divider);
+    padding: var(--spacing-xl) 0;
+  }
+
+  .contact__content {
+    display: flex;
+    gap: var(--spacing-hg);
+    align-items: center;
+  }
+
+  .contact__sidebar {
+    flex-shrink: 0;
+    width: 418px;
+    padding-right: var(--spacing-2xl);
+    border-right: 2px solid var(--color-divider);
+  }
+
+  .contact__links {
+    flex: 1;
+    display: flex;
+    gap: var(--spacing-2xl);
+  }
+
+  .contact__link {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-xl);
+    background-color: var(--color-surface);
+    border-radius: var(--radius-xl);
+    text-decoration: none;
+    color: var(--color-text-tertiary);
+    transition: all 0.2s ease-in-out;
+  }
+
+  .contact__link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  .contact__link:focus-visible {
+    outline: 3px solid var(--color-text-tertiary);
+    outline-offset: 2px;
+  }
+
+  .contact__icon {
+    flex-shrink: 0;
+  }
+
+  .contact__text {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-normal);
+  }
+
+  /* ========================================
+     RESPONSIVE DESIGN
+     ======================================== */
+
+  /* Tablet */
+  @media (max-width: 1200px) {
+    .hero__content {
+      flex-direction: column;
+      text-align: center;
+      gap: var(--spacing-2xl);
+    }
+
+    .hero__image {
+      width: 350px;
+      height: 370px;
+    }
+
+    .projects__content,
+    .contact__content {
+      flex-direction: column;
+      gap: var(--spacing-2xl);
+    }
+
+    .projects__sidebar,
+    .contact__sidebar {
+      width: 100%;
+      border-right: none;
+      border-bottom: 2px solid var(--color-divider);
+      padding-right: 0;
+      padding-bottom: var(--spacing-lg);
+      position: relative;
+    }
+
+    .contact__links {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 767px) {
+    .hero {
+      padding: var(--spacing-2xl) 0;
+      min-height: auto;
+    }
+
+    .hero__content {
+      gap: var(--spacing-lg);
+    }
+
+    .hero__image {
+      width: 100%;
+      max-width: 382px;
+      height: 405px;
+    }
+
+    .hero__title {
+      font-size: var(--font-size-lg);
+    }
+
+    .hero__description {
+      font-size: var(--font-size-md);
+    }
+
+    .section-title {
+      font-size: var(--font-size-hg);
+    }
+
+    .contact__text {
+      font-size: var(--font-size-sm);
+    }
+
+    .projects__grid {
+      gap: var(--spacing-2xl);
+    }
+  }
+
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .contact__link {
+      transition: none;
+    }
+
+    .contact__link:hover {
+      transform: none;
+    }
+  }
+
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .hero__image-container {
+      border: 2px solid var(--color-text-primary);
+    }
+
+    .contact__link {
+      border: 2px solid var(--color-text-tertiary);
+    }
+  }
+</style>

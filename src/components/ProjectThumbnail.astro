@@ -1,5 +1,5 @@
 ---
-// ProjectThumbnail.astro
+// src/components/ProjectThumbnail.astro
 import Link from './Link.astro';
 
 export interface Props {
@@ -12,6 +12,7 @@ export interface Props {
   linkText?: string;
   ariaLabel?: string;
   class?: string;
+  loading?: 'eager' | 'lazy';
 }
 
 const {
@@ -24,11 +25,21 @@ const {
   linkText = "Ver más",
   ariaLabel,
   class: className = "",
+  loading = "lazy",
 } = Astro.props;
 
 const baseClasses = "project-thumbnail";
 const variantClass = `project-thumbnail--${variant}`;
 const allClasses = [baseClasses, variantClass, className].filter(Boolean).join(" ");
+
+// Dimensiones optimizadas por variante
+const dimensionsByVariant = {
+  big: { width: 982, height: 600 },     // Para homepage
+  medium: { width: 400, height: 250 },  // Para grids normales
+  small: { width: 300, height: 200 },   // Para related projects
+};
+
+const { width, height } = dimensionsByVariant[variant];
 ---
 
 <article class={allClasses}>
@@ -37,7 +48,9 @@ const allClasses = [baseClasses, variantClass, className].filter(Boolean).join("
       src={imageSrc}
       alt={imageAlt}
       class="project-thumbnail__image"
-      loading="lazy"
+      width={width}
+      height={height}
+      loading={loading}
       decoding="async"
     />
   </div>
@@ -74,6 +87,12 @@ const allClasses = [baseClasses, variantClass, className].filter(Boolean).join("
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  /* Hover effect */
+  .project-thumbnail:hover .project-thumbnail__image {
+    transform: scale(1.02);
   }
 
   .project-thumbnail__content {
@@ -92,7 +111,7 @@ const allClasses = [baseClasses, variantClass, className].filter(Boolean).join("
   
   .project-thumbnail__title {
     font-family: var(--font-family-primary);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-semibold);
     color: var(--color-text-primary);
     margin: 0;
     line-height: var(--line-height-normal);
@@ -110,30 +129,68 @@ const allClasses = [baseClasses, variantClass, className].filter(Boolean).join("
     -webkit-line-clamp: 1;
   }
 
-  /* Mobile: todos los tamaños iguales */
-  .project-thumbnail--big .project-thumbnail__title,
-  .project-thumbnail--medium .project-thumbnail__title,
+  /* Tamaños de título por variante */
+  .project-thumbnail--big .project-thumbnail__title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .project-thumbnail--medium .project-thumbnail__title {
+    font-size: var(--font-size-2xl);
+  }
+  
   .project-thumbnail--small .project-thumbnail__title {
-    font-size: var(--font-size-2xl); /* mismo tamaño en mobile */
+    font-size: var(--font-size-xl);
   }
 
-  /* Mobile: todos los enlaces van abajo */
-  .project-thumbnail--big .project-thumbnail__content {
-    flex-direction: column;
-    gap: var(--spacing-sm);
-  }
-
-  /* Variantes de aspect ratio */
+  /* Aspect ratios por variante */
   .project-thumbnail--big .project-thumbnail__image-container {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
   }
   
   .project-thumbnail--medium .project-thumbnail__image-container {
-    aspect-ratio: 16 / 11;
+    aspect-ratio: 16 / 10;
   }
   
   .project-thumbnail--small .project-thumbnail__image-container {
-    aspect-ratio: 16 / 12;
+    aspect-ratio: 16 / 11;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 767px) {
+    .project-thumbnail__image-container {
+      margin-bottom: var(--spacing-md);
+    }
+
+    .project-thumbnail__content {
+      gap: var(--spacing-sm);
+    }
+
+    /* Mobile: todos los tamaños más pequeños */
+    .project-thumbnail--big .project-thumbnail__title,
+    .project-thumbnail--medium .project-thumbnail__title,
+    .project-thumbnail--small .project-thumbnail__title {
+      font-size: var(--font-size-lg);
+    }
+
+    /* Mobile: todos los enlaces van abajo */
+    .project-thumbnail--big .project-thumbnail__content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-sm);
+    }
+
+    /* Mobile: aspect ratios más cuadrados */
+    .project-thumbnail--big .project-thumbnail__image-container {
+      aspect-ratio: 16 / 10;
+    }
+    
+    .project-thumbnail--medium .project-thumbnail__image-container {
+      aspect-ratio: 16 / 11;
+    }
+    
+    .project-thumbnail--small .project-thumbnail__image-container {
+      aspect-ratio: 16 / 12;
+    }
   }
 
   /* Desktop adjustments */
@@ -145,39 +202,30 @@ const allClasses = [baseClasses, variantClass, className].filter(Boolean).join("
     .project-thumbnail__content {
       gap: var(--spacing-md);
     }
+  }
 
-    /* Desktop: diferentes tamaños de título */
-    .project-thumbnail--big .project-thumbnail__title {
-      font-size: var(--font-size-3xl);
+  /* Accessibility improvements */
+  @media (prefers-reduced-motion: reduce) {
+    .project-thumbnail__image {
+      transition: none;
     }
     
-    .project-thumbnail--medium .project-thumbnail__title {
-      font-size: var(--font-size-2xl);
+    .project-thumbnail:hover .project-thumbnail__image {
+      transform: none;
     }
-    
-    .project-thumbnail--small .project-thumbnail__title {
-      font-size: var(--font-size-xl);
-    }
+  }
 
-    /* Desktop: Big variant con enlace a la derecha */
-    .project-thumbnail--big .project-thumbnail__content {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: var(--spacing-lg);
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .project-thumbnail__image-container {
+      border: 2px solid var(--color-text-primary);
     }
-    
-    /* Desktop: aspect ratios ajustados */
-    .project-thumbnail--big .project-thumbnail__image-container {
-      aspect-ratio: 16 / 9;
-    }
-    
-    .project-thumbnail--medium .project-thumbnail__image-container {
-      aspect-ratio: 16 / 10;
-    }
-    
-    .project-thumbnail--small .project-thumbnail__image-container {
-      aspect-ratio: 16 / 11;
-    }
+  }
+
+  /* Focus improvements */
+  .project-thumbnail:focus-within {
+    outline: 3px solid var(--color-text-tertiary);
+    outline-offset: 2px;
+    border-radius: var(--radius-xl);
   }
 </style>
