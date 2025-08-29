@@ -1,0 +1,80 @@
+---
+// Badge.astro
+export interface Props {
+  /**
+   * Texto del badge
+   */
+  text?: string;
+  
+  /**
+   * Clases CSS adicionales
+   */
+  class?: string;
+  
+  /**
+   * ID del elemento
+   */
+  id?: string;
+  
+  /**
+   * Label accesible personalizado
+   */
+  ariaLabel?: string;
+}
+
+const {
+  text = 'Sector bancario',
+  class: className = '',
+  id,
+  ariaLabel
+} = Astro.props;
+
+// Clases CSS del componente
+const badgeClasses = [
+  'badge',
+  className
+].filter(Boolean).join(' ');
+
+// ID único para accesibilidad
+const badgeId = id || `badge-${text.toLowerCase().replace(/\s+/g, '-')}`;
+---
+
+<span 
+  class={badgeClasses} 
+  id={badgeId}
+  role="status"
+  aria-label={ariaLabel || `Badge: ${text}`}
+>
+  {text}
+  <slot />
+</span>
+
+<style>
+  .badge {
+    /* Layout - exacto del Figma */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    
+    /* Typography - exacto del Figma */
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-badge); /* 16px mobile, 20px desktop */
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    white-space: nowrap;
+    
+    /* Design - exacto del Figma */
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg); /* 16px */
+    padding: var(--spacing-lg) var(--spacing-xl); /* 12px 16px mobile */
+  }
+
+  /* Desktop responsive */
+  @media (min-width: 768px) {
+    .badge {
+      padding: var(--spacing-lg) var(--spacing-xl); /* 16px 24px desktop */
+    }
+  }
+</style>

@@ -12,6 +12,8 @@ import MenuItem from "../components/MenuItem.astro"
 import Menu from "../components/Menu.astro"
 import Footer from "../components/Footer.astro"
 import ProjectThumbnail from "../components/ProjectThumbnail.astro"
+import ExperienceCard from "../components/ExperienceCard.astro";
+import Badge from "../components/Badge.astro"
 
 const pageTitle = "Componentes";
 ---
@@ -326,6 +328,105 @@ const pageTitle = "Componentes";
         
       </div>
     </section>
+    <!-- ExperienceCard Component -->
+    <section class="component-section">
+      <h2 class="component-title">ExperienceCard</h2>
+      <div class="variants-grid two-columns">
+        <div class="variant">
+          <span class="variant-label">Default (Trabajo)</span>
+          <ExperienceCard />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Con Logo</span>
+          <ExperienceCard
+            title="Senior UX/UI Designer"
+            company="Alea Soluciones"
+            period="Ene. 2022 - Nov. 2023 - Barcelona"
+            logo="/images/logos/alea-logo.svg"
+            logoAlt="Logo de Alea Soluciones"
+            tasks={[
+              "Liderazgo en proyectos de diseño UX/UI para clientes enterprise.",
+              "Desarrollo de sistemas de diseño escalables.",
+              "Mentoría y formación del equipo junior.",
+              "Colaboración estrecha con stakeholders y equipos de desarrollo."
+            ]}
+          />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Educación</span>
+          <ExperienceCard
+            type="education"
+            title="Máster en Diseño Digital"
+            company="Elisava, Escuela Universitaria de Diseño"
+            period="2019 - 2020 - Barcelona"
+            tasks={[
+              "Especialización en diseño de interfaces digitales.",
+              "Metodologías de investigación UX.",
+              "Prototipado avanzado y testing de usabilidad.",
+              "Proyecto final: Sistema de diseño para startup fintech."
+            ]}
+          />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Freelance</span>
+          <ExperienceCard
+            title="Diseñador UX/UI Freelance"
+            company="Diversos clientes"
+            period="2020 - 2022 - Barcelona/Remoto"
+            tasks={[
+              "Diseño de aplicaciones móviles y web para startups.",
+              "Consultoría en experiencia de usuario.",
+              "Creación de identidades digitales completas."
+            ]}
+          />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Sin tareas</span>
+          <ExperienceCard
+            title="Curso de Especialización"
+            company="IronHack"
+            period="2019 - Barcelona"
+            type="education"
+            tasks={[]}
+          />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Interactiva</span>
+          <ExperienceCard
+            title="Design System Lead"
+            company="Sistema de Salut de Catalunya"
+            period="Dic. 2023 - Presente - Barcelona"
+            class="experience-card--interactive"
+            ariaLabel="Experiencia laboral actual en CatSalut, haz clic para más detalles"
+          />
+        </div>
+      </div>
+    </section>
+    <!-- Badge Component -->
+    <section class="component-section">
+      <h2 class="component-title">Badge</h2>
+      <div class="variants-grid">
+        <div class="variant">
+          <span class="variant-label">Default</span>
+          <Badge />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Custom Text</span>
+          <Badge text="Fintech" />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Sector Salud</span>
+          <Badge text="Sector salud" />
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>
 
@@ -368,7 +469,11 @@ const pageTitle = "Componentes";
     gap: var(--spacing-2xl);
   }
 
-  .variant {
+  .two-columns{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .variants-grid .variant {
     background-color: var(--color-main-bg);
     border-radius: var(--radius-lg);
     padding: var(--spacing-2xl);

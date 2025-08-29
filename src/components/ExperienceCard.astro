@@ -1,0 +1,321 @@
+---
+// ExperienceCard.astro
+export interface Props {
+  /**
+   * Nombre del puesto/título
+   */
+  title?: string;
+  
+  /**
+   * Nombre de la empresa/institución
+   */
+  company?: string;
+  
+  /**
+   * Período de tiempo
+   */
+  period?: string;
+  
+  /**
+   * Lista de tareas/logros/responsabilidades
+   */
+  tasks?: string[];
+  
+  /**
+   * Logo de la empresa (opcional)
+   */
+  logo?: string;
+  
+  /**
+   * Alt text para el logo
+   */
+  logoAlt?: string;
+  
+  /**
+   * Tipo de experiencia para estilos diferenciados
+   */
+  type?: 'work' | 'education';
+  
+  /**
+   * Clases CSS adicionales
+   */
+  class?: string;
+  
+  /**
+   * ID del elemento
+   */
+  id?: string;
+  
+  /**
+   * Label accesible personalizado
+   */
+  ariaLabel?: string;
+}
+
+const {
+  title = 'Design System Lead',
+  company = 'Sistema de Salut de Catalunya',
+  period = 'Dic. 2023 - Presente - Barcelona',
+  tasks = [
+    'Liderazgo del desarrollo y mantenimiento del sistema de diseño.',
+    'Gestión del equipo del sistema de diseño.',
+    'Colaboración con equipos multidisciplinarios para la adopción efectiva del sistema.',
+    'Definición y aplicación de estándares de diseño, componentes y pautas para mantener la coherencia y la eficiencia en todo el producto.',
+    'Mentorización a otros diseñadores del equipo.'
+  ],
+  logo,
+  logoAlt = '',
+  type = 'work',
+  class: className = '',
+  id,
+  ariaLabel
+} = Astro.props;
+
+// Clases CSS del componente
+const cardClasses = [
+  'experience-card',
+  `experience-card--${type}`,
+  className
+].filter(Boolean).join(' ');
+
+// ID único para accesibilidad
+const cardId = id || `experience-${title.toLowerCase().replace(/\s+/g, '-')}`;
+const titleId = `${cardId}-title`;
+const companyId = `${cardId}-company`;
+const periodId = `${cardId}-period`;
+const tasksId = `${cardId}-tasks`;
+---
+
+<article 
+  class={cardClasses} 
+  id={cardId}
+  role="article"
+  aria-labelledby={`${titleId} ${companyId}`}
+  aria-describedby={`${periodId} ${tasksId}`}
+  aria-label={ariaLabel}
+>
+  {logo && (
+    <div class="experience-card__logo" aria-hidden="true">
+      <img 
+        src={logo} 
+        alt={logoAlt}
+        class="experience-card__logo-img"
+      />
+    </div>
+  )}
+  
+  <div class="experience-card__info">
+    <h3 class="experience-card__title" id={titleId}>
+      {title}
+    </h3>
+    <div class="experience-card__company" id={companyId}>
+      {company}
+    </div>
+    <div class="experience-card__period" id={periodId}>
+      {period}
+    </div>
+  </div>
+  
+  {tasks && tasks.length > 0 && (
+    <ul class="experience-card__tasks" id={tasksId} aria-label="Responsabilidades y logros">
+      {tasks.map((task, index) => (
+        <li class="experience-card__task">
+          {task}
+        </li>
+      ))}
+    </ul>
+  )}
+  
+  <slot />
+</article>
+
+<style>
+  .experience-card {
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--spacing-xl);
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  /* Logo container */
+  .experience-card__logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .experience-card__logo-img {
+    max-height: 50px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Info section */
+  .experience-card__info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--spacing-xs);
+    width: 100%;
+  }
+
+  /* Title */
+  .experience-card__title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    width: 100%;
+    margin: 0;
+  }
+
+  /* Company */
+  .experience-card__company {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-tertiary);
+    width: 100%;
+  }
+
+  /* Period */
+  .experience-card__period {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-primary);
+    width: 100%;
+  }
+
+  /* Tasks list */
+  .experience-card__tasks {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-job-description);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-normal);
+    color: var(--color-text-secondary);
+    width: 100%;
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .experience-card__task {
+    position: relative;
+    padding-left: var(--spacing-2xl);
+    margin-bottom: 0;
+  }
+
+  .experience-card__task:not(:last-child) {
+    margin-bottom: var(--spacing-xs);
+  }
+
+  /* Custom bullet points */
+  .experience-card__task::before {
+    content: "•";
+    position: absolute;
+    left: var(--spacing-md);
+    top: 0;
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* Variante para educación */
+  .experience-card--education .experience-card__company {
+    color: var(--color-text-secondary);
+  }
+
+  .experience-card--education .experience-card__title {
+    color: var(--color-text-tertiary);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    .experience-card {
+      gap: var(--spacing-lg);
+    }
+    
+    .experience-card__logo-img {
+      max-height: 40px;
+      max-width: 150px;
+    }
+    
+    .experience-card__title {
+      font-size: var(--font-size-md);
+    }
+    
+    .experience-card__company {
+      font-size: var(--font-size-md);
+    }
+    
+    .experience-card__period {
+      font-size: var(--font-size-sm);
+    }
+    
+    .experience-card__tasks {
+      font-size: var(--font-size-sm);
+    }
+    
+    .experience-card__task {
+      padding-left: var(--spacing-xl);
+    }
+    
+    .experience-card__task::before {
+      left: var(--spacing-sm);
+    }
+  }
+
+  /* Estados de hover para interactividad */
+  .experience-card--interactive {
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+  }
+
+  .experience-card--interactive:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+    transform: translateY(-2px);
+  }
+
+  .experience-card--interactive:focus-visible {
+    outline: 2px solid var(--color-text-tertiary);
+    outline-offset: 2px;
+  }
+
+  /* Mejoras de accesibilidad */
+  @media (prefers-reduced-motion: reduce) {
+    .experience-card--interactive {
+      transition: none;
+    }
+    
+    .experience-card--interactive:hover {
+      transform: none;
+    }
+  }
+
+  /* High contrast mode */
+  @media (prefers-contrast: high) {
+    .experience-card {
+      outline: 1px solid var(--color-text-primary);
+      outline-offset: 2px;
+    }
+    
+    .experience-card__task::before {
+      color: var(--color-text-primary);
+    }
+  }
+</style>

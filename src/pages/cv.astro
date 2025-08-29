@@ -1,0 +1,326 @@
+---
+// src/pages/cv.astro
+import PageLayout from '../layouts/PageLayout.astro';
+import Hero from '../components/Hero.astro';
+import Title from '../components/Title.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import Badge from '../components/Badge.astro';
+import { getCollection } from 'astro:content';
+
+const pageTitle = "CV - Marc López";
+
+// Obtener experiencia laboral y educativa
+const allExperience = await getCollection('experience');
+
+// Filtrar y ordenar experiencia laboral (más reciente primero)
+const workExperience = allExperience
+  .filter(item => item.data.type === 'work')
+  .sort((a, b) => a.data.order - b.data.order);
+
+// Filtrar y ordenar experiencia educativa (más reciente primero)  
+const education = allExperience
+  .filter(item => item.data.type === 'education')
+  .sort((a, b) => a.data.order - b.data.order);
+
+// Skills exactos del diseño de Figma
+const skillsFromFigma = [
+  "Sector bancario",
+  "Sistemas de diseño", 
+  "Accesibilidad web",
+  "Front-End Development",
+  "Resolución de problemas",
+  "Mentoría",
+  "Gestión de proyectos",
+  "Design Tokens",
+  "Dev Hand-off",
+  "Diseño UI",
+  "Edición de vídeo",
+  "JIRA",
+  "Procesos de diseño",
+  "Diseño de apps",
+  "Diseño web",
+  "Gestión de equipos"
+];
+---
+
+<PageLayout 
+  title={pageTitle}
+  currentPage="/cv"
+  description="CV completo de Marc López, diseñador UX/UI con experiencia en sistemas de diseño, fintech y productos digitales."
+  keywords="CV Marc López, curriculum vitae, experiencia UX UI, diseñador digital, sistemas de diseño"
+>
+
+  <!-- Hero Section -->
+  <section role="banner" aria-labelledby="hero-title">
+    <Hero 
+      title="CV"
+      titleTag="h1"
+      id="hero-title"
+    />
+  </section>
+
+  <!-- Experiencia Laboral Section -->
+  <section 
+    class="section section--with-border" 
+    id="experiencia-laboral"
+    role="region"
+    aria-labelledby="work-title"
+  >
+    <div class="container">
+      <div class="content-block">
+        <Title
+          text="Experiencia Laboral"
+          size="big"
+          showDivider={false}
+          as="h2"
+          id="work-title"
+          class="section-title"
+        />
+
+        <!-- Grid de dos columnas para experiencias laborales -->
+        <div class="cv-grid" role="list" aria-label="Lista de experiencia laboral">
+          {workExperience.map((experience, index) => (
+            <div role="listitem">
+              <ExperienceCard
+                title={experience.data.title}
+                company={experience.data.company}
+                period={experience.data.period}
+                tasks={experience.data.tasks}
+                logo={experience.data.logo}
+                logoAlt={experience.data.logoAlt}
+                type={experience.data.type}
+                class={`slide-up ${experience.data.featured ? 'experience-card--featured' : ''}`}
+                ariaLabel={`Experiencia en ${experience.data.company} como ${experience.data.title}`}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experiencia Educativa Section -->
+  <section 
+    class="section section--with-border" 
+    id="experiencia-educativa"
+    role="region"
+    aria-labelledby="education-title"
+  >
+    <div class="container">
+      <div class="content-block">
+        <Title
+          text="Experiencia Educativa"
+          size="big"
+          showDivider={false}
+          as="h2"
+          id="education-title"
+          class="section-title"
+        />
+
+        <!-- Grid de dos columnas para experiencia educativa -->
+        <div class="cv-grid" role="list" aria-label="Lista de formación académica">
+          {education.map((experience, index) => (
+            <div role="listitem">
+              <ExperienceCard
+                title={experience.data.title}
+                company={experience.data.company}
+                period={experience.data.period}
+                tasks={experience.data.tasks}
+                logo={experience.data.logo}
+                logoAlt={experience.data.logoAlt}
+                type={experience.data.type}
+                class={`slide-up ${experience.data.featured ? 'experience-card--featured' : ''}`}
+                ariaLabel={`Formación en ${experience.data.company}: ${experience.data.title}`}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section 
+    class="section section--with-border" 
+    id="skills"
+    role="region"
+    aria-labelledby="skills-title"
+  >
+    <div class="container">
+      <div class="content-block">
+        <Title
+          text="Skills"
+          size="big"
+          showDivider={false}
+          as="h2"
+          id="skills-title"
+          class="section-title"
+        />
+
+        <div class="skills-grid" role="list" aria-label="Lista de habilidades y competencias">
+          {skillsFromFigma.map((skill, index) => (
+            <div role="listitem" class="skill-category">
+              <Badge 
+                text={skill} 
+                class="skill-badge slide-up"
+                ariaLabel={`Habilidad: ${skill}`}
+              />
+            </div>
+          ))}
+        </div>
+
+        <!-- Sin footer específico, usa el del PageLayout -->
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  /* Importar estilos globales de layout */
+  @import '../styles/layout.css';
+  
+  /* ====================================
+     CV PAGE SPECIFIC STYLES
+     ==================================== */
+  
+  /* Hero específico para CV */
+  .hero--cv {
+    /* Usa los estilos del Hero normal, sin modificaciones específicas */
+  }
+
+  /* CSS Grid automático - mucho más simple y elegante */
+  .cv-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--section-gap);
+    align-items: start;
+  }
+
+  /* Grid de skills */
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .skill-category {
+    flex-shrink: 0;
+  }
+
+  .skill-badge {
+    display: inline-flex;
+  }
+
+  /* Footer del CV - eliminado, usa el del PageLayout */
+
+  /* Responsive adjustments */
+  @media (max-width: 767px) {
+    /* En mobile, grid cambia a una sola columna */
+    .cv-grid {
+      grid-template-columns: 1fr;
+      gap: var(--spacing-3xl);
+    }
+    
+    .skills-grid {
+      gap: var(--spacing-md);
+      justify-content: center;
+    }
+  }
+
+  /* Animaciones escalonadas para las experiencias */
+  .experience-list [role="listitem"] {
+    opacity: 0;
+    animation: slideUpStagger 0.8s ease-out forwards;
+  }
+
+  .experience-list [role="listitem"]:nth-child(1) { animation-delay: 0.1s; }
+  .experience-list [role="listitem"]:nth-child(2) { animation-delay: 0.2s; }
+  .experience-list [role="listitem"]:nth-child(3) { animation-delay: 0.3s; }
+  .experience-list [role="listitem"]:nth-child(4) { animation-delay: 0.4s; }
+  .experience-list [role="listitem"]:nth-child(5) { animation-delay: 0.5s; }
+  .experience-list [role="listitem"]:nth-child(6) { animation-delay: 0.6s; }
+
+  /* Animaciones escalonadas para los skills */
+  .skills-grid [role="listitem"] {
+    opacity: 0;
+    animation: slideUpStagger 0.6s ease-out forwards;
+  }
+
+  .skills-grid [role="listitem"]:nth-child(1) { animation-delay: 0.1s; }
+  .skills-grid [role="listitem"]:nth-child(2) { animation-delay: 0.15s; }
+  .skills-grid [role="listitem"]:nth-child(3) { animation-delay: 0.2s; }
+  .skills-grid [role="listitem"]:nth-child(4) { animation-delay: 0.25s; }
+  .skills-grid [role="listitem"]:nth-child(5) { animation-delay: 0.3s; }
+  .skills-grid [role="listitem"]:nth-child(6) { animation-delay: 0.35s; }
+  .skills-grid [role="listitem"]:nth-child(7) { animation-delay: 0.4s; }
+  .skills-grid [role="listitem"]:nth-child(8) { animation-delay: 0.45s; }
+  .skills-grid [role="listitem"]:nth-child(9) { animation-delay: 0.5s; }
+  .skills-grid [role="listitem"]:nth-child(10) { animation-delay: 0.55s; }
+  .skills-grid [role="listitem"]:nth-child(11) { animation-delay: 0.6s; }
+  .skills-grid [role="listitem"]:nth-child(12) { animation-delay: 0.65s; }
+  .skills-grid [role="listitem"]:nth-child(13) { animation-delay: 0.7s; }
+  .skills-grid [role="listitem"]:nth-child(14) { animation-delay: 0.75s; }
+  .skills-grid [role="listitem"]:nth-child(15) { animation-delay: 0.8s; }
+
+  @keyframes slideUpStagger {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Featured experience styling */
+  .experience-card--featured {
+    position: relative;
+  }
+
+  .experience-card--featured::before {
+    content: '';
+    position: absolute;
+    left: -var(--spacing-md);
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(
+      to bottom,
+      var(--color-text-tertiary),
+      transparent
+    );
+    border-radius: var(--radius-lg);
+  }
+
+  /* Reduced motion preferences */
+  @media (prefers-reduced-motion: reduce) {
+    .experience-list [role="listitem"],
+    .skills-grid [role="listitem"] {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* High contrast mode improvements */
+  @media (prefers-contrast: high) {
+    .experience-card--featured::before {
+      background: var(--color-text-primary);
+    }
+  }
+
+  /* Touch device optimizations */
+  @media (hover: none) and (pointer: coarse) {
+    .skills-grid {
+      gap: var(--spacing-md);
+    }
+    
+    .experience-list {
+      gap: var(--spacing-2xl);
+    }
+  }
+</style>
