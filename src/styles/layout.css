@@ -130,7 +130,7 @@ select {
 
 .grid {
   display: grid;
-  gap: var(--spacing-2xl);
+  gap: var(--section-gap);
 }
 
 .grid--2 {

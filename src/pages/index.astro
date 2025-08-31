@@ -7,7 +7,7 @@ import Button from "../components/Button.astro";
 import ProjectThumbnail from "../components/ProjectThumbnail.astro";
 
 // Import solo para la imagen crítica del hero
-import profilePhoto from "../assets/profile-photo.png";
+import profilePhoto from "../assets/photo-profile.png";
 
 // Obtener proyectos destacados dinámicamente
 const featuredProjects = await getCollection("projects", ({ data }) => {
@@ -292,7 +292,6 @@ const projectsToShow = featuredProjects
   .container {
     max-width: 1512px;
     margin: 0 auto;
-    padding: 0 var(--section-horizontal);
   }
 
   /* Accent dot styling */
@@ -305,7 +304,7 @@ const projectsToShow = featuredProjects
      ======================================== */
 
   .hero {
-    padding: var(--spacing-xhg) 0;
+    padding: var(--spacing-xhg) var(--section-horizontal);
     min-height: 50dvh;
     display: flex;
     align-items: center;

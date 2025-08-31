@@ -1,5 +1,13 @@
 ---
 import '../styles/tokens.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?:string;
+}
+
+const { title, description, keywords } = Astro.props as Props;
 ---
 
 <!doctype html>
@@ -9,7 +17,7 @@ import '../styles/tokens.css';
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Marc López</title>
+		<title>{title ?? "Marc López"}</title>
 	</head>
 	<body>
 		<slot />

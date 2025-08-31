@@ -16,11 +16,9 @@ export async function getStaticPaths() {
   }));
 }
 
-interface Props {
-  project: CollectionEntry<"projects">;
-}
 
-const { project } = Astro.props;
+const { project } = Astro.props as { project: CollectionEntry<"projects"> };
+
 const {
   title,
   heroImage,

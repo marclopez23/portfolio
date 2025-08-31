@@ -9,51 +9,56 @@ import RecommendationLetter from '../components/RecommendationLetter.astro';
 const pageTitle = "Sobre mí - Marc López";
 
 // Datos de los puntos "Como trabajo"
-const comoTrabajoItems = [
+const misValoresItems = [
   {
     number: "1",
-    title: "Entender y analizar",
-    description: "Analizar a fondo las necesidades de los usuarios, el mercado y la idea de negocio o producto."
+    title: "Transparencia",
+    description: "Creo en la comunicación abierta y honesta.\nPrefiero decir las cosas como son, tanto cuando algo funciona como cuando hay problemas que resolver."
   },
   {
     number: "2", 
-    title: "Idear",
-    description: "Trabajar en la concepción de posibles soluciones, definiendo los recorridos (journeys) y esbozando los primeros bocetos."
+    title: "Respeto",
+    description: "Valoro profundamente las ideas y el trabajo de cada persona del equipo. Cada uno tiene algo valioso que aportar, independientemente de su rol o experiencia."
   },
   {
     number: "3",
-    title: "Diseñar", 
-    description: "Sumergirse en la creación de la interfaz del producto, desarrollando tanto las pantallas como el sistema de diseño."
+    title: "Propósito", 
+    description: "No me conformo con hacer cosas bonitas por hacerlas. Necesito que lo que diseño tenga un sentido real y mejore la vida de las personas que lo van a usar."
   },
   {
     number: "4",
-    title: "Testar",
-    description: "Realizar pruebas con usuarios para evaluar el trabajo realizado en las etapas previas y determinar la efectividad del diseño."
+    title: "Crecimiento",
+    description: "Creo que siempre se puede aprender algo nuevo y mejorar. Me gusta crecer como profesional y ayudar a que el equipo también crezca."
   },
   {
     number: "5",
-    title: "Celebración y mejora continua",
-    description: "Reconocer y felicitar al equipo por el excelente trabajo si todo ha salido bien. En caso contrario, identificar áreas de mejora y prepararse para iterar."
+    title: "Equilibrio",
+    description: "Busco encontrar el punto donde se encuentran las necesidades de los usuarios, las posibilidades técnicas y los objetivos del negocio. Ahí es donde nacen las mejores soluciones."
+  },
+  {
+    number: "6",
+    title: "Accesibilidad",
+    description: "Un buen diseño es aquel que funciona para todas las personas, independientemente de sus capacidades o contexto. No se trata solo de cumplir estándares, sino de crear experiencias que realmente incluyan a todo el mundo."
   }
 ];
 
 // Datos de los puntos "Qué aporto"
 const queAportoItems = [
   {
-    title: "Enlace con desarrollo",
-    description: "Me siento muy cómodo hablando con los equipos de desarrollo. Para mí la unión entre diseño y desarrollo es vital para crear un buen producto."
+    title: "Conexión diseño-desarrollo",
+    description: "Conozco las posibilidades y entiendeo las limitaciones técnicas, lo que me permite crear diseños que funcionan en la realidad."
   },
   {
-    title: "Calma y tranquilidad", 
-    description: "Gestiono muy bien situaciones complejas o de estrés."
+    title: "Gestión bajo presión", 
+    description: "Cuando surgen imprevistos o cambios de scope, mi primera reacción es analizar el impacto real y buscar alternativas"
   },
   {
-    title: "Colaboración",
-    description: "Me encanta trabajar en equipo y realizar todo tipo de actividades en grupo."
+    title: "Espíritu colaborativo",
+    description: "Creo que las mejores ideas nacen del intercambio. Me gusta involucrar a todo el equipo en el proceso de diseño"
   },
   {
-    title: "Consejos",
-    description: "Intento aprender algo nuevo cada día y si veo que puede ser útil para el equipo lo comparto con ellos."
+    title: "Intercambio de conocimiento",
+    description: "Si descubro algo útil, no me lo guardo. Creo que un equipo que aprende junto es un equipo imparable"
   }
 ];
 
@@ -127,12 +132,12 @@ const recomendacionItems = [
     </div>
   </section>
 
-  <!-- Como trabajo Section -->
+  <!-- Mis valores Section -->
   <section 
     class="section section--with-border" 
-    id="como-trabajo"
+    id="mis-valores"
     role="region"
-    aria-labelledby="como-trabajo-title"
+    aria-labelledby="mis-valores-title"
   >
     <div class="container">
       <div class="content-block">
@@ -143,7 +148,7 @@ const recomendacionItems = [
           showDivider={false}
           as="h2"
           class="section-title"
-          id="como-trabajo-title"
+          id="mis-valores-title"
         />
         
         <!-- Grid de puntos -->
@@ -152,7 +157,7 @@ const recomendacionItems = [
           role="list"
           aria-label="Proceso de trabajo en 5 pasos"
         >
-          {comoTrabajoItems.map((item, index) => (
+          {misValoresItems.map((item, index) => (
             <div role="listitem">
               <Punto
                 number={item.number}
@@ -166,7 +171,7 @@ const recomendacionItems = [
           ))}
           
           <!-- Último elemento invisible para mantener el grid -->
-          {comoTrabajoItems.length % 2 !== 0 && (
+          {misValoresItems.length % 2 !== 0 && (
             <div class="grid-placeholder" aria-hidden="true"></div>
           )}
         </div>
@@ -291,7 +296,7 @@ const recomendacionItems = [
   .intro-text {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-2xl); /* 32px entre párrafos */
+    gap: var(--section-gap); /* 32px entre párrafos */
   }
   
 
