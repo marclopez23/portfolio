@@ -255,8 +255,6 @@ const computedAriaLabel = ariaLabel || (isExternal ? `${text} (se abre en nueva 
         return;
       }
 
-      // Visual feedback for successful interaction
-      console.log(`Link activated: ${this.text}`);
       
       // Add subtle visual feedback
       this.element.style.transform = 'scale(0.95)';
@@ -377,8 +375,6 @@ const computedAriaLabel = ariaLabel || (isExternal ? `${text} (se abre en nueva 
       new AccessibleLinkComponent(element as HTMLElement);
       element.setAttribute('data-initialized', 'true');
     });
-
-    console.log(`♿ ${linkComponents.length} accessible link components initialized`);
   });
 
   // Utility function for dynamic creation

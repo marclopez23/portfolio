@@ -192,12 +192,32 @@ const itemId = id || `menu-item-${text.toLowerCase().replace(/\s+/g, '-')}`;
   /* Estados de pressed para mobile */
   @media (hover: none) and (pointer: coarse) {
     .menu-item:active:not(.menu-item--disabled) {
-      background-color: rgba(233, 94, 73, 0.1);
+      background-color: none;
       padding: var(--spacing-xs) var(--spacing-sm);
       margin: calc(-1 * var(--spacing-xs)) calc(-1 * var(--spacing-sm));
       border-radius: 4px;
     }
   }
+
+  /* Agregar al final del CSS en MenuItem.astro */
+
+/* Quitar bordes inferiores solo en móvil y tablet */
+@media (max-width: 1023px) {
+  .menu-item::before,
+  .menu-item::after,
+  .menu-item__text::before,
+  .menu-item__text::after {
+    display: none !important;
+  }
+  
+  .menu-item--active .menu-item__text::after {
+    display: none !important;
+  }
+  
+  .menu-item:not(.menu-item--active):not(.menu-item--disabled)::before {
+    display: none !important;
+  }
+}
 
   /* Responsive adjustments */
   @media (max-width: 767px) {

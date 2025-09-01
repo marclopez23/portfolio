@@ -1,7 +1,7 @@
 ---
 title: "Abdul Latif Jameel Finance"
 heroImage: "/assets/proyectos/hero-aljuf.png"
-logo: "/assets/projects/aljuf/aljuf-logo.svg"
+logo: "/assets/proyectos/snb/logo-snb.svg"
 
 # Información del proyecto
 objective: "Digitalizar completamente los procesos de financiamiento para pequeñas y medianas empresas, creando una plataforma que simplifique las solicitudes de crédito y mejore la experiencia tanto para clientes como para el equipo interno de evaluación."
@@ -13,7 +13,7 @@ team: "Marc López, 2 Product Designers, 1 Research Specialist, Product Manager"
 process:
   title: "Transformación digital de procesos legacy"
   content: "El proyecto requirió un approach híbrido que combinara service design con UX tradicional para mapear y digitalizar procesos complejos existentes. Iniciamos con shadowing sessions en oficinas físicas para entender flujos actuales, seguido de stakeholder interviews con personal de créditos y clientes actuales. Utilizamos design sprints de 5 días para cada módulo principal, con prototipado rápido y validación continua. El proceso incluyó workshops de co-diseño con el equipo legal y compliance, testing de usabilidad con empresarios reales, y un programa piloto de 3 meses con 50 empresas para refinar la experiencia antes del lanzamiento completo."
-  image: "/assets/proyectos/proceso-aljuf.jpg"
+  
 
 # Retos del proyecto
 challenges:
@@ -44,6 +44,6 @@ relatedProjects: ["saudi-national-bank", "bayn"]
 description: "Digitalización completa de procesos de financiamiento para PyMES con enfoque en auto lease y configuraciones complejas."
 publishDate: 2023-01-25
 featured: false
-protected: true
+protected: false
 order: 3
 ---
