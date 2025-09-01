@@ -31,7 +31,7 @@ challenges:
     - title: "Coordinación entre múltiples squads"
       layout: "image-left"
       image: "/assets/proyectos/snb/img-squads.png"
-      content: "Con más de 30 desarrolladores distribuidos en distintas partes del mundo, mantener la coherencia era fundamental.\n\nPara facilitar el trabajo conjunto, documentamos de forma exhaustiva cada componente y su comportamiento, desde la validación de formularios hasta las transiciones entre pantallas.Además, diseñamos prototipos interactivos que mostraban no solo la interfaz estática, sino también cómo debía reaccionar la aplicación en cada escenario, asegurando así una experiencia uniforme para los usuarios."
+      content: "Con más de 30 desarrolladores distribuidos en distintas partes del mundo, mantener la coherencia era fundamental.\n\nPara facilitar el trabajo conjunto, documentamos de forma exhaustiva cada componente y su comportamiento, desde la validación de formularios hasta las transiciones entre pantallas.\n\nAdemás, diseñamos prototipos interactivos que mostraban no solo la interfaz estática, sino también cómo debía reaccionar la aplicación en cada escenario, asegurando así una experiencia uniforme para los usuarios."
 
 # Video del proyecto (opcional)
 projectVideo: "/assets/proyectos/snb/snb-video.mp4"

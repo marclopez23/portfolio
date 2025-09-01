@@ -37,7 +37,7 @@
     --font-size-text-block-sm-title: var(--font-size-2xl);      /* size/2xl - 20px mobile */
     --font-size-text-block-sm-text: var(--font-size-xl);        /* size/xl - 16px mobile */
     --font-size-text-block-xl-title: var(--font-size-3xl);      /* size/3xl - 24px mobile */
-    --font-size-text-block-xl-description: var(--font-size-xl); /* size/xl - 16px mobile */
+    --font-size-text-block-xl-description: var(--font-size-2xl); /* size/xl - 16px mobile */
     --font-size-paragraph: var(--font-size-xl);
     
     /* ========================================
