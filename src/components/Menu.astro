@@ -146,7 +146,7 @@ function getUrl(path: string): string {
           {menuItems.map((item) => (
             <li class="menu__mobile-item" role="listitem">
               <MenuItem 
-                text={item.text}
+                text={item.text || 'Sin texto'}
                 href={getUrl(item.href)}
                 active={item.active}
                 target={item.target}

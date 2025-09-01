@@ -43,7 +43,7 @@ export interface Props {
 }
 
 const {
-  text = 'Menu item',
+  text = 'Elemento de menú',
   href = '#',
   active = false,
   target = '_self',
@@ -71,13 +71,13 @@ const itemId = id || `menu-item-${text.toLowerCase().replace(/\s+/g, '-')}`;
   target={target}
   rel={target === '_blank' ? 'noopener noreferrer' : undefined}
   id={itemId}
-  aria-label={ariaLabel || undefined}
+  aria-label={ariaLabel || text}
   aria-current={active ? 'page' : undefined}
   aria-disabled={disabled}
   tabindex={disabled ? -1 : 0}
 >
   <span class="menu-item__text">
-    {text || ariaLabel}
+    {text}
   </span>
 </a>
 
