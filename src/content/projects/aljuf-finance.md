@@ -44,6 +44,6 @@ relatedProjects: ["saudi-national-bank", "bayn"]
 description: "Digitalización completa de procesos de financiamiento para PyMES con enfoque en auto lease y configuraciones complejas."
 publishDate: 2023-01-25
 featured: false
-protected: false
+protected: true
 order: 3
 ---
