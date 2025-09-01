@@ -55,7 +55,18 @@ const menuClasses = [
 
 // ID único para accesibilidad
 const menuId = id || 'main-menu';
+
+// Helper para rutas - funciona automáticamente
+function getUrl(path: string): string {
+  const base = import.meta.env.BASE_URL;
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  // Asegurar que base termine en / y no duplicar /
+  const baseWithSlash = base.endsWith('/') ? base : base + '/';
+  return `${baseWithSlash}${cleanPath}`;
+}
 ---
+
+
 
 <header class={menuClasses} id={menuId} role="banner">
   <!-- Fondo con borde inferior -->
@@ -65,11 +76,11 @@ const menuId = id || 'main-menu';
   <div class="menu__content">
     <!-- Logo -->
     <a 
-      href={logoHref}
+      href={getUrl(logoHref)}
       class="menu__logo"
     >
       <img 
-        src="/assets/logo.svg" 
+        src={getUrl('assets/logo.svg')}
         alt={logoAlt}
         class="logo"
         width="225" 
@@ -84,7 +95,7 @@ const menuId = id || 'main-menu';
           <li class="menu__item" role="listitem">
             <MenuItem 
               text={item.text}
-              href={item.href}
+              href={getUrl(item.href)}
               active={item.active}
               target={item.target}
               disabled={item.disabled}
@@ -136,7 +147,7 @@ const menuId = id || 'main-menu';
             <li class="menu__mobile-item" role="listitem">
               <MenuItem 
                 text={item.text}
-                href={item.href}
+                href={getUrl(item.href)}
                 active={item.active}
                 target={item.target}
                 disabled={item.disabled}
