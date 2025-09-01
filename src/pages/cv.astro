@@ -41,6 +41,11 @@ const skillsFromFigma = [
   "Diseño web",
   "Gestión de equipos"
 ];
+
+function getUrl(path: string): string {
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${import.meta.env.BASE_URL}/${cleanPath}`;
+}
 ---
 
 <PageLayout 
@@ -86,7 +91,7 @@ const skillsFromFigma = [
                 company={experience.data.company}
                 period={experience.data.period}
                 tasks={experience.data.tasks}
-                logo={experience.data.logo}
+                logo={getUrl(experience.data.logo)}
                 logoAlt={experience.data.logoAlt}
                 type={experience.data.type}
                 class={`slide-up ${experience.data.featured ? 'experience-card--featured' : ''}`}
@@ -126,7 +131,7 @@ const skillsFromFigma = [
                 company={experience.data.company}
                 period={experience.data.period}
                 tasks={experience.data.tasks}
-                logo={experience.data.logo}
+                logo={getUrl(experience.data.logo)}
                 logoAlt={experience.data.logoAlt}
                 type={experience.data.type}
                 class={`slide-up ${experience.data.featured ? 'experience-card--featured' : ''}`}

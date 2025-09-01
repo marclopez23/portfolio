@@ -103,7 +103,7 @@ const projectsToShow = featuredProjects
               projectsToShow.map((project) => (
                 <ProjectThumbnail
                   title={project.data.title}
-                  imageSrc={project.data.heroImage}
+                  imageSrc={getUrl(project.data.heroImage)}
                   imageAlt={`Vista previa del proyecto ${project.data.title}`}
                   href={getUrl(`proyectos/${project.slug}`)}
                   linkText="Ver proyecto"
@@ -393,7 +393,7 @@ const projectsToShow = featuredProjects
 
   .projects__content {
     display: flex;
-    gap: var(--spacing-hg);
+    gap: var(--section-gap);
     align-items: flex-start;
   }
 
@@ -440,7 +440,7 @@ const projectsToShow = featuredProjects
 
   .contact__content {
     display: flex;
-    gap: var(--spacing-hg);
+    gap: var(--section-gap);
     align-items: center;
   }
 
@@ -496,10 +496,15 @@ const projectsToShow = featuredProjects
 
   /* Tablet */
   @media (max-width: 1200px) {
+
+    .hero{
+      padding: var(--section-vertical) var(--section-horizontal);
+    }
+
     .hero__content {
       flex-direction: column;
-      text-align: center;
       gap: var(--spacing-2xl);
+      align-items: flex-start;
     }
 
     .hero__image {
@@ -510,17 +515,17 @@ const projectsToShow = featuredProjects
     .projects__content,
     .contact__content {
       flex-direction: column;
-      gap: var(--spacing-2xl);
+      gap: var(--section-gap);
     }
 
     .projects__sidebar,
     .contact__sidebar {
       width: 100%;
       border-right: none;
-      border-bottom: 2px solid var(--color-divider);
+      border-bottom: none;
       padding-right: 0;
-      padding-bottom: var(--spacing-lg);
-      position: relative;
+      padding-bottom: none;
+      position: unset;
     }
 
     .contact__links {
@@ -573,12 +578,16 @@ const projectsToShow = featuredProjects
   /* Mobile */
   @media (max-width: 767px) {
     .hero {
-      padding: var(--spacing-2xl) 0;
+      padding: var(--section-vertical) var(--section-horizontal);
       min-height: auto;
     }
 
     .hero__content {
-      gap: var(--spacing-lg);
+      gap: var(--section-gap);
+    }
+
+    .hero__subtitle{
+      font-size: var(--font-size-2xl);
     }
 
     .hero__image {
@@ -588,11 +597,11 @@ const projectsToShow = featuredProjects
     }
 
     .hero__title {
-      font-size: var(--font-size-lg);
+      font-size: var(--font-size-3xl);
     }
 
     .hero__description {
-      font-size: var(--font-size-md);
+      font-size: var(--font-size-xl);
     }
 
     .section-title {
@@ -600,7 +609,7 @@ const projectsToShow = featuredProjects
     }
 
     .contact__text {
-      font-size: var(--font-size-sm);
+      font-size: var(--font-size-xl);
     }
 
     .projects__grid {

@@ -12,6 +12,12 @@ const allProjects = await getCollection('projects', ({ data }) => {
   return data.protected !== true;
 });
 const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => a.data.order - b.data.order);
+
+  function getUrl(path: string): string {
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${import.meta.env.BASE_URL}/${cleanPath}`;
+  }
+
 ---
 
 <PageLayout 
@@ -23,7 +29,7 @@ const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: Collection
 
   <!-- Hero Section -->
   <section 
-    class="section" 
+    class="" 
     id="hero"
     role="banner"
     aria-labelledby="hero-title"
@@ -59,8 +65,8 @@ const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: Collection
               <ProjectThumbnail
                 title={project.data.title}
                 linkText="Ver proyecto"
-                href={`/proyectos/${project.slug}`}
-                imageSrc={project.data.heroImage}
+                href={getUrl(`proyectos/${project.slug}`)}
+                imageSrc={getUrl(project.data.heroImage)}
                 imageAlt={`Vista previa del proyecto ${project.data.title}`}
                 variant="medium"
                 class="slide-up"

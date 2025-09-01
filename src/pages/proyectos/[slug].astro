@@ -73,7 +73,7 @@ function getUrl(path: string): string {
       <div class="project-hero__content project-hero__image-container">
         <!-- Project Hero Image -->
         <SkeletonImage
-  src={heroImage}
+  src={getUrl(heroImage)}
   alt={`Vista principal del proyecto ${title}`}
   class="project-hero__image"
   loading="eager"
@@ -102,7 +102,7 @@ function getUrl(path: string): string {
         {
           logo && (
             <img
-              src={logo}
+              src={getUrl(logo)}
               alt={`Logo de ${title}`}
               class="project-hero__logo"
               loading="lazy"
@@ -164,7 +164,7 @@ function getUrl(path: string): string {
               {process.image && (
                 <div class="process-content__image">
                   <img
-                    src={process.image}
+                    src={getUrl(process.image)}
                     alt={`Proceso del proyecto ${title}`}
                     class="process-image"
                     loading="lazy"
@@ -218,7 +218,7 @@ function getUrl(path: string): string {
                   {challenge.image && (
                     <div class="challenge__media">
                       <SkeletonImage
-  src={challenge.image}
+  src={getUrl(challenge.image)}
   alt={`Ilustración de ${challenge.title}`}
   class="challenge__image"
   loading="lazy"
@@ -258,11 +258,11 @@ function getUrl(path: string): string {
               <!-- Thumbnail clickeable en lugar de video directo -->
               <div 
                 class="video-thumbnail"
-                data-video-src={projectVideo}
+                data-video-src={getUrl(projectVideo)}
                 data-video-title={`Video completo del proyecto ${title}`}
               >
                 <SkeletonImage
-  src={videoThumbnail || heroImage || '/placeholder-video.jpg'}
+  src={getUrl(videoThumbnail) || getUrl(heroImage) || '/placeholder-video.jpg'}
   alt={`Video completo del proyecto ${title}`}
   class="video-poster"
   loading="lazy"
@@ -310,7 +310,7 @@ function getUrl(path: string): string {
                     title={relatedProject.data.title}
                     linkText="Ver proyecto"
                     href={getUrl(`proyectos/${relatedProject.slug}`)}
-                    imageSrc={relatedProject.data.heroImage}
+                    imageSrc={getUrl(relatedProject.data.heroImage)}
                     imageAlt={`Vista previa del proyecto ${relatedProject.data.title}`}
                     variant="medium"
                     ariaLabel={`Ver detalles del proyecto ${relatedProject.data.title}`}

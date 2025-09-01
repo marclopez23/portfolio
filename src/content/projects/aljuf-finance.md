@@ -1,7 +1,7 @@
 ---
 title: "Abdul Latif Jameel Finance"
 heroImage: "/assets/proyectos/hero-aljuf.png"
-logo: "/images/projects/aljuf/aljuf-logo.svg"
+logo: "/assets/projects/aljuf/aljuf-logo.svg"
 
 # Información del proyecto
 objective: "Digitalizar completamente los procesos de financiamiento para pequeñas y medianas empresas, creando una plataforma que simplifique las solicitudes de crédito y mejore la experiencia tanto para clientes como para el equipo interno de evaluación."

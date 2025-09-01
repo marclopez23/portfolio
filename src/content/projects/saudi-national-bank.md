@@ -1,6 +1,6 @@
 ---
 title: "SNB Retail App"
-heroImage: "/assets/proyectos/snb/hero-snb.png"
+heroImage: "assets//proyectos/snb/hero-snb.png"
 logo: "/assets/proyectos/snb/logo-snb.svg"
 
 # Información del proyecto
