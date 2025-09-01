@@ -10,7 +10,7 @@ tasks:
   - "Definición de misión, visión, objetivos y modelos de gobierno para sistemas de diseño."
   - "Creación y mantenimiento de arquitecturas de Design Tokens escalables."
   - "Documentación de patrones visuales y funcionales para equipos multidisciplinares."
-  - "Planificación end-to-end: auditoría, implementación y mantenimiento del sistema.
+  - "Planificación end-to-end: auditoría, implementación y mantenimiento del sistema."
 
 description: "Formación especializada en la creación de sistemas de diseño desde cero, aprendiendo metodologías y herramientas para desarrollar design systems escalables."
 website: "https://mrmarcel.com"
