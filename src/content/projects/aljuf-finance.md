@@ -1,18 +1,18 @@
 ---
 title: "Abdul Latif Jameel Finance"
 heroImage: "/assets/proyectos/hero-aljuf.png"
-logo: "/assets/proyectos/snb/logo-snb.svg"
+logo: "/assets/proyectos/aljuf/logo-aljuf.svg"
 
 # Información del proyecto
-objective: "Digitalizar completamente los procesos de financiamiento para pequeñas y medianas empresas, creando una plataforma que simplifique las solicitudes de crédito y mejore la experiencia tanto para clientes como para el equipo interno de evaluación."
-role: "Lead UX/UI Designer"  
-duration: "9 meses"
-team: "Marc López, 2 Product Designers, 1 Research Specialist, Product Manager"
+objective: "Crear una aplicación para solicitar y gestionar préstamos y autos leasing para pequeñas y medianas empresas."
+role: "Product Designer"  
+duration: "Aproximadamente 3 meses."
+team: "2 Product Designers"
 
 # Proceso del proyecto
 process:
-  title: "Transformación digital de procesos legacy"
-  content: "El proyecto requirió un approach híbrido que combinara service design con UX tradicional para mapear y digitalizar procesos complejos existentes. Iniciamos con shadowing sessions en oficinas físicas para entender flujos actuales, seguido de stakeholder interviews con personal de créditos y clientes actuales. Utilizamos design sprints de 5 días para cada módulo principal, con prototipado rápido y validación continua. El proceso incluyó workshops de co-diseño con el equipo legal y compliance, testing de usabilidad con empresarios reales, y un programa piloto de 3 meses con 50 empresas para refinar la experiencia antes del lanzamiento completo."
+  title: "Metodología y proceso de trabajo"
+  content: "El proyecto comenzó con una investigación del mercado local y entrevistas con stakeholders para entender cómo funcionaban hasta entonces los procesos de financiación para pymes. Detectamos que gran parte de ellos seguían siendo manuales y presenciales, lo que ralentizaba trámites y aumentaba costes.\nA partir de ahí, definimos un MVP que trasladara esos procesos a un entorno digital, reduciendo fricción tanto para las empresas como para los gestores del banco. Trabajamos con iteraciones cortas: diseñábamos flujos, validábamos con negocio y ajustábamos antes de pasar a prototipos de alta fidelidad.\nEn paralelo, construimos un design system ligero, reutilizando componentes entre desktop y mobile para acelerar el desarrollo y mantener consistencia visual. Esto fue clave porque la aplicación debía tener doble versión (móvil y escritorio) sin duplicar esfuerzos de diseño ni generar un coste extra para desarrollo.\nDurante el proceso colaboramos estrechamente con el equipo de desarrollo, documentando patrones de interacción y entregando prototipos navegables que mostraban no solo las pantallas estáticas, sino también comportamientos y validaciones de formularios."
   
 
 # Retos del proyecto
@@ -21,21 +21,22 @@ challenges:
   items:
     - title: "Digitalización de procesos offline"
       layout: "image-left"
-      image: "/images/projects/aljuf/digitalization.jpg"
-      content: "El mayor desafío fue transformar procesos financieros tradicionalmente offline en una experiencia digital completa. Mapeamos todos los flujos existentes de solicitud y aprobación de créditos, identificando puntos de fricción y oportunidades de automatización. Desarrollamos formularios inteligentes que se adaptan según el tipo de empresa y financiamiento solicitado, con validaciones en tiempo real y carga de documentos optimizada. La plataforma integra verificaciones automáticas de datos empresariales y scoring crediticio, reduciendo el tiempo de evaluación de semanas a días."
+      image: "/assets/proyectos/aljuf/proceso-online.png"
+      content: "El reto principal fue transformar procesos que hasta entonces se realizaban de forma presencial en sucursales, en experiencias 100% digitales.\n\nEsto implicaba diseñar un onboarding claro, accesible y guiado paso a paso, capaz de reducir al mínimo las llamadas al call center y la necesidad de asistencia humana."
       
     - title: "Generar una versión desktop con poco impacto en desarrollo"
       layout: "image-right"
-      image: "/images/projects/aljuf/desktop-version.jpg" 
-      content: "Creamos una versión desktop completa reutilizando al máximo los componentes y lógica de la versión móvil. Implementamos un sistema de responsive design inteligente que adapta automáticamente los flujos móviles a pantallas grandes, reorganizando elementos para aprovechar el espacio adicional sin duplicar código. Utilizamos técnicas de progressive enhancement donde la funcionalidad base funciona en móvil y se enriquece automáticamente en desktop, minimizando el esfuerzo de desarrollo mientras ofrecemos experiencias optimizadas para cada dispositivo."
+      image: "/assets/proyectos/aljuf/desktop.png" 
+      content: "La prioridad era lanzar la versión móvil, pero también era necesario contar con una versión de escritorio.\n\nPara evitar duplicar trabajo, aprovechamos los mismos componentes diseñados para mobile y los adaptamos al entorno desktop, optimizando el uso del espacio y aplicando patrones propios de cada dispositivo."
       
     - title: "El flujo del auto lease y sus configuraciones"
       layout: "image-left"
-      image: "/images/projects/aljuf/auto-lease-flow.jpg"
-      content: "Diseñamos un flujo específico para financiamiento de vehículos que maneja la complejidad de múltiples configuraciones: lease operativo, lease financiero, compra directa, y opciones de seguro. Creamos un configurador visual interactivo donde los usuarios pueden ver en tiempo real cómo sus selecciones afectan las cuotas mensuales, términos del contrato, y beneficios fiscales. El sistema maneja automáticamente diferentes modelos de vehículos, variaciones en precios según concesionario, y cálculos complejos de depreciación y valor residual, presentando toda esta información de manera clara y comprensible."
+      image: "/assets/proyectos/aljuf/configurador.png"
+      content: "Uno de los procesos más complejos fue el de solicitud de leasing de automóviles, ya que los usuarios podían seleccionar entre más de 25 coches con distintas configuraciones.\n\nDiseñamos un flujo flexible que permitía comparar modelos, añadir o eliminar vehículos del carrito y simular condiciones de financiación en tiempo real. Todo ello debía resolverse en una experiencia clara, rápida y sin errores."
 
 # Video del proyecto (opcional)
-projectVideo: "/assets/proyectos/video-aljuf.mp4"
+projectVideo: "/assets/proyectos/aljuf/video-aljuf.mp4"
+videoThumbnail: "/assets/proyectos/aljuf/video-aljuf.png"
 
 # Proyectos relacionados  
 relatedProjects: ["saudi-national-bank", "bayn"]

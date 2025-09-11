@@ -4,34 +4,34 @@ heroImage: "assets//proyectos/snb/hero-snb.png"
 logo: "/assets/proyectos/snb/logo-snb.svg"
 
 # Información del proyecto
-objective: "Rediseñar la aplicación dirigida a los clientes retail del banco buscando la mejor experiencia de usuario del país."
-role: "En este proyecto actué como Product Designer y Design System Designer."
-duration: "7 meses aproximadamente"
-team: "4 Product Designers y 1 Design System Designer"
+objective: "Rediseñar la aplicación de banca retail de SNB para ofrecer una experiencia de usuario clara, coherente y adaptada al mercado de Arabia Saudí."
+role: "Product Designer y Design System Designer."
+duration: "Aproximadamente 7 meses."
+team: "4 Product Designers + 1 Design System Designer."
 
 # Proceso del proyecto
 process:
   title: "Metodología y proceso de trabajo"
-  content: "<span>El proyecto comenzó sobre una aplicación existente y algunos conceptos previos de otra agencia.</span>\nEn relación al research, entrevistas con usuarios eran complicadas a causa del idioma y que al principio, el banco no acababa de comprender el valor que podían aportar.\nPor eso, nuestra primera tarea fue explorar la app antigua y analizar competidores locales, regionales y europeos, para tener una base sólida y comprender qué funcionaba y qué podía mejorar.\nPoco a poco logramos introducir prácticas de research más estructuradas, como la creación de user personas, y viajamos a Arabia Saudí para trabajar codo con codo con los stakeholders, entendiendo de primera mano el contexto local y reforzando la colaboración.\nCon esta información definimos el camino de diseño y arrancamos en sprints de dos semanas, presentando avances a mitad y al final tanto a stakeholders como a los equipos de desarrollo."
+  content: "El proyecto partió de una aplicación ya existente y de algunos conceptos creados previamente por otra agencia.\nAl inicio, las entrevistas con usuarios resultaron complicadas debido al idioma y a la resistencia del banco a reconocer el valor del research.\nPor eso, además de analizar la app antigua, investigamos competidores locales, regionales y europeos para identificar fortalezas, debilidades y oportunidades de mejora.\nPoco a poco conseguimos introducir prácticas de investigación más estructuradas: definimos user personas y viajamos a Arabia Saudí para colaborar directamente con stakeholders, conocer el contexto cultural y enriquecer el diseño con insights reales.\nCon toda esta información, establecimos la dirección del diseño y trabajamos en iteraciones de dos semanas, presentando avances a mitad y final de cada sprint tanto a stakeholders como al equipo de desarrollo."
 
 # Retos del proyecto
 challenges:
   title: "Retos del proyecto"
   items:
-    - title: "Los productos"
+    - title: "Productos financieros locales"
       layout: "image-left"
       image: "/assets/proyectos/snb/img-productos.png"
-      content: "Uno de los principales retos del proyecto fue comprender los productos específicos de Arabia Saudí, muy distintos a los que estamos acostumbrados en Europa.\n\nPara lograrlo, realizamos entrevistas y sesiones de trabajo con stakeholders del banco y expertos locales, lo que nos permitió alinear el diseño a las necesidades reales del mercado."
+      content: "Los productos de Arabia Saudí eran muy diferentes a los europeos, lo que exigió un proceso de comprensión y adaptación.\n\nA través de entrevistas y talleres con stakeholders locales y expertos logramos alinear los flujos y pantallas con las necesidades del mercado."
       
-    - title: "Diseños en árabe (RTL y LTR)"
+    - title: "Diseño bilingüe (RTL y LTR)"
       layout: "image-right"
       image: "/assets/proyectos/snb/img-arabe.png"
-      content: "Dado que la mayoría de usuarios hablaba únicamente árabe, la aplicación debía estar disponible en árabe e inglés.\n\nEl reto fue diseñar interfaces tanto en LTR como en RTL, garantizando consistencia y usabilidad en ambos casos.Para resolverlo, creamos un sistema de componentes adaptables y conectamos Figma con Google Sheets mediante un plugin.\n\nEsto permitió que colaboradores externos escribieran directamente en árabe y que los textos se actualizaran de forma automática en el diseño."
+      content: "La mayoría de los usuarios utilizaba la app en árabe, aunque también debía estar disponible en inglés. El reto fue diseñar interfaces que funcionaran en ambas direcciones (LTR y RTL) sin perder consistencia ni usabilidad.\n\nPara lograrlo, desarrollamos componentes modulares y usamos un plugin que conectaba Figma con Google Sheets: colaboradores externos podían introducir textos en árabe y estos se actualizaban automáticamente en los diseños."
       
-    - title: "Coordinación entre múltiples squads"
+    - title: "Coordinación internacional"
       layout: "image-left"
       image: "/assets/proyectos/snb/img-squads.png"
-      content: "Con más de 30 desarrolladores distribuidos en distintas partes del mundo, mantener la coherencia era fundamental.\n\nPara facilitar el trabajo conjunto, documentamos de forma exhaustiva cada componente y su comportamiento, desde la validación de formularios hasta las transiciones entre pantallas.\n\nAdemás, diseñamos prototipos interactivos que mostraban no solo la interfaz estática, sino también cómo debía reaccionar la aplicación en cada escenario, asegurando así una experiencia uniforme para los usuarios."
+      content: "El proyecto involucraba a más de 30 desarrolladores distribuidos en varios países.\n\nPara garantizar coherencia, documentamos en detalle cada componente y su comportamiento (desde validaciones de formularios hasta transiciones entre pantallas) y preparamos prototipos interactivos que mostraban no solo las pantallas estáticas, sino también cómo debía responder la aplicación en cada escenario."
 
 # Video del proyecto (opcional)
 projectVideo: "/assets/proyectos/snb/snb-video.mp4"

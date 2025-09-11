@@ -38,7 +38,7 @@
     --font-size-text-block-sm-text: var(--font-size-xl);        /* size/xl - 16px mobile */
     --font-size-text-block-xl-title: var(--font-size-3xl);      /* size/3xl - 24px mobile */
     --font-size-text-block-xl-description: var(--font-size-2xl); /* size/xl - 16px mobile */
-    --font-size-paragraph: var(--font-size-xl);
+    --font-size-paragraph: 18px;
     
     /* ========================================
        SPACING - MOBILE (Default)
@@ -154,7 +154,7 @@
          --font-size-text-block-sm-text: var(--font-size-md);        
          --font-size-text-block-xl-title: var(--font-size-xl);      
          --font-size-text-block-xl-description: var(--font-size-md); 
-         --font-size-paragraph: var(--font-size-lg);
+         --font-size-paragraph: 20px;
       
       /* ========================================
          SPACING - DESKTOP
@@ -391,7 +391,7 @@
     font-family: var(--font-family-primary); /* Inter Tight */
     font-size: var(--font-size-paragraph); /* 32px */
     font-weight: var(--font-weight-medium); /* Medium/500 */
-    line-height: var(--line-height-relaxed); /* 1.5 */
+    line-height: var(--line-height-normal); /* 1.5 */
     letter-spacing: 0.32px; /* tracking de Figma */
     
     /* Color secundario por defecto */

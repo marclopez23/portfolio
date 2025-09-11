@@ -4,34 +4,34 @@ heroImage: "/assets/proyectos/hero-bayn.png"
 logo: "/assets/proyectos/bayn/bayn-logo.svg"
 
 # Información del proyecto
-objective: "Crear la primera plataforma de dropshipping de Arabia Saudi."
-role: "En este proyecto actué como Product Designer."
-duration: "6 meses aproximadamente."
+objective: "Crear la primera plataforma de dropshipping de Arabia Saudí."
+role: "Product Designer."
+duration: "Aproximadamente 6 meses."
 team: "2 Product Designers"
 
 # Proceso del proyecto
 process:
-  title: "Metodología y proceso de trabajo."
-  content: "Iniciamos con un análisis exhaustivo de los dos segmentos de usuarios y sus necesidades diferenciadas. Utilizamos metodologías de design thinking con workshops intensivos, user journey mapping para cada tipo de usuario, y prototipado rápido para validar conceptos. El proceso incluyó sesiones de co-diseño con stakeholders de ambos segmentos, testing A/B para optimizar flujos críticos, y desarrollo ágil con entregas incrementales cada 2 semanas para incorporar feedback temprano."
+  title: "Metodología y proceso de trabajo"
+  content: "Al tratarse de una startup, comenzamos con un benchmark de plataformas de referencia en otros mercados para identificar buenas prácticas y diferenciar a Bayn desde el inicio.\nDefinimos un MVP con las funcionalidades mínimas necesarias para salir al mercado: gestión básica de productos, conexión entre makers y retailers y un flujo de compra inicial. Con este MVP pudimos validar el concepto rápidamente y empezar a crecer sobre una base sólida.\nA partir de ahí, fuimos desarrollando la plataforma de forma iterativa.\nEn paralelo trabajamos en la imagen de marca: logo, identidad visual, tipografía y colores, construyendo una personalidad clara para el producto desde su lanzamiento.\nAdemás, creamos un UI kit sencillo con componentes reutilizables que nos permitió mantener consistencia en las pantallas y acelerar la evolución de la plataforma."
 
 # Retos del proyecto
 challenges:
   title: "Retos del proyecto"
   items:
-    - title: "Gestión de grandes cantidades de datos"
+    - title: "Gestión de grandes volúmenes de datos"
       layout: "image-left"
       image: "/assets/proyectos/bayn/gestion-datos.png"
-      content: "El core de Bayn se centra en los productos listados en la plataforma. Estos pueden ser simples y no tener variantes, como una taza, o pueden ser productos con múltiples variantes, como una prenda de vestir.\n\nLos productos con variantes pueden tener hasta 30 opciones distintas, lo que representa un desafío tanto en la importación, la gestión o en la presentación de los mismos."
+      content: "Uno de los mayores desafíos fue diseñar un sistema capaz de gestionar productos con estructuras muy diferentes.\n\nMientras que algunos artículos eran simples y sin variantes (por ejemplo, una taza), otros podían llegar a tener decenas de combinaciones (como una prenda con tallas, colores y materiales distintos).\n\nLa complejidad residía en cómo importar, organizar y mostrar esa información de manera clara y escalable, evitando confusión tanto para makers como para retailers."
       
-    - title: "Trabajar dos segmentos"
+    - title: "Dos segmentos de usuarios con necesidades distintas"
       layout: "image-right"
       image: "/assets/proyectos/bayn/dos-segmentos.png"
-      content: "El servicio de Bayn está dirigido a dos tipos de usuarios o segmentos: los makers y los retailers.\n\nPor lo tanto, Bayn debe abarcar todas sus necesidades, desde la importación de productos hasta la gestión de inventario y, además, proporcionar servicios logísticos para el almacenamiento y envío de todos los productos."
+      content: "Bayn debía dar servicio a dos perfiles muy diferentes: makers y retailers. \n\nLos primeros necesitaban funcionalidades orientadas a la importación de productos, la gestión del inventario y la logística.\n\nLos segundos, en cambio, buscaban herramientas para navegar catálogos, hacer pedidos y tomar decisiones basadas en métricas.\n\nDiseñar una plataforma que respondiera a ambas necesidades sin que una experiencia afectara negativamente a la otra fue uno de los retos más relevantes del proyecto."
       
     - title: "Creación de un pequeño eCommerce"
       layout: "image-left" 
       image: "/assets/proyectos/bayn/ecommerce.png"
-      content: "Además de desarrollar la infraestructura para la gestión e importación de productos para Bayn, fue fundamental la implementación de un pequeño eCommerce en la plataforma.\n\nEsta función es indispensable, ya que ofrece a los retailers la opción de explorar y adquirir nuevos productos para sus tiendas. Para ello, se ha desarrollado un extenso catálogo de productos categorizados, filtros detallados y fichas de producto informativas.\n\nComo valor agregado, los productos disponen de métricas que indican su rendimiento en función de las importaciones y ventas realizadas por los usuarios de la plataforma, además de proporcionar una aproximación del margen de beneficio de cada producto."
+      content: "Además de la capa de gestión, la plataforma necesitaba integrar un eCommerce propio para los retailers.\n\nEsto implicaba diseñar un catálogo bien estructurado por categorías, filtros avanzados para encontrar productos rápidamente y fichas de producto con toda la información relevante. También fue necesario incluir métricas claras de rendimiento, ventas y márgenes estimados, de forma que los retailers pudieran evaluar fácilmente la rentabilidad de sus decisiones dentro de la propia plataforma."
 
 # Video del proyecto (opcional)
 projectVideo: "/assets/proyectos/bayn/video-bayn.mp4"
