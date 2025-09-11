@@ -1,19 +1,18 @@
 ---
 title: "DH Design System"
-heroImage: "/assets/proyectos/hero-dh-ds.png"
-logo: "/images/projects/dh-design-system/dh-logo.svg"
+heroImage: "/assets/proyectos/dh-ds/hero-dh-ds.png"
+logo: "/assets/proyectos/dh-ds/dh-ds-logo.svg"
 
 # Información del proyecto
-objective: "Crear y mantener un sistema de diseño completo y escalable que unificara la experiencia visual y de interacción across todos los productos digitales de la empresa, estableciendo estándares claros y componentes reutilizables."
-role: "Design System Lead"
-duration: "12 meses"
-team: "Marc López, 3 Product Designers, 2 Frontend Developers"
+objective: "Crear un Design System multiplataforma que sirviera de referencia para todos los equipos de la compañía."
+role: "Design System Designer"
+duration: "6 meses aproximadamente."
+team: "1 Design System Designer"
 
 # Proceso del proyecto
 process:
-  title: "Construcción sistemática y colaborativa"
-  content: "Desarrollamos el design system siguiendo una metodología híbrida que combinó atomic design con principios de desarrollo ágil. Comenzamos con un audit completo de todos los productos existentes para identificar inconsistencias y oportunidades. Establecimos un proceso de governance con reuniones semanales entre diseño y desarrollo, implementamos documentación viva que se actualiza automáticamente, y creamos un sistema de contribución donde cualquier miembro del equipo puede proponer mejoras. El proceso incluyó workshops de adopción, training sessions, y un programa piloto con 3 productos para validar la efectividad del sistema."
-  image: "/assets/proyectos/proceso-dh-ds.jpg"
+  title: "Metodología y proceso de trabajo"
+  content: "El proyecto comenzó con una auditoría de productos existentes para detectar inconsistencias visuales, duplicidades y necesidades comunes de los equipos. A partir de ese análisis definimos una hoja de ruta centrada en crear un sistema robusto y escalable.\nTrabajamos de forma iterativa: primero definimos la arquitectura de tokens (colores, tipografía, espaciados) como base flexible, fácil de actualizar y extender. Después construimos componentes clave en Figma, documentándolos con guías de uso y buenas prácticas.\nEn paralelo, desarrollamos los mismos componentes en código, asegurando que diseño y desarrollo trabajaran en espejo. Esto nos permitió validar que los tokens y componentes funcionaban igual en entornos reales, reduciendo errores y acelerando la adopción."
 
 # Retos del proyecto
 challenges:
@@ -21,22 +20,22 @@ challenges:
   items:
     - title: "Generar una arquitectura de tokens fácil de personalizar y escalable"
       layout: "image-left"
-      image: "/images/projects/dh-design-system/tokens-architecture.jpg"
-      content: "Desarrollamos una arquitectura de design tokens robusta que permite personalización rápida y escalabilidad across múltiples productos. Creamos un sistema de tokens semánticos organizados en capas: tokens primitivos (colores base, tipografías, espaciados), tokens semánticos (primary, secondary, success, error), y tokens específicos de componentes. Esta estructura permite modificar toda la identidad visual cambiando solo los tokens primitivos, mientras mantiene la coherencia funcional."
+      image: "/assets/proyectos/dh-ds/colores.png"
+      content: "Uno de los mayores retos fue crear una base sólida de design tokens que pudiera adaptarse a los diferentes productos de la compañía sin perder coherencia. Los equipos necesitaban flexibilidad para personalizar elementos como colores, tipografía o espaciados, pero al mismo tiempo era crucial mantener una estructura común que facilitara la escalabilidad.\n\nDefinimos una arquitectura clara y jerárquica, con tokens base reutilizables que podían modificarse según las necesidades de cada producto. Además, trabajamos estrechamente con los equipos de desarrollo para asegurarnos de que la implementación en código reflejara exactamente lo diseñado en Figma. Esta estructura permitió que el sistema fuera fácil de mantener y preparar al equipo para futuras evoluciones."
       
-    - title: "Uso diario y desarrollo"
+    - title: "Unir diseño y desarrollo"
       layout: "image-right"
-      image: "/images/projects/dh-design-system/daily-usage.jpg"
-      content: "El sistema fue diseñado para ser utilizado diariamente por equipos multidisciplinarios. Establecimos flujos de trabajo claros entre diseño y desarrollo, documentación interactiva con Storybook, y herramientas de sincronización automática entre Figma y código. Creamos templates y kits de inicio que permiten a nuevos proyectos implementar el design system en minutos, no semanas. También establecimos procesos de contribución para que el sistema evolucione con las necesidades del equipo."
+      image: "/assets/proyectos/dh-ds/dev.png"
+      content: "Otro reto importante fue alinear los entregables de diseño y desarrollo en un mismo lenguaje. En el pasado, cada equipo trabajaba con criterios distintos, lo que generaba inconsistencias y retrabajo.\n\nPara resolverlo, creamos librerías compartidas en Figma y las sincronizamos con los componentes desarrollados en código. Así conseguimos que ambos mundos trabajaran sobre la misma base, con componentes idénticos y reglas de comportamiento bien documentadas. Esta integración evitó divergencias y permitió a los diseñadores entregar flujos completos con la confianza de que serían replicados fielmente en producción."
       
     - title: "Facilitar el trabajo del equipo de diseño"
       layout: "image-left"
-      image: "/images/projects/dh-design-system/design-workflow.jpg"
-      content: "Implementamos herramientas y procesos que aceleraron significativamente el trabajo del equipo de diseño. Creamos una librería de componentes Figma con auto-layout avanzado, variants automáticos, y propiedades dinámicas. Establecimos sistemas de nomenclatura consistentes, guidelines de uso para cada componente, y workflows de handoff optimizados. El resultado fue una reducción del 60% en tiempo de creación de mockups y una mejora notable en la consistencia visual."
+      image: "/assets/proyectos/dh-ds/equipo.png"
+      content: "Finalmente, uno de los mayores desafíos fue conseguir los recursos necesarios para dedicar tiempo completo al proyecto. Al inicio, el Design System se veía como un “extra” y no como una inversión estratégica.\n\nPreparamos un caso de negocio mostrando inconsistencias reales entre productos, duplicación de esfuerzos y ejemplos de cómo un sistema unificado podría ahorrar tiempo y dinero. También presentamos un prototipo funcional que ilustraba el impacto en velocidad y calidad. Gracias a este trabajo conseguimos el apoyo de dirección y el presupuesto para seguir desarrollando y escalando el Design System."
       
     - title: "Conseguir el presupuesto para trabajar en el proyecto"
       layout: "text-only"
-      content: "Una parte crucial del proyecto fue demostrar el valor business del design system para conseguir presupuesto y buy-in de stakeholders. Creamos presentaciones con métricas claras: reducción de tiempo de desarrollo, disminución de bugs de UI, mejora en scores de usabilidad, y cálculos de ROI. Mostramos casos de estudio de otras empresas y creamos prototipos que demostraban el impacto directo en la experiencia del usuario. Esta estrategia resultó en la aprobación de un presupuesto completo para un equipo dedicado."
+      content: "Finalmente, uno de los mayores desafíos fue conseguir los recursos necesarios para dedicar tiempo completo al proyecto. Al inicio, el Design System se veía como un “extra” y no como una inversión estratégica.\n\nPreparamos un caso de negocio mostrando inconsistencias reales entre productos, duplicación de esfuerzos y ejemplos de cómo un sistema unificado podría ahorrar tiempo y dinero. También presentamos un prototipo funcional que ilustraba el impacto en velocidad y calidad. Gracias a este trabajo conseguimos el apoyo de dirección y el presupuesto para seguir desarrollando y escalando el Design System."
 
 # Proyectos relacionados  
 relatedProjects: ["dh-retail-app", "bayn"]
