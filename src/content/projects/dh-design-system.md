@@ -35,7 +35,7 @@ challenges:
       
     - title: "Conseguir el presupuesto para trabajar en el proyecto"
       layout: "text-only"
-      content: "Finalmente, uno de los mayores desafíos fue conseguir los recursos necesarios para dedicar tiempo completo al proyecto. Al inicio, el Design System se veía como un “extra” y no como una inversión estratégica.\n\nPreparamos un caso de negocio mostrando inconsistencias reales entre productos, duplicación de esfuerzos y ejemplos de cómo un sistema unificado podría ahorrar tiempo y dinero. También presentamos un prototipo funcional que ilustraba el impacto en velocidad y calidad. Gracias a este trabajo conseguimos el apoyo de dirección y el presupuesto para seguir desarrollando y escalando el Design System."
+      content: "Finalmente, uno de los mayores desafíos fue conseguir los recursos necesarios para dedicar tiempo completo al proyecto.\n\nAl inicio, el Design System se veía como un “extra” y no como una inversión estratégica.\n\nPreparamos un caso de negocio mostrando inconsistencias reales entre productos, duplicación de esfuerzos y ejemplos de cómo un sistema unificado podría ahorrar tiempo y dinero. También presentamos un prototipo funcional que ilustraba el impacto en velocidad y calidad.\n\nGracias a este trabajo conseguimos el apoyo de dirección y el presupuesto para seguir desarrollando y escalando el Design System."
 
 # Proyectos relacionados  
 relatedProjects: ["dh-retail-app", "bayn"]

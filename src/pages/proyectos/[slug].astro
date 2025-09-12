@@ -470,14 +470,13 @@ function getUrl(path: string): string {
   .challenges-list {
     display: flex;
     flex-direction: column;
-    gap: var(--section-gap);
+    gap: var(--spacing-3xl);
   }
 
   .challenge {
     display: flex;
     flex-direction: column;
     gap: var(--section-gap);
-    padding-top: var(--spacing-2xl);
   }
 
   .challenge__content {
@@ -512,6 +511,11 @@ function getUrl(path: string): string {
   .challenge__text p:last-child {
     margin-bottom: 0;
   }
+
+  .challenge.challenge--text-only
+ {
+    display: block;
+}
 
   /* ====================================
      VIDEO THUMBNAIL STYLES
@@ -705,6 +709,11 @@ function getUrl(path: string): string {
 
 
     /* Challenges desktop layouts */
+
+      .challenges-list {
+        margin-top: var(--spacing-2xl);
+    gap: var(--spacing-xhg);
+      }
 
     .challenge {
       display: grid;
