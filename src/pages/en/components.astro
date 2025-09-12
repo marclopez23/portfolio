@@ -1,0 +1,515 @@
+---
+// src/pages/components.astro
+import Layout from "../../layouts/Layout.astro"; // Ajusta la ruta
+import Link from "../../components/Link.astro"; // Ajusta la ruta
+import Button from "../../components/Button.astro";
+import Punto from "../../components/Punto.astro";
+import RecommendationLetter from "../../components/RecommendationLetter.astro";
+import Title from "../../components/Title.astro";
+import Hero from "../../components/Hero.astro";
+import TextBlock from "../../components/TextBlock.astro"
+import MenuItem from "../../components/MenuItem.astro"
+import Menu from "../../components/Menu.astro"
+import Footer from "../../components/Footer.astro"
+import ProjectThumbnail from "../../components/ProjectThumbnail.astro"
+import ExperienceCard from "../../components/ExperienceCard.astro";
+import Badge from "../../components/Badge.astro"
+
+const pageTitle = "Componentes";
+---
+
+<Layout title={pageTitle}>
+  <main class="components-page">
+    <header class="page-header">
+      <h1 class="page-title">Componentes</h1>
+    </header>
+
+    <!-- Link Component -->
+    <section class="component-section">
+      <h2 class="component-title">Link</h2>
+
+      <div class="variants-grid">
+        <div class="variant">
+          <span class="variant-label">Default</span>
+          <Link />
+        </div>
+
+        <div class="variant">
+          <span class="variant-label">Sin flecha</span>
+          <Link text="Contacto" showArrow={false} />
+        </div>
+
+        <div class="variant">
+          <span class="variant-label">Disabled</span>
+          <Link text="No disponible" disabled={true} />
+        </div>
+
+        <div class="variant">
+          <span class="variant-label">Externo</span>
+          <Link text="GitHub" href="https://github.com" target="_blank" />
+        </div>
+      </div>
+    </section>
+
+    <section class="component-section">
+      <h2 class="component-title">Button</h2>
+      <div class="variants-grid">
+        <div class="variant">
+          <span class="variant-label">Default</span>
+          <Button />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Custom Text</span>
+          <Button text="Contáctame" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">As Link</span>
+          <Button as="a" href="#" text="Enlace" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Disabled</span>
+          <Button text="Deshabilitado" disabled />
+        </div>
+      </div>
+    </section>
+    ---
+
+    <!-- Punto Component -->
+    <section class="component-section">
+      <h2 class="component-title">Punto</h2>
+      <div class="variants-grid">
+        <div class="variant">
+          <span class="variant-label">Default</span>
+          <Punto titleTag="h4" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Custom</span>
+          <Punto
+            number="2"
+            title="Diseñar solución"
+            description="Crear un diseño que resuelva los problemas identificados."
+            titleTag="h4"
+          />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Sin número</span>
+          <Punto
+            title="Información adicional"
+            description="Punto sin numeración para casos especiales."
+            showNumber={false}
+            titleTag="h4"
+          />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Paso 3</span>
+          <Punto
+            number="3"
+            title="Implementar y evaluar"
+            description="Desarrollar la solución y medir su efectividad."
+            titleTag="h4"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- RecommendationLetter Component -->
+    <section class="component-section">
+      <h2 class="component-title">RecommendationLetter</h2>
+      <div class="variants-grid">
+        <div class="variant">
+          <span class="variant-label">Default</span>
+          <RecommendationLetter />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Custom</span>
+          <RecommendationLetter
+            nombre="Ana García"
+            cargo="Senior UX Designer"
+            empresa="Google"
+            linkText="Ver carta"
+          />
+        </div>
+        <div class="variant">
+          <span class="variant-label">External Link</span>
+          <RecommendationLetter
+            nombre="Carlos López"
+            cargo="Tech Lead"
+            empresa="Microsoft"
+            href="https://linkedin.com/in/carlos"
+            target="_blank"
+            linkText="Ver perfil"
+          />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Custom Aria</span>
+          <RecommendationLetter
+            nombre="María Rodríguez"
+            cargo="Product Manager"
+            empresa="Meta"
+            linkText="Leer más"
+            linkAriaLabel="Leer recomendación completa de María Rodríguez"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Title Component -->
+    <section class="component-section">
+      <h2 class="component-title">Title</h2>
+      <div class="variants-grid" style="display: flex; flex-direction: column;">
+        <div class="variant">
+          <span class="variant-label">Big + Divider</span>
+          <Title as="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Small + Divider</span>
+          <Title size="small" text="Sobre mí" as="h4" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Big No Divider</span>
+          <Title showDivider={false} text="Sobre mí" as="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Small No Divider</span>
+          <Title size="small" showDivider={false} text="Sobre mí" as="h4" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Custom Text</span>
+          <Title text="Mis proyectos" size="small" as="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">With Aria Label</span>
+          <Title
+            text="Proyectos"
+            as="h3"
+            ariaLabel="Mis proyectos principales"
+          />
+        </div>
+      </div>
+    </section>
+    <section class="component-section">
+      <h2 class="component-title">Hero</h2>
+      <div class="variants-grid" style="display: flex; flex-direction: column;">
+        <div class="variant">
+          <span class="variant-label">Default</span>
+          <Hero titleTag="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Center</span>
+          <Hero title="Centrado" align="center" titleTag="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Custom Title</span>
+          <Hero title="Mi Portfolio" titleTag="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Compact</span>
+          <Hero title="Hola mundo" class="hero--compact" titleTag="h4" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Right Aligned</span>
+          <Hero title="Alineado" align="right" titleTag="h3" />
+        </div>
+        <div class="variant">
+          <span class="variant-label">With Animation</span>
+          <Hero title="Animado" class="hero--animated" titleTag="h3" />
+        </div>
+      </div>
+    </section>
+    <section class="component-section">
+  <h2 class="component-title">TextBlock</h2>
+  <div class="variants-grid">
+    <div class="variant">
+      <span class="variant-label">Small</span>
+      <TextBlock titleTag="h4" />
+    </div>
+    <div class="variant">
+      <span class="variant-label">XL</span>
+      <TextBlock 
+        size="xl" 
+        titleTag="h4"
+      />
+    </div>
+    <div class="variant">
+      <span class="variant-label">Custom</span>
+      <TextBlock 
+        title="Mi experiencia"
+        description="Como diseñador UX/UI, he trabajado en proyectos que van desde startups hasta grandes corporaciones."
+        size="sm"
+        titleTag="h4"
+      />
+    </div>
+    <div class="variant">
+      <span class="variant-label">Center Aligned</span>
+      <TextBlock 
+        title="Centrado"
+        description="Contenido alineado al centro"
+        align="center"
+        titleTag="h4"
+      />
+    </div>
+  </div>
+</section>
+<section class="component-section">
+  <h2 class="component-title">MenuItem</h2>
+  <div class="variants-grid">
+    <div class="variant">
+      <span class="variant-label">Default</span>
+      <MenuItem />
+    </div>
+    <div class="variant">
+      <span class="variant-label">Active</span>
+      <MenuItem text="Sobre mí" active={true} />
+    </div>
+    <div class="variant">
+      <span class="variant-label">Disabled</span>
+      <MenuItem text="Deshabilitado" disabled={true} />
+    </div>
+  </div>
+</section>
+
+<section class="component-section">
+  <h2 class="component-title">Menu</h2>
+  <div class="variants-grid">
+    <div class="variant">
+      <span class="variant-label">Complete Menu</span>
+      <Menu />
+    </div>
+  </div>
+</section>
+
+<section class="component-section">
+  <h2 class="component-title">Footer</h2>
+  <div class="variants-grid">
+    <div class="variant">
+      <span class="variant-label">Default</span>
+      <Footer />
+    </div>
+    <div class="variant">
+      <span class="variant-label">Custom Name</span>
+      <Footer name="Jane Doe" />
+    </div>
+    <div class="variant">
+      <span class="variant-label">Compact</span>
+      <Footer class="footer--compact" />
+    </div>
+  </div>
+</section>
+<!-- ProjectThumbnail Component -->
+    <section class="component-section">
+      <h2 class="component-title">ProjectThumbnail</h2>
+      <div class="variants-grid" style="display: flex; flex-direction: column;">
+        <div class="variant">
+          <span class="variant-label">Big</span>
+          <ProjectThumbnail 
+            variant="big"
+            title="Plataforma E-commerce"
+            linkText="Ver proyecto"
+            href="/proyectos/ecommerce"
+          />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Medium</span>
+          <ProjectThumbnail 
+            variant="medium"
+            title="Dashboard Analytics"
+            linkText="Ver más"
+            href="/proyectos/dashboard"
+          />
+        </div>
+        <div class="variant">
+          <span class="variant-label">Small</span>
+          <ProjectThumbnail 
+            variant="small"
+            title="Sitio Corporativo"
+            href="/proyectos/sitio-corporativo"
+          />
+        </div>
+        
+      </div>
+    </section>
+    <!-- ExperienceCard Component -->
+    <section class="component-section">
+      <h2 class="component-title">ExperienceCard</h2>
+      <div class="variants-grid two-columns">
+        <div class="variant">
+          <span class="variant-label">Default (Trabajo)</span>
+          <ExperienceCard />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Con Logo</span>
+          <ExperienceCard
+            title="Senior UX/UI Designer"
+            company="Alea Soluciones"
+            period="Ene. 2022 - Nov. 2023 - Barcelona"
+            logo="/images/logos/alea-logo.svg"
+            logoAlt="Logo de Alea Soluciones"
+            tasks={[
+              "Liderazgo en proyectos de diseño UX/UI para clientes enterprise.",
+              "Desarrollo de sistemas de diseño escalables.",
+              "Mentoría y formación del equipo junior.",
+              "Colaboración estrecha con stakeholders y equipos de desarrollo."
+            ]}
+          />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Educación</span>
+          <ExperienceCard
+            type="education"
+            title="Máster en Diseño Digital"
+            company="Elisava, Escuela Universitaria de Diseño"
+            period="2019 - 2020 - Barcelona"
+            tasks={[
+              "Especialización en diseño de interfaces digitales.",
+              "Metodologías de investigación UX.",
+              "Prototipado avanzado y testing de usabilidad.",
+              "Proyecto final: Sistema de diseño para startup fintech."
+            ]}
+          />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Freelance</span>
+          <ExperienceCard
+            title="Diseñador UX/UI Freelance"
+            company="Diversos clientes"
+            period="2020 - 2022 - Barcelona/Remoto"
+            tasks={[
+              "Diseño de aplicaciones móviles y web para startups.",
+              "Consultoría en experiencia de usuario.",
+              "Creación de identidades digitales completas."
+            ]}
+          />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Sin tareas</span>
+          <ExperienceCard
+            title="Curso de Especialización"
+            company="IronHack"
+            period="2019 - Barcelona"
+            type="education"
+            tasks={[]}
+          />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Interactiva</span>
+          <ExperienceCard
+            title="Design System Lead"
+            company="Sistema de Salut de Catalunya"
+            period="Dic. 2023 - Presente - Barcelona"
+            class="experience-card--interactive"
+            ariaLabel="Experiencia laboral actual en CatSalut, haz clic para más detalles"
+          />
+        </div>
+      </div>
+    </section>
+    <!-- Badge Component -->
+    <section class="component-section">
+      <h2 class="component-title">Badge</h2>
+      <div class="variants-grid">
+        <div class="variant">
+          <span class="variant-label">Default</span>
+          <Badge />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Custom Text</span>
+          <Badge text="Fintech" />
+        </div>
+        
+        <div class="variant">
+          <span class="variant-label">Sector Salud</span>
+          <Badge text="Sector salud" />
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .components-page {
+    margin: 0 auto;
+    padding: var(--spacing-4xl) var(--spacing-2xl);
+    background-color: var(--color-main-bg);
+    min-height: 100vh;
+  }
+
+  .page-header {
+    margin-bottom: var(--spacing-4xl);
+  }
+
+  .page-title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+  }
+
+  .component-section {
+    margin-bottom: var(--spacing-4xl);
+  }
+
+  .component-title {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--spacing-2xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--color-divider);
+  }
+
+  .variants-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-2xl);
+  }
+
+  .two-columns{
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .variants-grid .variant {
+    background-color: var(--color-main-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-2xl);
+    border: 1px solid var(--color-divider);
+  }
+
+  .variant-label {
+    display: block;
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--spacing-lg);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .placeholder {
+    background-color: var(--color-main-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-family: var(--font-family-primary);
+    font-style: italic;
+    border: 2px dashed var(--color-divider);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .components-page {
+      padding: var(--spacing-2xl) var(--spacing-xl);
+    }
+
+    .variants-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

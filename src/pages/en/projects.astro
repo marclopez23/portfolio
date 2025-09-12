@@ -1,15 +1,15 @@
 ---
 // src/pages/projects.astro
-import PageLayout from '../layouts/PageLayout.astro';
-import Hero from '../components/Hero.astro';
-import ProjectThumbnail from '../components/ProjectThumbnail.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+import Hero from '../../components/Hero.astro';
+import ProjectThumbnail from '../../components/ProjectThumbnail.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 const pageTitle = "Proyectos - Marc López";
 
 // Obtener solo proyectos no protegidos para mostrar públicamente
 const allProjects = await getCollection('projects', ({ id, data }) => {
-  return !id.startsWith('en/') && data.protected !== true;
+  return id.startsWith('en/') && data.protected !== true;
 });
 const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => a.data.order - b.data.order);
 
@@ -22,9 +22,10 @@ const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: Collection
 
 <PageLayout 
   title={pageTitle}
-  currentPage="/projects"
+  currentPage="projects"
   description="Explora los proyectos de Marc López en diseño UX/UI. Desde aplicaciones móviles hasta sistemas de diseño y plataformas web."
   keywords="proyectos UX UI, portfolio diseño, casos de estudio, Marc López"
+  lang='en'
 >
 
   <!-- Hero Section -->
@@ -55,8 +56,8 @@ const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: Collection
             <div role="listitem">
               <ProjectThumbnail
                 title={project.data.title}
-                linkText="Ver proyecto"
-                href={getUrl(`proyectos/${project.slug}`)}
+                linkText="View project"
+                href={getUrl(`en/projects/${project.slug.replace('en/', '')}`)}
                 imageSrc={getUrl(project.data.heroImage)}
                 imageAlt={`Vista previa del proyecto ${project.data.title}`}
                 variant="medium"
@@ -74,7 +75,7 @@ const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: Collection
 
 <style>
   /* Importar estilos globales de layout */
-  @import '../styles/layout.css';
+  @import '../../styles/layout.css';
   
   /* ====================================
      ACCESSIBILITY IMPROVEMENTS

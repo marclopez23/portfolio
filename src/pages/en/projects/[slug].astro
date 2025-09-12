@@ -1,20 +1,23 @@
 ---
 // src/pages/proyectos/[slug].astro
 import { getCollection, type CollectionEntry } from "astro:content";
-import PageLayout from "../../layouts/PageLayout.astro";
-import Hero from "../../components/Hero.astro";
-import Title from "../../components/Title.astro";
-import ProjectThumbnail from "../../components/ProjectThumbnail.astro";
-import TextBlock from "../../components/TextBlock.astro";
-import SkeletonImage from "../../components/SkeletonImage.astro";
-import Button from "../../components/Button.astro";
+import PageLayout from "../../../layouts/PageLayout.astro";
+import Hero from "../../../components/Hero.astro";
+import Title from "../../../components/Title.astro";
+import ProjectThumbnail from "../../../components/ProjectThumbnail.astro";
+import TextBlock from "../../../components/TextBlock.astro";
+import SkeletonImage from "../../../components/SkeletonImage.astro";
+import Button from "../../../components/Button.astro";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects", ({ id }) => {
-  return !id.startsWith('en/');
-});
+    return id.startsWith('en/'); // Solo proyectos en inglés
+  });
+  
   return projects.map((project) => ({
-    params: { slug: project.slug },
+    params: { 
+      slug: project.slug.replace('en/', '') // ← IMPORTANTE: Quitar 'en/'
+    },
     props: { project },
   }));
 }
@@ -40,12 +43,14 @@ const {
   description,
 } = project.data;
 
-// Obtener proyectos relacionados
+// Obtener proyectos relacionados SOLO en inglés
 let relatedProjectsData: CollectionEntry<"projects">[] = [];
 if (relatedProjects && relatedProjects.length > 0) {
-  const allProjects = await getCollection("projects");
-  relatedProjectsData = allProjects.filter(
-    (p) => relatedProjects.includes(p.slug) && p.data.protected !== true
+  const allEnglishProjects = await getCollection("projects", ({ id, data }) => {
+    return id.startsWith('en/') && data.protected !== true;
+  });
+  relatedProjectsData = allEnglishProjects.filter(
+    (p) => relatedProjects.includes(p.slug.replace('en/', ''))
   );
 }
 
@@ -63,9 +68,10 @@ function getUrl(path: string): string {
 
 <PageLayout
   title={pageTitle}
-  currentPage="/projects"
+  currentPage="projects"
   description={description}
   keywords={`proyecto ${title}, UX UI design, caso de estudio, Marc López`}
+  lang="en"
 >
   <!-- Project Hero Section -->
   <!-- Hero Section -->
@@ -332,7 +338,7 @@ function getUrl(path: string): string {
                   <ProjectThumbnail
                     title={relatedProject.data.title}
                     linkText="Ver proyecto"
-                    href={getUrl(`proyectos/${relatedProject.slug}`)}
+                    href={getUrl(`en/projects/${relatedProject.slug.replace('en/', '')}`)}
                     imageSrc={getUrl(relatedProject.data.heroImage)}
                     imageAlt={`Vista previa del proyecto ${relatedProject.data.title}`}
                     variant="medium"
@@ -366,7 +372,7 @@ function getUrl(path: string): string {
 
 <style>
   /* Importar estilos globales de layout */
-  @import "../../styles/layout.css";
+  @import "../../../styles/layout.css";
 
   /* ====================================
      PROJECT HERO SECTION

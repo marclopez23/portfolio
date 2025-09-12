@@ -1,0 +1,507 @@
+---
+// src/pages/sobre-mi.astro
+import PageLayout from '../../layouts/PageLayout.astro';
+import Hero from '../../components/Hero.astro';
+import Title from '../../components/Title.astro';
+import Punto from '../../components/Punto.astro';
+import RecommendationLetter from '../../components/RecommendationLetter.astro';
+
+const pageTitle = "Sobre mí - Marc López";
+
+// Datos de los puntos "Como trabajo"
+const misValoresItems = [
+  {
+    number: "1",
+    title: "Transparencia",
+    description: "Creo en la comunicación abierta y honesta.\nPrefiero decir las cosas como son, tanto cuando algo funciona como cuando hay problemas que resolver."
+  },
+  {
+    number: "2", 
+    title: "Respeto",
+    description: "Valoro profundamente las ideas y el trabajo de cada persona del equipo. Cada uno tiene algo valioso que aportar, independientemente de su rol o experiencia."
+  },
+  {
+    number: "3",
+    title: "Propósito", 
+    description: "No me conformo con hacer cosas bonitas por hacerlas. Necesito que lo que diseño tenga un sentido real y mejore la vida de las personas que lo van a usar."
+  },
+  {
+    number: "4",
+    title: "Crecimiento",
+    description: "Creo que siempre se puede aprender algo nuevo y mejorar. Me gusta crecer como profesional y ayudar a que el equipo también crezca."
+  },
+  {
+    number: "5",
+    title: "Equilibrio",
+    description: "Busco encontrar el punto donde se encuentran las necesidades de los usuarios, las posibilidades técnicas y los objetivos del negocio. Ahí es donde nacen las mejores soluciones."
+  },
+  {
+    number: "6",
+    title: "Accesibilidad",
+    description: "Un buen diseño es aquel que funciona para todas las personas, independientemente de sus capacidades o contexto. No se trata solo de cumplir estándares, sino de crear experiencias que realmente incluyan a todo el mundo."
+  }
+];
+
+// Datos de los puntos "Qué aporto"
+const queAportoItems = [
+  {
+    title: "Conexión diseño-desarrollo",
+    description: "Conozco las posibilidades y entiendeo las limitaciones técnicas, lo que me permite crear diseños que funcionan en la realidad."
+  },
+  {
+    title: "Gestión bajo presión", 
+    description: "Cuando surgen imprevistos o cambios de scope, mi primera reacción es analizar el impacto real y buscar alternativas"
+  },
+  {
+    title: "Espíritu colaborativo",
+    description: "Creo que las mejores ideas nacen del intercambio. Me gusta involucrar a todo el equipo en el proceso de diseño"
+  },
+  {
+    title: "Intercambio de conocimiento",
+    description: "Si descubro algo útil, no me lo guardo. Creo que un equipo que aprende junto es un equipo imparable"
+  }
+];
+
+// Datos de las cartas de recomendación
+const recomendacionItems = [
+  {
+    nombre: "Mauricio Alpizar",
+    cargo: "Senior Product Designer",
+    empresa: "K-LAGAN",
+    href: "/assets/cartas/carta-mau.pdf",
+    linkText: "Leer carta de recomendación"
+  },
+  {
+    nombre: "Eszter Vass",
+    cargo: "Principal Product Management in Custody Banking",
+    empresa: "Epsom", 
+    href: "/assets/cartas/carta-eszter.pdf",
+    linkText: "Leer carta de recomendación"
+  }
+];
+
+
+function getUrl(path: string): string {
+  // Debug específico para aljuf
+  if (!path) {
+    return '#'; // Fallback temporal
+  }
+  const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+  return `${import.meta.env.BASE_URL}/${cleanPath}`;
+}
+---
+
+<PageLayout 
+  title="About Me - Marc López"
+  currentPage="about"
+  description="Learn more about Marc López..."
+  lang="en"
+>
+
+  <!-- Hero Section -->
+  <section role="banner" aria-labelledby="hero-title">
+      <Hero 
+        title="Sobre mí"
+        titleTag="h1"
+        class="fade-in"
+        id="hero-title"
+      />
+  </section>
+
+  <!-- Intro Section -->
+  <section 
+    class="section section--with-border" 
+    id="intro"
+    role="main"
+    aria-labelledby="intro-heading"
+  >
+    <div class="container">
+      <!-- Heading invisible para screen readers -->
+      <h2 id="intro-heading" class="sr-only">Introducción personal</h2>
+      
+      <div class="text-columns">
+        <!-- Columna izquierda -->
+        <div class="intro-text" role="region" aria-label="Filosofía de trabajo">
+          <p class="paragraph">
+            Mi proceso creativo abarca desde la <span class="intro-highlight">concepción inicial hasta la entrega final al equipo de desarrollo</span>, siempre con el usuario en el centro.
+          <p class="paragraph">
+            A lo largo de mi trayectoria he aprendido que el éxito radica en comprender las necesidades de las personas, alcanzar los objetivos del negocio y crear productos accesibles que generen impacto real.
+          </p>
+        </div>
+        
+        <!-- Columna derecha -->
+        <div class="intro-text" role="region" aria-label="Visión y compromiso">
+          <p class="paragraph">
+            Para mí, el diseño no es solo una cuestión estética o de tendencias: <span class="intro-highlight">es la oportunidad de dar forma a soluciones significativas que inspiren y empoderen</span>.
+          </p>
+          <p class="paragraph">
+            Estoy comprometido a seguir desafiando los límites del diseño y a liderar el camino hacia un <span class="intro-highlight">futuro digital más inclusivo y emocionante</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mis valores Section -->
+  <section 
+    class="section section--with-border" 
+    id="mis-valores"
+    role="region"
+    aria-labelledby="mis-valores-title"
+  >
+    <div class="container">
+      <div class="content-block">
+        <!-- Título de sección -->
+        <Title 
+          text="Mi proceso de trabajo"
+          size="big"
+          showDivider={false}
+          as="h2"
+          class="section-title"
+          id="mis-valores-title"
+        />
+        
+        <!-- Grid de puntos -->
+        <div 
+          class="grid grid--responsive-2" 
+          role="list"
+          aria-label="Proceso de trabajo en 5 pasos"
+        >
+          {misValoresItems.map((item, index) => (
+            <div role="listitem">
+              <Punto
+                number={item.number}
+                title={item.title}
+                description={item.description}
+                titleTag="h3"
+                class="slide-up"
+                ariaLabel={`Paso ${item.number}: ${item.title}`}
+              />
+            </div>
+          ))}
+          
+          <!-- Último elemento invisible para mantener el grid -->
+          {misValoresItems.length % 2 !== 0 && (
+            <div class="grid-placeholder" aria-hidden="true"></div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué aporto Section -->
+  <section 
+    class="section section--with-border" 
+    id="que-aporto"
+    role="region"
+    aria-labelledby="que-aporto-title"
+  >
+    <div class="container">
+      <div class="content-block">
+        <!-- Título de sección -->
+        <Title 
+          text="Qué aportaré al equipo"
+          size="big"
+          showDivider={false}
+          as="h2"
+          class="section-title"
+          id="que-aporto-title"
+        />
+        
+        <!-- Grid de puntos sin números -->
+        <div 
+          class="grid grid--responsive-2"
+          role="list" 
+          aria-label="Habilidades y aportes al equipo"
+        >
+          {queAportoItems.map((item, index) => (
+            <div role="listitem">
+              <Punto
+                title={item.title}
+                description={item.description}
+                showNumber={false}
+                titleTag="h3"
+                class="slide-up"
+                ariaLabel={`Aporte: ${item.title}`}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cartas de recomendación Section -->
+  <section 
+    class="section section--with-border" 
+    id="recomendaciones"
+    role="region"
+    aria-labelledby="recomendaciones-title"
+  >
+    <div class="container">
+      <div class="content-block">
+        <!-- Título de sección -->
+        <Title 
+          text="Cartas de recomendación"
+          size="big"
+          showDivider={false}
+          as="h2"
+          class="section-title"
+          id="recomendaciones-title"
+        />
+        
+        <!-- Grid de cartas -->
+        <div 
+          class="grid grid--responsive-2"
+          role="list"
+          aria-label="Cartas de recomendación profesional"
+        >
+          {recomendacionItems.map((item, index) => (
+            <div role="listitem">
+              <RecommendationLetter
+                nombre={item.nombre}
+                cargo={item.cargo}
+                empresa={item.empresa}
+                href={getUrl(item.href)}
+                linkText={item.linkText}
+                target="_blank"
+                class="slide-up"
+                linkAriaLabel={`Carta de recomendación de ${item.nombre}, ${item.cargo} en ${item.empresa}`}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+</PageLayout>
+
+<style>
+  /* Importar estilos globales de layout */
+  @import '../../styles/layout.css';
+  
+  /* ====================================
+     ACCESSIBILITY IMPROVEMENTS
+     ==================================== */
+  
+  /* Screen reader only content */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  
+  /* ====================================
+     ESTILOS ESPECÍFICOS - INTRO SECTION
+     ==================================== */
+  
+  /* Contenedor para cada columna de texto */
+  .intro-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--section-gap); /* 32px entre párrafos */
+  }
+  
+
+  /* Texto destacado en blanco */
+  .intro-highlight {
+    color: var(--color-text-primary); /* #fefefe */
+    font-weight: var(--font-weight-medium); /* Mantiene el mismo peso */
+  }
+  
+  /* ====================================
+     ESTILOS ESPECÍFICOS - RESTO DE PÁGINA
+     ==================================== */
+  
+  .section-title {
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .grid-placeholder {
+    opacity: 0;
+    pointer-events: none;
+    min-height: 1px;
+  }
+  
+  /* Animaciones escalonadas */
+  .slide-up {
+    opacity: 0;
+    animation: slideUpStagger 0.8s ease-out forwards;
+  }
+  
+  @keyframes slideUpStagger {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ====================================
+     RESPONSIVE ADJUSTMENTS - Basado en diseños específicos de Figma
+     ==================================== */
+  
+  /* Mobile breakpoint - exacto al diseño de Figma */
+  @media (max-width: 767px) {
+    /* Skip links en móvil */
+    .skip-link {
+      font-size: var(--font-size-sm);
+      padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    
+    /* Intro section responsive - mantiene tamaño según diseño mobile */
+    .intro-text {
+      gap: var(--spacing-lg); /* 16px según mobile spacing */
+    }
+    
+    /* Grids en móvil - una sola columna según diseño */
+    .grid--responsive-2 {
+      grid-template-columns: 1fr; /* Una columna en móvil */
+      gap: var(--spacing-lg); /* 16px según mobile spacing */
+    }
+    
+    /* Content blocks en móvil */
+    .content-block {
+      gap: var(--spacing-lg); /* 16px según Figma mobile */
+    }
+    
+    /* Títulos de sección en móvil */
+    .section-title {
+      margin-bottom: var(--spacing-lg); /* 16px según mobile */
+    }
+  }
+
+  /* No necesitamos breakpoint más pequeño - el diseño mobile cubre hasta 480px */
+  
+  /* ====================================
+     ACCESSIBILITY & MOTION
+     ==================================== */
+  
+  /* Estados de reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in,
+    .slide-up {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .skip-link {
+      transition: none;
+    }
+  }
+
+  /* Estados para high contrast */
+  @media (prefers-contrast: high) {
+    .paragraph {
+      color: var(--color-text-primary);
+    }
+    
+    .intro-highlight {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+    }
+    
+    .skip-link {
+      border: 3px solid var(--color-text-primary);
+    }
+  }
+  
+  /* ====================================
+     PRINT STYLES
+     ==================================== */
+  
+  @media print {
+
+    .slide-up,
+    .fade-in {
+      animation: none;
+      opacity: 1;
+      transform: none;
+    }
+    
+    .intro-highlight {
+      font-weight: var(--font-weight-bold);
+      text-decoration: underline;
+    }
+  }
+</style>
+
+<script>
+  // Mejoras de accesibilidad en el cliente
+  document.addEventListener('astro:page-load', () => {
+    // Anunciar cambios de página para screen readers
+    const pageTitle = document.title;
+    const announcement = document.createElement('div');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.setAttribute('aria-atomic', 'true');
+    announcement.className = 'sr-only';
+    announcement.textContent = `Página cargada: ${pageTitle}`;
+    
+    document.body.appendChild(announcement);
+    
+    setTimeout(() => {
+      if (document.body.contains(announcement)) {
+        document.body.removeChild(announcement);
+      }
+    }, 1000);
+
+    // Mejorar focus management para skip links
+    const skipLinks = document.querySelectorAll('.skip-link');
+    skipLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        const targetId = href ? href.substring(1) : '';
+        const targetElement = document.getElementById(targetId);
+        
+        if (targetElement) {
+          // Hacer el elemento focusable temporalmente si no lo es
+          const originalTabIndex = targetElement.getAttribute('tabindex');
+          if (!originalTabIndex) {
+            targetElement.setAttribute('tabindex', '-1');
+          }
+          
+          // Focus y scroll al elemento
+          targetElement.focus();
+          targetElement.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+          });
+          
+          // Restaurar tabindex original después del focus
+          if (!originalTabIndex) {
+            setTimeout(() => {
+              targetElement.removeAttribute('tabindex');
+            }, 100);
+          }
+        }
+      });
+    });
+
+    // Mejorar UX de animaciones según preferencias del usuario
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+      // Desactivar todas las animaciones si el usuario prefiere reduced motion
+      const animatedElements = document.querySelectorAll('.slide-up, .fade-in');
+      animatedElements.forEach(el => {
+        const element = el as HTMLElement;
+        element.style.animation = 'none';
+        element.style.opacity = '1';
+        element.style.transform = 'none';
+      });
+    }
+  });
+</script>

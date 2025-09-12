@@ -9,17 +9,43 @@ export interface Props {
   currentPage?: string;
   description?: string;
   keywords?: string;
+  lang?: string;
 }
 
 const { 
   title, 
   currentPage = '',
   description,
-  keywords 
+  keywords,
+  lang = 'es'
 } = Astro.props;
 
-// Items del menú con detección automática de página activa
-const menuItems = [
+// Detectar idioma
+const isEnglish = lang === 'en' || Astro.url.pathname.startsWith('/en/');
+
+// Items del menú según idioma
+const menuItems = isEnglish ? [
+  { 
+    text: 'Home', 
+    href: '/en/', 
+    active: currentPage === '/' || currentPage === 'home'
+  },
+  { 
+    text: 'About', 
+    href: '/en/about', 
+    active: currentPage === 'about' || currentPage === 'sobre-mi'
+  },
+  { 
+    text: 'CV', 
+    href: '/en/cv', 
+    active: currentPage === 'cv'
+  },
+  { 
+  text: 'Projects', 
+  href: '/en/projects', 
+  active: currentPage === 'projects'
+}
+] : [
   { 
     text: 'Inicio', 
     href: '/', 
@@ -42,6 +68,11 @@ const menuItems = [
   }
 ];
 
+
+
+// Logo href según idioma
+const logoHref = isEnglish ? '/en/' : '/';
+
 // También puede detectar automáticamente desde la URL
 const pathname = Astro.url?.pathname || '';
 if (!currentPage && pathname) {
@@ -62,8 +93,8 @@ if (!currentPage && pathname) {
     <header class="page__header">
       <Menu 
         menuItems={menuItems} 
-        logoHref="/"
-        logoAlt="Marc López - Diseñador UX/UI"
+        logoHref={logoHref}
+logoAlt={isEnglish ? "Marc López - UX/UI Designer" : "Marc López - Diseñador UX/UI"}
         class="menu--fixed"
       />
     </header>

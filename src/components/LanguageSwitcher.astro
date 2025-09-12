@@ -1,0 +1,124 @@
+---
+// src/components/LanguageSwitcher.astro
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const isEnglish = currentPath.includes('/en/');
+
+// Función simple para generar URL español
+const getSpanishUrl = () => {
+  if (!isEnglish) return currentPath;
+  
+  // Casos específicos
+  if (currentPath.includes('/en/about')) {
+    return currentPath.replace('/en/about', '/sobre-mi');
+  }
+  if (currentPath.includes('/en/projects')) {
+    return currentPath.replace('/en/projects', '/proyectos');
+  }
+  if (currentPath.includes('/en/cv')) {
+    return currentPath.replace('/en/cv', '/cv');
+  }
+  if (currentPath.endsWith('/en/') || currentPath.endsWith('/en')) {
+    return currentPath.replace('/en/', '/').replace('/en', '/');
+  }
+  
+  return currentPath.replace('/en/', '/');
+};
+
+// Función simple para generar URL inglés
+const getEnglishUrl = () => {
+  if (isEnglish) return currentPath;
+  
+  // Casos específicos
+  if (currentPath.includes('/sobre-mi')) {
+    return currentPath.replace('/sobre-mi', '/en/about');
+  }
+  if (currentPath.includes('/proyectos')) {
+    return currentPath.replace('/proyectos', '/en/projects');
+  }
+  if (currentPath.includes('/cv')) {
+    return currentPath.replace('/cv', '/en/cv');
+  }
+  if (currentPath.endsWith('/')) {
+    return currentPath + 'en/';
+  }
+  
+  return currentPath + '/en/';
+};
+
+const spanishUrl = getSpanishUrl();
+const englishUrl = getEnglishUrl();
+---
+
+<!-- HTML igual que antes -->
+<div class={`language-switcher ${className}`}>
+  <div class="language-switcher__options">
+    <a 
+      href={spanishUrl}
+      class={`language-switcher__option ${!isEnglish ? 'language-switcher__option--active' : ''}`}
+    >
+      ES
+    </a>
+    
+    <span class="language-switcher__separator">/</span>
+    
+    <a 
+      href={englishUrl}
+      class={`language-switcher__option ${isEnglish ? 'language-switcher__option--active' : ''}`}
+    >
+      EN
+    </a>
+  </div>
+</div>
+
+<!-- CSS igual que antes -->
+<style>
+  .language-switcher {
+    display: flex;
+    align-items: center;
+  }
+
+  .language-switcher__options {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+  }
+
+  .language-switcher__option {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    text-decoration: none;
+    color: var(--color-text-secondary);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    border-radius: var(--radius-sm);
+    transition: all 0.2s ease;
+  }
+
+  .language-switcher__option:hover {
+    color: var(--color-text-primary);
+    background: var(--color-surface-hover);
+  }
+
+  .language-switcher__option--active {
+    color: var(--color-accent);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .language-switcher__option--active:hover {
+    color: var(--color-accent);
+    background: transparent;
+    cursor: default;
+  }
+
+  .language-switcher__separator {
+    color: var(--color-text-tertiary);
+    font-size: var(--font-size-sm);
+    user-select: none;
+  }
+</style>
