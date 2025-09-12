@@ -14,6 +14,10 @@ const projectsCollection = defineCollection({
     role: z.string(), 
     duration: z.string(),
     team: z.string(),
+
+    // Botón del proyecto
+    buttonText: z.string().optional(), // Texto del botón
+    buttonUrl: z.string().optional(),  // URL del botón
     
     // Proceso del proyecto (nueva sección)
     process: z.object({

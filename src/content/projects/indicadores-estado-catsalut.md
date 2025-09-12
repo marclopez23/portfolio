@@ -9,6 +9,11 @@ role: "Design System Lead."
 duration: "Aproximadamente 2 meses."
 team: "Design System Lead"
 
+# Información del button
+
+buttonText: "Ver documentación"
+buttonUrl: "https://zeroheight.com/12913d2f0/p/55a9e0-indicadors-destat"
+
 # Proceso del proyecto
 process:
   title: "Metodología y proceso de trabajo"

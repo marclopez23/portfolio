@@ -9,6 +9,12 @@ role: "Product / Visual Designer + Dev"
 duration: "Aproximadamente 7- 8 meses."
 team: "3 Product / Visual Designer."
 
+# Información del button
+
+buttonText: "Ver web"
+buttonUrl: "https://mythod.com/"
+
+
 # Proceso del proyecto
 process:
   title: "Metodología y proceso de trabajo"
