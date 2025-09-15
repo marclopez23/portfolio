@@ -70,7 +70,7 @@ function getUrl(path: string): string {
   title={pageTitle}
   currentPage="projects"
   description={description}
-  keywords={`proyecto ${title}, UX UI design, caso de estudio, Marc López`}
+  keywords={`Project ${title}, UX UI design, case study, Marc López`}
   lang="en"
 >
   <!-- Project Hero Section -->
@@ -89,7 +89,7 @@ function getUrl(path: string): string {
         <!-- Project Hero Image -->
         <SkeletonImage
   src={getUrl(heroImage)}
-  alt={`Vista principal del proyecto ${title}`}
+  alt={`Principal image of ${title}`}
   class="project-hero__image"
   loading="eager"
   decoding="sync"
@@ -107,7 +107,7 @@ function getUrl(path: string): string {
     <div class="container">
       <div class="content-block with-logo">
         <Title
-          text="Información del proyecto"
+          text="Project information"
           size="big"
           showDivider={false}
           as="h2"
@@ -118,7 +118,7 @@ function getUrl(path: string): string {
           logo && (
             <img
               src={getUrl(logo)}
-              alt={`Logo de ${title}`}
+              alt={`Logo of ${title}`}
               class="project-hero__logo"
               loading="lazy"
               decoding="async"
@@ -128,7 +128,7 @@ function getUrl(path: string): string {
 
         <div class="project-info">
           <TextBlock
-            title="Objetivo"
+            title="Goal"
             description={objective}
             size="sm"
             titleTag="h4"
@@ -136,14 +136,14 @@ function getUrl(path: string): string {
           <TextBlock title="Rol" description={role} size="sm" titleTag="h4" />
 
           <TextBlock
-            title="Duración"
+            title="Duration"
             description={duration}
             size="sm"
             titleTag="h4"
           />
 
           <TextBlock
-            title="Equipo de diseño"
+            title="Design team"
             description={team}
             size="sm"
             titleTag="h4"
@@ -180,7 +180,7 @@ function getUrl(path: string): string {
                 <div class="process-content__image">
                   <img
                     src={getUrl(process.image)}
-                    alt={`Proceso del proyecto ${title}`}
+                    alt={`Process of the project ${title}`}
                     class="process-image"
                     loading="lazy"
                     decoding="async"
@@ -248,7 +248,7 @@ function getUrl(path: string): string {
                     <div class="challenge__media">
                       <SkeletonImage
   src={getUrl(challenge.image)}
-  alt={`Ilustración de ${challenge.title}`}
+  alt={`Image of ${challenge.title}`}
   class="challenge__image"
   loading="lazy"
   decoding="async"
@@ -276,7 +276,7 @@ function getUrl(path: string): string {
         <div class="container">
           <div class="content-block">
             <Title
-              text="Video del proyecto"
+              text="Project video"
               size="big"
               showDivider={false}
               as="h2"
@@ -288,11 +288,11 @@ function getUrl(path: string): string {
               <div 
                 class="video-thumbnail"
                 data-video-src={getUrl(projectVideo)}
-                data-video-title={`Video completo del proyecto ${title}`}
+                data-video-title={`Video of the project ${title}`}
               >
                 <SkeletonImage
   src={getUrl(videoThumbnail) || getUrl(heroImage) || '/placeholder-video.jpg'}
-  alt={`Video completo del proyecto ${title}`}
+  alt={`Video of the project ${title}`}
   class="video-poster"
   loading="lazy"
   decoding="async"
@@ -325,7 +325,7 @@ function getUrl(path: string): string {
         <div class="container">
           <div class="content-block">
             <Title
-              text="Otros proyectos"
+              text="Other projects"
               size="big"
               showDivider={false}
               as="h2"
@@ -337,12 +337,12 @@ function getUrl(path: string): string {
                 <div class="related-project">
                   <ProjectThumbnail
                     title={relatedProject.data.title}
-                    linkText="Ver proyecto"
+                    linkText="View project"
                     href={getUrl(`en/projects/${relatedProject.slug.replace('en/', '')}`)}
                     imageSrc={getUrl(relatedProject.data.heroImage)}
-                    imageAlt={`Vista previa del proyecto ${relatedProject.data.title}`}
+                    imageAlt={`Preview of the project ${relatedProject.data.title}`}
                     variant="medium"
-                    ariaLabel={`Ver detalles del proyecto ${relatedProject.data.title}`}
+                    ariaLabel={`View details of the project ${relatedProject.data.title}`}
                   />
                 </div>
               ))}

@@ -3,45 +3,45 @@ title: "SNB Retail App"
 heroImage: "assets//proyectos/snb/hero-snb.png"
 logo: "/assets/proyectos/snb/logo-snb.svg"
 
-# Información del proyecto
-objective: "Rediseñar la aplicación de banca retail de SNB para ofrecer una experiencia de usuario clara, coherente y adaptada al mercado de Arabia Saudí."
-role: "Product Designer y Design System Designer."
-duration: "Aproximadamente 7 meses."
-team: "4 Product Designers + 1 Design System Designer."
+# Project information
+objective: "Redesign the SNB retail banking app to provide a clear, consistent user experience tailored to the Saudi Arabian market."
+role: "Product Designer and Design System Designer"
+duration: "Approximately 7 months."
+team: "4 product designers + 1 design system designer"
 
-# Proceso del proyecto
+# Project process
 process:
-  title: "Metodología y proceso de trabajo"
-  content: "El proyecto partió de una aplicación ya existente y de algunos conceptos creados previamente por otra agencia.\nAl inicio, las entrevistas con usuarios resultaron complicadas debido al idioma y a la resistencia del banco a reconocer el valor del research.\nPor eso, además de analizar la app antigua, investigamos competidores locales, regionales y europeos para identificar fortalezas, debilidades y oportunidades de mejora.\nPoco a poco conseguimos introducir prácticas de investigación más estructuradas: definimos user personas y viajamos a Arabia Saudí para colaborar directamente con stakeholders, conocer el contexto cultural y enriquecer el diseño con insights reales.\nCon toda esta información, establecimos la dirección del diseño y trabajamos en iteraciones de dos semanas, presentando avances a mitad y final de cada sprint tanto a stakeholders como al equipo de desarrollo."
+  title: "Methodology and work process"
+  content: "The project started from an existing app and some concepts previously created by another agency.\nAt the beginning, user interviews were challenging due to language barriers and the bank’s reluctance to acknowledge the value of research.\nTherefore, in addition to analyzing the old app, we researched local, regional, and European competitors to identify strengths, weaknesses, and opportunities for improvement.\nGradually, we introduced more structured research practices: we defined user personas and traveled to Saudi Arabia to collaborate directly with stakeholders, understand the cultural context, and enrich the design with real insights.\nWith all this information, we established the design direction and worked in two-week iterations, presenting progress at the middle and end of each sprint to both stakeholders and the development team."
 
-# Retos del proyecto
+# Project challenges
 challenges:
-  title: "Retos del proyecto"
+  title: "Project challenges"
   items:
-    - title: "Productos financieros locales"
+    - title: "Local financial products"
       layout: "image-left"
       image: "/assets/proyectos/snb/img-productos.png"
-      content: "Los productos de Arabia Saudí eran muy diferentes a los europeos, lo que exigió un proceso de comprensión y adaptación.\n\nA través de entrevistas y talleres con stakeholders locales y expertos logramos alinear los flujos y pantallas con las necesidades del mercado."
+      content: "Saudi financial products were very different from European ones, requiring a process of understanding and adaptation.\n\nThrough interviews and workshops with local stakeholders and experts, we aligned flows and screens with market needs."
       
-    - title: "Diseño bilingüe (RTL y LTR)"
+    - title: "Bilingual design (RTL and LTR)"
       layout: "image-right"
       image: "/assets/proyectos/snb/img-arabe.png"
-      content: "La mayoría de los usuarios utilizaba la app en árabe, aunque también debía estar disponible en inglés. El reto fue diseñar interfaces que funcionaran en ambas direcciones (LTR y RTL) sin perder consistencia ni usabilidad.\n\nPara lograrlo, desarrollamos componentes modulares y usamos un plugin que conectaba Figma con Google Sheets: colaboradores externos podían introducir textos en árabe y estos se actualizaban automáticamente en los diseños."
+      content: "Most users used the app in Arabic, although it also had to be available in English. The challenge was to design interfaces that worked in both directions (LTR and RTL) without losing consistency or usability.\n\nTo achieve this, we developed modular components and used a plugin that connected Figma with Google Sheets: external collaborators could input Arabic text, and it was automatically updated in the designs."
       
-    - title: "Coordinación internacional"
+    - title: "International coordination"
       layout: "image-left"
       image: "/assets/proyectos/snb/img-squads.png"
-      content: "El proyecto involucraba a más de 30 desarrolladores distribuidos en varios países.\n\nPara garantizar coherencia, documentamos en detalle cada componente y su comportamiento (desde validaciones de formularios hasta transiciones entre pantallas) y preparamos prototipos interactivos que mostraban no solo las pantallas estáticas, sino también cómo debía responder la aplicación en cada escenario."
+      content: "The project involved more than 30 developers distributed across several countries.\n\nTo ensure consistency, we documented each component and its behavior in detail (from form validations to screen transitions) and prepared interactive prototypes that showed not only static screens but also how the app should respond in each scenario."
 
-# Video del proyecto (opcional)
+# Project video (optional)
 projectVideo: "/assets/proyectos/snb/snb-video.mp4"
 videoThumbnail: "/assets/proyectos/snb/video-snb.png"
 
-# Proyectos relacionados  
+# Related projects  
 relatedProjects: ["bayn", "aljuf-finance"]
 
 # SEO
-description: "Rediseño completo de la aplicación móvil de Saudi National Bank, enfocado en mejorar la experiencia de usuario y la adopción digital."
+description: "Complete redesign of the Saudi National Bank mobile app, focused on improving user experience and digital adoption."
 publishDate: 2025-09-01
 featured: true
 protected: false

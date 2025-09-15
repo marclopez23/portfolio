@@ -35,7 +35,7 @@ const projectsToShow = featuredProjects
             <div class="hero__image-container">
               <Image
                 src={profilePhoto}
-                alt="Foto de Marc López, Product & System Designer"
+                alt="Profile image of Marc López, Product & System Designer"
                 class="hero__photo"
                 width={425}
                 height={451}
@@ -54,22 +54,20 @@ const projectsToShow = featuredProjects
                 Marc López, Product & System Designer
               </p>
               <h1 class="hero__title" id="hero-title">
-                Transformo ideas complejas en experiencias simples y memorables<span
+                Transforming complex ideas into simple, memorable experiences<span
                   class="accent-dot">.</span
                 >
               </h1>
               <p class="hero__description">
-                Creo productos escalables que resuelven problemas reales,
-                conectando las necesidades de los usuarios con los objetivos del
-                negocio para construir experiencias que realmente funcionan<span
+                I design scalable products that solve real problems, bridging user needs with business goals to create experiences that truly work<span
                   class="accent-dot">.</span
                 >
               </p>
             </div>
             <div class="hero__actions">
               <Button
-                text="Cónoceme"
-                href={getUrl('/sobre-mi')}
+                text="Who I am"
+                href={getUrl('en/about')}
                 as="a"
                 class="hero__cta"
               />
@@ -91,7 +89,7 @@ const projectsToShow = featuredProjects
           <div class="projects__sidebar">
   <div class="projects__sticky-container">
     <h2 class="section-title" id="projects-title">
-      Proyectos<span class="accent-dot">.</span>
+      Projects<span class="accent-dot">.</span>
     </h2>
   </div>
 </div>
@@ -103,9 +101,9 @@ const projectsToShow = featuredProjects
                 <ProjectThumbnail
                   title={project.data.title}
                   imageSrc={getUrl(project.data.heroImage)}
-                  imageAlt={`Vista previa del proyecto ${project.data.title}`}
+                  imageAlt={`Preview of the project ${project.data.title}`}
                   href={getUrl(`en/projects/${project.slug.replace('en/', '')}`)}
-                  linkText="Ver proyecto"
+                  linkText="View project"
                   variant="big"
                   loading="lazy"
                   class="project-card"
@@ -116,8 +114,8 @@ const projectsToShow = featuredProjects
             <!-- Ver todos button -->
             <div class="projects__all-button">
               <Button
-                text="Ver todos los proyectos"
-                href={getUrl('/proyectos')}
+                text="View all projects"
+                href={getUrl('en/projects')}
                 as="a"
                 class="projects__cta"
               />
@@ -138,7 +136,7 @@ const projectsToShow = featuredProjects
           <!-- Title sidebar -->
           <div class="contact__sidebar">
             <h2 class="section-title" id="contact-title">
-              Contacto<span class="accent-dot">.</span>
+              Contact<span class="accent-dot">.</span>
             </h2>
           </div>
 

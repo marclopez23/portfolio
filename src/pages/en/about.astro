@@ -12,55 +12,57 @@ const pageTitle = "Sobre mí - Marc López";
 const misValoresItems = [
   {
     number: "1",
-    title: "Transparencia",
-    description: "Creo en la comunicación abierta y honesta.\nPrefiero decir las cosas como son, tanto cuando algo funciona como cuando hay problemas que resolver."
+    title: "Transparency",
+    description: "I believe in open and honest communication.\nI prefer to say things as they are, both when something works and when there are problems to solve."
   },
   {
     number: "2", 
-    title: "Respeto",
-    description: "Valoro profundamente las ideas y el trabajo de cada persona del equipo. Cada uno tiene algo valioso que aportar, independientemente de su rol o experiencia."
+    title: "Respect",
+    description: "I deeply value the ideas and work of every team member. Everyone has something valuable to contribute, regardless of their role or experience."
   },
   {
     number: "3",
-    title: "Propósito", 
-    description: "No me conformo con hacer cosas bonitas por hacerlas. Necesito que lo que diseño tenga un sentido real y mejore la vida de las personas que lo van a usar."
+    title: "Purpose", 
+    description: "I don’t settle for making things beautiful just for the sake of it. What I design must have real meaning and improve the lives of the people who are going to use it."
   },
   {
     number: "4",
-    title: "Crecimiento",
-    description: "Creo que siempre se puede aprender algo nuevo y mejorar. Me gusta crecer como profesional y ayudar a que el equipo también crezca."
+    title: "Growth",
+    description: "I believe there is always something new to learn and improve. I enjoy growing as a professional and helping the team grow as well."
   },
   {
     number: "5",
-    title: "Equilibrio",
-    description: "Busco encontrar el punto donde se encuentran las necesidades de los usuarios, las posibilidades técnicas y los objetivos del negocio. Ahí es donde nacen las mejores soluciones."
+    title: "Balance",
+    description: "I aim to find the point where user needs, technical possibilities, and business objectives meet. That’s where the best solutions are born."
   },
   {
     number: "6",
-    title: "Accesibilidad",
-    description: "Un buen diseño es aquel que funciona para todas las personas, independientemente de sus capacidades o contexto. No se trata solo de cumplir estándares, sino de crear experiencias que realmente incluyan a todo el mundo."
+    title: "Accessibility",
+    description: "Good design works for everyone, regardless of their abilities or context. It’s not just about meeting standards, but about creating experiences that truly include everyone."
   }
 ];
+
 
 // Datos de los puntos "Qué aporto"
 const queAportoItems = [
   {
-    title: "Conexión diseño-desarrollo",
-    description: "Conozco las posibilidades y entiendeo las limitaciones técnicas, lo que me permite crear diseños que funcionan en la realidad."
+    title: "Design-Development connection",
+    description: "I know the possibilities and understand the technical limitations, which allows me to create designs that work in practice."
   },
   {
-    title: "Gestión bajo presión", 
-    description: "Cuando surgen imprevistos o cambios de scope, mi primera reacción es analizar el impacto real y buscar alternativas"
+    title: "Adaptability in challenging situations", 
+    description: "When unexpected issues or scope changes arise, my first reaction is to analyze the real impact and look for alternatives."
   },
   {
-    title: "Espíritu colaborativo",
-    description: "Creo que las mejores ideas nacen del intercambio. Me gusta involucrar a todo el equipo en el proceso de diseño"
+    title: "Collaborative spirit",
+    description: "I believe the best ideas come from exchange. I like involving the whole team in the design process."
   },
   {
-    title: "Intercambio de conocimiento",
-    description: "Si descubro algo útil, no me lo guardo. Creo que un equipo que aprende junto es un equipo imparable"
+    title: "Knowledge sharing",
+    description: "If I discover something useful, I don’t keep it to myself. I believe a team that learns together is an unstoppable team."
   }
 ];
+
 
 // Datos de las cartas de recomendación
 const recomendacionItems = [
@@ -69,20 +71,19 @@ const recomendacionItems = [
     cargo: "Senior Product Designer",
     empresa: "K-LAGAN",
     href: "/assets/cartas/carta-mau.pdf",
-    linkText: "Leer carta de recomendación"
+    linkText: "Reed recommendation letter"
   },
   {
     nombre: "Eszter Vass",
     cargo: "Principal Product Management in Custody Banking",
     empresa: "Epsom", 
     href: "/assets/cartas/carta-eszter.pdf",
-    linkText: "Leer carta de recomendación"
+    linkText: "Reed recommendation letter"
   }
 ];
 
 
 function getUrl(path: string): string {
-  // Debug específico para aljuf
   if (!path) {
     return '#'; // Fallback temporal
   }
@@ -94,14 +95,14 @@ function getUrl(path: string): string {
 <PageLayout 
   title="About Me - Marc López"
   currentPage="about"
-  description="Learn more about Marc López..."
+  description="Learn more about Marc López"
   lang="en"
 >
 
   <!-- Hero Section -->
   <section role="banner" aria-labelledby="hero-title">
       <Hero 
-        title="Sobre mí"
+        title="About Me"
         titleTag="h1"
         class="fade-in"
         id="hero-title"
@@ -116,56 +117,64 @@ function getUrl(path: string): string {
     aria-labelledby="intro-heading"
   >
     <div class="container">
-      <!-- Heading invisible para screen readers -->
-      <h2 id="intro-heading" class="sr-only">Introducción personal</h2>
-      
-      <div class="text-columns">
-        <!-- Columna izquierda -->
-        <div class="intro-text" role="region" aria-label="Filosofía de trabajo">
-          <p class="paragraph">
-            Mi proceso creativo abarca desde la <span class="intro-highlight">concepción inicial hasta la entrega final al equipo de desarrollo</span>, siempre con el usuario en el centro.
-          <p class="paragraph">
-            A lo largo de mi trayectoria he aprendido que el éxito radica en comprender las necesidades de las personas, alcanzar los objetivos del negocio y crear productos accesibles que generen impacto real.
-          </p>
-        </div>
-        
-        <!-- Columna derecha -->
-        <div class="intro-text" role="region" aria-label="Visión y compromiso">
-          <p class="paragraph">
-            Para mí, el diseño no es solo una cuestión estética o de tendencias: <span class="intro-highlight">es la oportunidad de dar forma a soluciones significativas que inspiren y empoderen</span>.
-          </p>
-          <p class="paragraph">
-            Estoy comprometido a seguir desafiando los límites del diseño y a liderar el camino hacia un <span class="intro-highlight">futuro digital más inclusivo y emocionante</span>.
-          </p>
-        </div>
-      </div>
+  <!-- Invisible heading for screen readers -->
+  <h2 id="intro-heading" class="sr-only">Personal Introduction</h2>
+  
+  <div class="text-columns">
+    <!-- Left column -->
+    <div class="intro-text" role="region" aria-label="Work Philosophy">
+      <p class="paragraph">
+        I’m Marc, a Product Designer with experience in the <span class="intro-highlight">creation and management of complex digital products</span>, always with a focus on collaboration and continuous improvement. 
+      </p>
+      <p class="paragraph">
+        I’m passionate about <span class="intro-highlight">designing clear and useful experiences</span>, but also about exploring new ways of working: dynamics, processes, and tools that make teams more efficient and creative.
+      </p>
+      <p class="paragraph">
+        I work closely with <span class="intro-highlight">research, data, business, and technology teams</span>, which allows me to approach projects with a comprehensive vision. In addition, my knowledge of web development helps me better understand technical limitations and opportunities, and collaborate more smoothly with development teams.
+      </p>
     </div>
+    
+    <!-- Right column -->
+    <div class="intro-text" role="region" aria-label="Vision and Commitment">
+      <p class="paragraph">
+        Throughout my career I have <span class="intro-highlight">designed and managed design systems</span>, not only as a support for visual consistency, but also as a strategic tool to scale products and improve communication between design and development.
+      </p>
+      <p class="paragraph">
+        Beyond design, I enjoy <span class="intro-highlight">project management, mentoring junior designers, and team capacity planning</span>, ensuring that we work in an optimal and impactful way.
+      </p>
+      <p class="paragraph">
+        Outside of work, you’ll find me <span class="intro-highlight">playing sports, gaming, or exploring the latest in technology</span>.
+      </p>
+    </div>
+  </div>
+</div>
+
   </section>
 
   <!-- Mis valores Section -->
   <section 
     class="section section--with-border" 
-    id="mis-valores"
+    id="my-values"
     role="region"
-    aria-labelledby="mis-valores-title"
+    aria-labelledby="my-values-title"
   >
     <div class="container">
       <div class="content-block">
         <!-- Título de sección -->
         <Title 
-          text="Mi proceso de trabajo"
+          text="My values"
           size="big"
           showDivider={false}
           as="h2"
           class="section-title"
-          id="mis-valores-title"
+          id="my-values-title"
         />
         
         <!-- Grid de puntos -->
         <div 
           class="grid grid--responsive-2" 
           role="list"
-          aria-label="Proceso de trabajo en 5 pasos"
+          aria-label="My 6 main values"
         >
           {misValoresItems.map((item, index) => (
             <div role="listitem">
@@ -175,7 +184,7 @@ function getUrl(path: string): string {
                 description={item.description}
                 titleTag="h3"
                 class="slide-up"
-                ariaLabel={`Paso ${item.number}: ${item.title}`}
+                ariaLabel={`Step ${item.number}: ${item.title}`}
               />
             </div>
           ))}
@@ -192,27 +201,27 @@ function getUrl(path: string): string {
   <!-- Qué aporto Section -->
   <section 
     class="section section--with-border" 
-    id="que-aporto"
+    id="what-bring"
     role="region"
-    aria-labelledby="que-aporto-title"
+    aria-labelledby="what-bring-title"
   >
     <div class="container">
       <div class="content-block">
         <!-- Título de sección -->
         <Title 
-          text="Qué aportaré al equipo"
+          text="What I’ll bring to the team"
           size="big"
           showDivider={false}
           as="h2"
           class="section-title"
-          id="que-aporto-title"
+          id="what-bring-title"
         />
         
         <!-- Grid de puntos sin números -->
         <div 
           class="grid grid--responsive-2"
           role="list" 
-          aria-label="Habilidades y aportes al equipo"
+          aria-label="What I’ll Bring to the Team"
         >
           {queAportoItems.map((item, index) => (
             <div role="listitem">
@@ -222,7 +231,7 @@ function getUrl(path: string): string {
                 showNumber={false}
                 titleTag="h3"
                 class="slide-up"
-                ariaLabel={`Aporte: ${item.title}`}
+                ariaLabel={`what I bring: ${item.title}`}
               />
             </div>
           ))}
@@ -234,27 +243,27 @@ function getUrl(path: string): string {
   <!-- Cartas de recomendación Section -->
   <section 
     class="section section--with-border" 
-    id="recomendaciones"
+    id="recommendation"
     role="region"
-    aria-labelledby="recomendaciones-title"
+    aria-labelledby="recommendation-title"
   >
     <div class="container">
       <div class="content-block">
         <!-- Título de sección -->
         <Title 
-          text="Cartas de recomendación"
+          text="Recommendation Letters"
           size="big"
           showDivider={false}
           as="h2"
           class="section-title"
-          id="recomendaciones-title"
+          id="recommendation-title"
         />
         
         <!-- Grid de cartas -->
         <div 
           class="grid grid--responsive-2"
           role="list"
-          aria-label="Cartas de recomendación profesional"
+          aria-label="REcommendation letters"
         >
           {recomendacionItems.map((item, index) => (
             <div role="listitem">
@@ -266,7 +275,7 @@ function getUrl(path: string): string {
                 linkText={item.linkText}
                 target="_blank"
                 class="slide-up"
-                linkAriaLabel={`Carta de recomendación de ${item.nombre}, ${item.cargo} en ${item.empresa}`}
+                linkAriaLabel={`Recommendation letter of ${item.nombre}, ${item.cargo} at ${item.empresa}`}
               />
             </div>
           ))}
@@ -303,10 +312,10 @@ function getUrl(path: string): string {
      ==================================== */
   
   /* Contenedor para cada columna de texto */
-  .intro-text {
+   .intro-text {
     display: flex;
     flex-direction: column;
-    gap: var(--section-gap); /* 32px entre párrafos */
+    gap: var(--spacing-xl); 
   }
   
 

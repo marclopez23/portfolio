@@ -7,7 +7,7 @@ import ExperienceCard from '../../components/ExperienceCard.astro';
 import Badge from '../../components/Badge.astro';
 import { getCollection } from 'astro:content';
 
-const pageTitle = "CV - Marc López";
+const pageTitle = "Resume - Marc López";
 
 // Obtener experiencia laboral y educativa
 // Obtener experiencia de /en/
@@ -27,23 +27,24 @@ const education = allExperience
 
 // Skills exactos del diseño de Figma
 const skillsFromFigma = [
-  "Sector bancario",
-  "Sistemas de diseño", 
-  "Accesibilidad web",
+  "Banking Sector",
+  "Design Systems", 
+  "Web Accessibility",
   "Front-End Development",
-  "Resolución de problemas",
-  "Mentoría",
-  "Gestión de proyectos",
+  "Problem Solving",
+  "Mentoring",
+  "Project Management",
   "Design Tokens",
   "Dev Hand-off",
-  "Diseño UI",
-  "Edición de vídeo",
+  "UI Design",
+  "Video Editing",
   "JIRA",
-  "Procesos de diseño",
-  "Diseño de apps",
-  "Diseño web",
-  "Gestión de equipos"
+  "Design Processes",
+  "App Design",
+  "Web Design",
+  "Team Management"
 ];
+
 
 function getUrl(path: string): string {
   const cleanPath = path.startsWith('/') ? path.slice(1) : path;
@@ -53,16 +54,17 @@ function getUrl(path: string): string {
 
 <PageLayout 
   title={pageTitle}
-  currentPage="cv"
-  description="CV completo de Marc López, diseñador UX/UI con experiencia en sistemas de diseño, fintech y productos digitales."
-  keywords="CV Marc López, curriculum vitae, experiencia UX UI, diseñador digital, sistemas de diseño"
+  currentPage="resume"
+  description="Full CV of Marc López, UX/UI designer with experience in design systems, fintech, and digital products."
+  keywords="CV Marc López, curriculum vitae, UX UI experience, digital designer, design systems"
   lang='en'
 >
+
 
   <!-- Hero Section -->
   <section role="banner" aria-labelledby="hero-title">
     <Hero 
-      title="CV"
+      title="Resume"
       titleTag="h1"
       id="hero-title"
     />
@@ -71,14 +73,14 @@ function getUrl(path: string): string {
   <!-- Experiencia Laboral Section -->
   <section 
     class="section section--with-border" 
-    id="experiencia-laboral"
+    id="work-experience"
     role="region"
     aria-labelledby="work-title"
   >
     <div class="container">
       <div class="content-block">
         <Title
-          text="Experiencia Laboral"
+          text="Work Experience"
           size="big"
           showDivider={false}
           as="h2"
@@ -87,7 +89,7 @@ function getUrl(path: string): string {
         />
 
         <!-- Grid de dos columnas para experiencias laborales -->
-        <div class="cv-grid" role="list" aria-label="Lista de experiencia laboral">
+        <div class="cv-grid" role="list" aria-label="Work experience list">
           {workExperience.map((experience, index) => (
             <div role="listitem">
               <ExperienceCard
@@ -99,7 +101,7 @@ function getUrl(path: string): string {
                 logoAlt={experience.data.logoAlt}
                 type={experience.data.type}
                 class={`slide-up ${experience.data.featured ? 'experience-card--featured' : ''}`}
-                ariaLabel={`Experiencia en ${experience.data.company} como ${experience.data.title}`}
+                ariaLabel={`Work experience at ${experience.data.company} as ${experience.data.title}`}
               />
             </div>
           ))}
@@ -111,14 +113,14 @@ function getUrl(path: string): string {
   <!-- Experiencia Educativa Section -->
   <section 
     class="section section--with-border" 
-    id="experiencia-educativa"
+    id="education"
     role="region"
     aria-labelledby="education-title"
   >
     <div class="container">
       <div class="content-block">
         <Title
-          text="Estudios"
+          text="Education"
           size="big"
           showDivider={false}
           as="h2"
@@ -127,7 +129,7 @@ function getUrl(path: string): string {
         />
 
         <!-- Grid de dos columnas para experiencia educativa -->
-        <div class="cv-grid" role="list" aria-label="Lista de formación académica">
+        <div class="cv-grid" role="list" aria-label="Education resume">
           {education.map((experience, index) => (
             <div role="listitem">
               <ExperienceCard
@@ -139,7 +141,7 @@ function getUrl(path: string): string {
                 logoAlt={experience.data.logoAlt}
                 type={experience.data.type}
                 class={`slide-up ${experience.data.featured ? 'experience-card--featured' : ''}`}
-                ariaLabel={`Formación en ${experience.data.company}: ${experience.data.title}`}
+                ariaLabel={`Formation in ${experience.data.company}: ${experience.data.title}`}
               />
             </div>
           ))}
@@ -166,19 +168,18 @@ function getUrl(path: string): string {
           class="section-title"
         />
 
-        <div class="skills-grid" role="list" aria-label="Lista de habilidades y competencias">
+        <div class="skills-grid" role="list" aria-label="Abilities and skills list">
           {skillsFromFigma.map((skill, index) => (
             <div role="listitem" class="skill-category">
               <Badge 
                 text={skill} 
                 class="skill-badge slide-up"
-                ariaLabel={`Habilidad: ${skill}`}
+                ariaLabel={`Skill: ${skill}`}
               />
             </div>
           ))}
         </div>
 
-        <!-- Sin footer específico, usa el del PageLayout -->
       </div>
     </div>
   </section>

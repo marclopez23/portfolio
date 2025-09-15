@@ -117,7 +117,7 @@ const itemId = id || `menu-item-${text.toLowerCase().replace(/\s+/g, '-')}`;
 
   /* Estados interactivos */
   .menu-item:hover:not(.menu-item--disabled) {
-    color: var(--color-text-tertiary);
+    color: var(--color-text-secondary);
     transform: translateY(-1px);
   }
 
@@ -163,7 +163,7 @@ const itemId = id || `menu-item-${text.toLowerCase().replace(/\s+/g, '-')}`;
     left: 50%;
     width: 0;
     height: 2px;
-    background-color: var(--color-text-tertiary);
+    background-color: var(--color-text-secondary);
     border-radius: 1px;
     transition: all 0.2s ease-in-out;
     transform: translateX(-50%);

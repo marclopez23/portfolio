@@ -123,20 +123,25 @@ function getUrl(path: string): string {
         <!-- Columna izquierda -->
         <div class="intro-text" role="region" aria-label="Filosofía de trabajo">
           <p class="paragraph">
-            Mi proceso creativo abarca desde la <span class="intro-highlight">concepción inicial hasta la entrega final al equipo de desarrollo</span>, siempre con el usuario en el centro.
+            Soy Marc, Product Designer con experiencia en la<span class="intro-highlight"> creación y gestión de productos digitales complejos</span>, siempre con un enfoque en la colaboración y la mejora continua. 
           <p class="paragraph">
-            A lo largo de mi trayectoria he aprendido que el éxito radica en comprender las necesidades de las personas, alcanzar los objetivos del negocio y crear productos accesibles que generen impacto real.
+            Me apasiona <span class="intro-highlight">diseñar experiencias claras y útiles</span>, pero también explorar nuevas formas de trabajo: dinámicas, procesos y herramientas que impulsen a los equipos a ser más eficientes y creativos.
           </p>
+          <p class="paragraph">
+            Trabajo junto con equipos de <span class="intro-highlight">research, data, negocio y tecnología</span>, lo que me permite abordar los proyectos con una visión integral. Además, mis conocimientos en desarrollo web me ayudan a comprender mejor las limitaciones y oportunidades técnicas, y a colaborar de forma más fluida con los equipos de desarrollo.
+          </p>
+
         </div>
         
         <!-- Columna derecha -->
         <div class="intro-text" role="region" aria-label="Visión y compromiso">
           <p class="paragraph">
-            Para mí, el diseño no es solo una cuestión estética o de tendencias: <span class="intro-highlight">es la oportunidad de dar forma a soluciones significativas que inspiren y empoderen</span>.
+           A lo largo de mi trayectoria he <span class="intro-highlight">diseñado y gestionado sistemas de diseño</span>, no solo como soporte de consistencia visual, sino como una herramienta estratégica para escalar productos y mejorar la comunicación entre diseño y desarrollo.
           </p>
           <p class="paragraph">
-            Estoy comprometido a seguir desafiando los límites del diseño y a liderar el camino hacia un <span class="intro-highlight">futuro digital más inclusivo y emocionante</span>.
+            Más allá del diseño, disfruto con la <span class="intro-highlight">gestión de proyectos, la mentoría a diseñadores junior y la organización de la capacidad del equipo</span>, asegurando que trabajemos de forma óptima y con impacto.
           </p>
+          <p class="paragraph">Fuera del trabajo, me encontrarás <span class="intro-highlight">haciendo deporte, jugando a videojuegos o explorando lo último en tecnología</span>.</p>
         </div>
       </div>
     </div>
@@ -153,7 +158,7 @@ function getUrl(path: string): string {
       <div class="content-block">
         <!-- Título de sección -->
         <Title 
-          text="Mi proceso de trabajo"
+          text="Mi valores"
           size="big"
           showDivider={false}
           as="h2"
@@ -165,7 +170,7 @@ function getUrl(path: string): string {
         <div 
           class="grid grid--responsive-2" 
           role="list"
-          aria-label="Proceso de trabajo en 5 pasos"
+          aria-label="Mis 6 valores principales"
         >
           {misValoresItems.map((item, index) => (
             <div role="listitem">
@@ -306,7 +311,7 @@ function getUrl(path: string): string {
   .intro-text {
     display: flex;
     flex-direction: column;
-    gap: var(--section-gap); /* 32px entre párrafos */
+    gap: var(--spacing-xl); 
   }
   
 

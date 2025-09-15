@@ -23,15 +23,16 @@ const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: Collection
 <PageLayout 
   title={pageTitle}
   currentPage="projects"
-  description="Explora los proyectos de Marc López en diseño UX/UI. Desde aplicaciones móviles hasta sistemas de diseño y plataformas web."
-  keywords="proyectos UX UI, portfolio diseño, casos de estudio, Marc López"
+  description="Discover Marc López's UX/UI design projects. From mobile applications to design systems and web platforms."
+  keywords="UX UI projects, design portfolio, case studies, Marc López"
   lang='en'
 >
+
 
   <!-- Hero Section -->
   <section role="banner" aria-labelledby="hero-title">
     <Hero 
-      title="Proyectos"
+      title="Projects"
       titleTag="h1"
       id="hero-title"
     />
@@ -50,7 +51,7 @@ const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: Collection
         <div 
           class="projects-grid"
           role="list"
-          aria-label="Lista de proyectos destacados"
+          aria-label="List of projects"
         >
           {projects.map((project: CollectionEntry<'projects'>) => (
             <div role="listitem">
@@ -59,10 +60,10 @@ const projects = allProjects.sort((a: CollectionEntry<'projects'>, b: Collection
                 linkText="View project"
                 href={getUrl(`en/projects/${project.slug.replace('en/', '')}`)}
                 imageSrc={getUrl(project.data.heroImage)}
-                imageAlt={`Vista previa del proyecto ${project.data.title}`}
+                imageAlt={`Preview of the project ${project.data.title}`}
                 variant="medium"
                 class="slide-up"
-                ariaLabel={`Ver detalles del proyecto ${project.data.title}`}
+                ariaLabel={`View details of the project ${project.data.title}`}
               />
             </div>
           ))}

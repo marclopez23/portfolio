@@ -3,45 +3,45 @@ title: "Bayn"
 heroImage: "/assets/proyectos/hero-bayn.png"
 logo: "/assets/proyectos/bayn/bayn-logo.svg"
 
-# Información del proyecto
-objective: "Crear la primera plataforma de dropshipping de Arabia Saudí."
-role: "Product Designer."
-duration: "Aproximadamente 6 meses."
-team: "2 Product Designers"
+# Project information
+objective: "Create the first dropshipping platform in Saudi Arabia."
+role: "Product Designer"
+duration: "Approximately 6 months."
+team: "2 product designers"
 
-# Proceso del proyecto
+# Project process
 process:
-  title: "Metodología y proceso de trabajo"
-  content: "Al tratarse de una startup, comenzamos con un benchmark de plataformas de referencia en otros mercados para identificar buenas prácticas y diferenciar a Bayn desde el inicio.\nDefinimos un MVP con las funcionalidades mínimas necesarias para salir al mercado: gestión básica de productos, conexión entre makers y retailers y un flujo de compra inicial. Con este MVP pudimos validar el concepto rápidamente y empezar a crecer sobre una base sólida.\nA partir de ahí, fuimos desarrollando la plataforma de forma iterativa.\nEn paralelo trabajamos en la imagen de marca: logo, identidad visual, tipografía y colores, construyendo una personalidad clara para el producto desde su lanzamiento.\nAdemás, creamos un UI kit sencillo con componentes reutilizables que nos permitió mantener consistencia en las pantallas y acelerar la evolución de la plataforma."
+  title: "Methodology and work process"
+  content: "Since this was a startup, we began with a benchmark of reference platforms in other markets to identify best practices and differentiate Bayn from the start.\nWe defined an MVP with the minimum necessary features to go to market: basic product management, connection between makers and retailers, and an initial purchase flow. With this MVP we were able to validate the concept quickly and start growing on a solid foundation.\nFrom there, we developed the platform iteratively.\nIn parallel, we worked on the brand identity: logo, visual identity, typography, and colors, building a clear personality for the product from launch.\nAdditionally, we created a simple UI kit with reusable components that allowed us to maintain consistency across screens and accelerate the platform’s evolution."
 
-# Retos del proyecto
+# Project challenges
 challenges:
-  title: "Retos del proyecto"
+  title: "Project challenges"
   items:
-    - title: "Gestión de grandes volúmenes de datos"
+    - title: "Managing large volumes of data"
       layout: "image-left"
       image: "/assets/proyectos/bayn/gestion-datos.png"
-      content: "Uno de los mayores desafíos fue diseñar un sistema capaz de gestionar productos con estructuras muy diferentes.\n\nMientras que algunos artículos eran simples y sin variantes (por ejemplo, una taza), otros podían llegar a tener decenas de combinaciones (como una prenda con tallas, colores y materiales distintos).\n\nLa complejidad residía en cómo importar, organizar y mostrar esa información de manera clara y escalable, evitando confusión tanto para makers como para retailers."
+      content: "One of the biggest challenges was designing a system capable of handling products with very different structures.\n\nWhile some items were simple and without variants (for example, a mug), others could have dozens of combinations (like a garment with different sizes, colors, and materials).\n\nThe complexity lay in how to import, organize, and display that information clearly and in a scalable way, avoiding confusion for both makers and retailers."
       
-    - title: "Dos segmentos de usuarios con necesidades distintas"
+    - title: "Two user segments with different needs"
       layout: "image-right"
       image: "/assets/proyectos/bayn/dos-segmentos.png"
-      content: "Bayn debía dar servicio a dos perfiles muy diferentes: makers y retailers. \n\nLos primeros necesitaban funcionalidades orientadas a la importación de productos, la gestión del inventario y la logística.\n\nLos segundos, en cambio, buscaban herramientas para navegar catálogos, hacer pedidos y tomar decisiones basadas en métricas.\n\nDiseñar una plataforma que respondiera a ambas necesidades sin que una experiencia afectara negativamente a la otra fue uno de los retos más relevantes del proyecto."
+      content: "Bayn had to serve two very different profiles: makers and retailers.\n\nThe former needed features focused on product import, inventory management, and logistics.\n\nThe latter, on the other hand, were looking for tools to browse catalogs, place orders, and make decisions based on metrics.\n\nDesigning a platform that met both needs without one experience negatively affecting the other was one of the most significant challenges of the project."
       
-    - title: "Creación de un pequeño eCommerce"
+    - title: "Creating a small eCommerce"
       layout: "image-left" 
       image: "/assets/proyectos/bayn/ecommerce.png"
-      content: "Además de la capa de gestión, la plataforma necesitaba integrar un eCommerce propio para los retailers.\n\nEsto implicaba diseñar un catálogo bien estructurado por categorías, filtros avanzados para encontrar productos rápidamente y fichas de producto con toda la información relevante. También fue necesario incluir métricas claras de rendimiento, ventas y márgenes estimados, de forma que los retailers pudieran evaluar fácilmente la rentabilidad de sus decisiones dentro de la propia plataforma."
+      content: "In addition to the management layer, the platform needed to integrate its own eCommerce for retailers.\n\nThis meant designing a well-structured catalog by categories, advanced filters to find products quickly, and product sheets with all relevant information. It was also necessary to include clear performance metrics, sales, and estimated margins, so that retailers could easily evaluate the profitability of their decisions within the platform itself."
 
-# Video del proyecto (opcional)
+# Project video (optional)
 projectVideo: "/assets/proyectos/bayn/video-bayn.mp4"
 videoThumbnail: "/assets/proyectos/bayn/video-bayn.png"
 
-# Proyectos relacionados  
+# Related projects  
 relatedProjects: ["saudi-national-bank", "aljuf-finance"]
 
 # SEO
-description: "Plataforma financiera completa para gestión de grandes volúmenes de datos y dos segmentos de usuarios diferentes."
+description: "Comprehensive financial platform for managing large volumes of data and two different user segments."
 publishDate: 2023-07-20
 featured: true
 protected: false

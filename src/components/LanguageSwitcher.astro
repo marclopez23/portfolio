@@ -58,19 +58,26 @@ const englishUrl = getEnglishUrl();
 <!-- HTML igual que antes -->
 <div class={`language-switcher ${className}`}>
   <div class="language-switcher__options">
-    <a 
-      href={spanishUrl}
-      class={`language-switcher__option ${!isEnglish ? 'language-switcher__option--active' : ''}`}
-    >
-      ES
-    </a>
+   <a 
+  href={spanishUrl}
+  lang="es"
+  aria-label="Cambiar a español"
+  aria-current={!isEnglish ? "true" : undefined}
+  class={`language-switcher__option ${!isEnglish ? 'language-switcher__option--active' : ''}`}
+>
+  ES
+</a>
+
     
     <span class="language-switcher__separator">/</span>
     
     <a 
-      href={englishUrl}
-      class={`language-switcher__option ${isEnglish ? 'language-switcher__option--active' : ''}`}
-    >
+  href={englishUrl}
+  lang="en"
+  aria-label="Switch to English"
+  aria-current={isEnglish ? "true" : undefined}
+  class={`language-switcher__option ${isEnglish ? 'language-switcher__option--active' : ''}`}
+>
       EN
     </a>
   </div>
@@ -78,10 +85,16 @@ const englishUrl = getEnglishUrl();
 
 <!-- CSS igual que antes -->
 <style>
+
   .language-switcher {
     display: flex;
     align-items: center;
-  }
+    padding: var(--spacing-xs);
+    background: #3f3f3f8f;
+    border-radius: 8px;
+    margin-left: 0px;
+}
+  
 
   .language-switcher__options {
     display: flex;
@@ -92,7 +105,7 @@ const englishUrl = getEnglishUrl();
   .language-switcher__option {
     padding: var(--spacing-xs) var(--spacing-sm);
     text-decoration: none;
-    color: var(--color-text-secondary);
+    color: var(--color-text-primary);
     font-family: var(--font-family-primary);
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-medium);
@@ -101,24 +114,46 @@ const englishUrl = getEnglishUrl();
   }
 
   .language-switcher__option:hover {
-    color: var(--color-text-primary);
+    color: var(--color-text-secondary);
     background: var(--color-surface-hover);
   }
 
   .language-switcher__option--active {
-    color: var(--color-accent);
+    color: var(--color-interactive-link-active);
     font-weight: var(--font-weight-bold);
   }
 
   .language-switcher__option--active:hover {
-    color: var(--color-accent);
+    color: var(--color-interactive-link-active);
     background: transparent;
     cursor: default;
   }
 
   .language-switcher__separator {
-    color: var(--color-text-tertiary);
+    color: var(--color-text-primary);
     font-size: var(--font-size-sm);
     user-select: none;
   }
+
+@media (max-width: 767px) {
+
+
+  .language-switcher__options{
+    width: 100%;
+  }
+  .language-switcher__option{
+        font-size: var(--font-size-xl);
+    padding: var(--spacing-md) 0;
+    width: 100%;
+    text-align: center;
+}
+  }
+
+  .language-switcher__separator{
+    display: none;
+  }
+}
+
+
+
 </style>
