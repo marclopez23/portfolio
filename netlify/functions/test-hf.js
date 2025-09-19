@@ -1,10 +1,21 @@
+import fetch from "node-fetch";
+
 export async function handler() {
+  const response = await fetch(
+    "https://api-inference.huggingface.co/models/google/flan-t5-base",
+    {
+      headers: { Authorization: `Bearer ${process.env.HF_API_KEY}` },
+      method: "POST",
+      body: JSON.stringify({ inputs: "Say hello in Spanish" }),
+    }
+  );
+
+  const result = await response.json();
+
   return {
-    statusCode: 200,
-    body: JSON.stringify({
-      key: process.env.HF_API_KEY
-        ? process.env.HF_API_KEY.slice(0, 10) + "..."  // muestra solo el inicio
-        : "NOT FOUND"
-    })
+    statusCode: response.status,
+    body: JSON.stringify(result),
   };
 }
+
+
