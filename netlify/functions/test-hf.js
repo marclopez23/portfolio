@@ -2,7 +2,7 @@ import fetch from "node-fetch";
 
 export async function handler() {
   const response = await fetch(
-    "https://api-inference.huggingface.co/models/bigscience/bloomz-560m",
+    "https://api-inference.huggingface.co/models/gpt2",
     {
       headers: { Authorization: `Bearer ${process.env.HF_API_KEY}` },
       method: "POST",
