@@ -2,13 +2,13 @@ import fetch from "node-fetch";
 
 export async function handler() {
   const response = await fetch(
-    "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2",
-    {
-      headers: { Authorization: `Bearer ${process.env.HF_API_KEY}` },
-      method: "POST",
-      body: JSON.stringify({ inputs: "Say hello in Spanish" }),
-    }
-  );
+  "https://api-inference.huggingface.co/models/google/flan-t5-base",
+  {
+    headers: { Authorization: `Bearer ${process.env.HF_API_KEY}` },
+    method: "POST",
+    body: JSON.stringify({ inputs: "Say hello in Spanish" }),
+  }
+);
 
   const text = await response.text(); // <-- lee como texto
 
