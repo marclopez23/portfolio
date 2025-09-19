@@ -20,8 +20,8 @@ const getSpanishUrl = () => {
   if (currentPath.includes('/en/projects')) {
     return currentPath.replace('/en/projects', '/proyectos');
   }
-  if (currentPath.includes('/en/cv')) {
-    return currentPath.replace('/en/cv', '/cv');
+  if (currentPath.includes('/en/resume')) {
+    return currentPath.replace('/en/resume', '/cv');
   }
   if (currentPath.endsWith('/en/') || currentPath.endsWith('/en')) {
     return currentPath.replace('/en/', '/').replace('/en', '/');
@@ -42,8 +42,9 @@ const getEnglishUrl = () => {
     return currentPath.replace('/proyectos', '/en/projects');
   }
   if (currentPath.includes('/cv')) {
-    return currentPath.replace('/cv', '/en/cv');
+    return currentPath.replace('/cv', '/en/resume');
   }
+
   if (currentPath.endsWith('/')) {
     return currentPath + 'en/';
   }
@@ -137,6 +138,10 @@ const englishUrl = getEnglishUrl();
 
 @media (max-width: 767px) {
 
+  .language-switcher{
+    width: 100%;
+  }
+
 
   .language-switcher__options{
     width: 100%;
@@ -146,7 +151,7 @@ const englishUrl = getEnglishUrl();
     padding: var(--spacing-md) 0;
     width: 100%;
     text-align: center;
-}
+
   }
 
   .language-switcher__separator{

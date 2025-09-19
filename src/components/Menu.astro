@@ -54,7 +54,7 @@ const isEnglish = currentPath.startsWith('/en/');
 // SI NO SE PASAN menuItems, usar estos por defecto según idioma:
 const defaultMenuItems = isEnglish ? [
   { text: 'About', href: '/en/about' },
-  { text: 'CV', href: '/en/cv' },
+  { text: 'CV', href: '/en/resume' },
   { text: 'Projects', href: '/en/projects' }
 ] : [
   { text: 'Sobre mí', href: '/sobre-mi' },
@@ -323,6 +323,16 @@ function getUrl(path: string): string {
   .logo-text {
     font-size: 20px;
   }
+
+  .menu__mobile-list :last-child{
+    height: 100%;
+
+    display: flex
+;
+        align-items: flex-end;
+  }
+
+
 }
 
 /* Reduced motion */

@@ -1,0 +1,736 @@
+{
+  "bio": {
+    "en": "I’m Marc, a Product Designer with experience in the creation and management of complex digital products, always with a focus on collaboration and continuous improvement.\n\nI’m passionate about designing clear and useful experiences, but also about exploring new ways of working: dynamics, processes, and tools that make teams more efficient and creative.\n\nI work closely with research, data, business, and technology teams, which allows me to approach projects with a comprehensive vision. In addition, my knowledge of web development helps me better understand technical limitations and opportunities, and collaborate more smoothly with development teams.\n\nThroughout my career I have designed and managed design systems, not only as a support for visual consistency, but also as a strategic tool to scale products and improve communication between design and development.\n\nBeyond design, I enjoy project management, mentoring junior designers, and team capacity planning, ensuring that we work in an optimal and impactful way.\n\nOutside of work, you’ll find me playing sports, gaming, or exploring the latest in technology.",
+    "es": "Soy Marc, Product Designer con experiencia en la creación y gestión de productos digitales complejos, siempre con un enfoque en la colaboración y la mejora continua.\n\nMe apasiona diseñar experiencias claras y útiles, pero también explorar nuevas formas de trabajo: dinámicas, procesos y herramientas que impulsen a los equipos a ser más eficientes y creativos.\n\nTrabajo junto con equipos de research, data, negocio y tecnología, lo que me permite abordar los proyectos con una visión integral. Además, mis conocimientos en desarrollo web me ayudan a comprender mejor las limitaciones y oportunidades técnicas, y a colaborar de forma más fluida con los equipos de desarrollo.\n\nA lo largo de mi trayectoria he diseñado y gestionado sistemas de diseño, no solo como soporte de consistencia visual, sino como una herramienta estratégica para escalar productos y mejorar la comunicación entre diseño y desarrollo.\n\nMás allá del diseño, disfruto con la gestión de proyectos, la mentoría a diseñadores junior y la organización de la capacidad del equipo, asegurando que trabajemos de forma óptima y con impacto.\n\nFuera del trabajo, me encontrarás haciendo deporte, jugando a videojuegos o explorando lo último en tecnología."
+  },
+  "educacion_y_skills": {
+    "es": "",
+    "en": ""
+  },
+  "experiencia": {
+    "es": {
+      "accessibleeu-technology-design.md": {
+        "title": "Accessible Technology Design",
+        "company": "AccessibleEU Centre",
+        "period": "Dic. 2023 - Dic. 2023 - Barcelona",
+        "type": "education",
+        "logo": "/assets/logos/accessibleeu-logo.png",
+        "logoAlt": "Logo de AccessibleEU Centre",
+        "tasks": [
+          "Curso sobre los conceptos básicos para crear soluciones digitales inclusivas, abarcando principios, requisitos legales y estrategias de diseño para la accesibilidad."
+        ],
+        "description": "Formación especializada en diseño inclusivo y accesibilidad digital, aprendiendo los fundamentos para crear productos accesibles para todos los usuarios.",
+        "website": "https://accessibleeu.org",
+        "featured": false,
+        "current": false,
+        "order": 10,
+        "startDate": "2023-12-01",
+        "endDate": "2023-12-01",
+        "keywords": [
+          "Accessibility",
+          "Inclusive Design",
+          "WCAG",
+          "Digital Inclusion",
+          "UX"
+        ]
+      },
+      "alea-product-designer.md": {
+        "title": "Product Designer / Design System Designer",
+        "company": "ALEA Design",
+        "period": "Dic. 2022 - Dic 2023 - Barcelona",
+        "type": "work",
+        "logo": "/assets/logos/alea-logo.svg",
+        "logoAlt": "Logo de ALEA Design",
+        "tasks": [
+          "Diseño de productos para startups y empresas tecnológicas en Arabia Saudita.",
+          "Gestión y soporte de entrega a equipos de desarrollo.",
+          "Creación de sistemas de diseño para diferentes clientes."
+        ],
+        "description": "Diseño de productos digitales para el mercado de Oriente Medio, con especial foco en startups tecnológicas y creación de sistemas de diseño escalables.",
+        "website": "https://alea.design",
+        "featured": true,
+        "current": false,
+        "order": 3,
+        "startDate": "2022-12-01",
+        "endDate": "2023-12-01",
+        "keywords": [
+          "Product Design",
+          "Saudi Arabia",
+          "Startups",
+          "Design Systems",
+          "International"
+        ]
+      },
+      "catsalut-design-system-lead.md": {
+        "title": "Design System Lead",
+        "company": "Sistema de Salut de Catalunya",
+        "period": "Dic. 2023 - May. 2024 - Barcelona",
+        "type": "work",
+        "tasks": [
+          "Liderazgo del desarrollo y mantenimiento del sistema de diseño.",
+          "Gestión del equipo del sistema de diseño.",
+          "Colaboración con equipos multidisciplinarios para la adopción efectiva del sistema.",
+          "Definición y aplicación de estándares de diseño, componentes y pautas para mantener la coherencia y la eficiencia en todo el producto.",
+          "Mentorización a otros diseñadores del equipo."
+        ],
+        "order": 2,
+        "featured": true,
+        "current": false,
+        "logo": "/assets/logos/catsalut-logo.svg",
+        "logoAlt": "Logo del Sistema de Salut de Catalunya",
+        "description": "Liderazgo en la creación y evolución del sistema de diseño que unifica la experiencia digital en todas las aplicaciones del sistema sanitario catalán.",
+        "website": "https://catsalut.gencat.cat",
+        "startDate": "2023-12-01",
+        "endDate": "2024-05-01",
+        "keywords": [
+          "Design System",
+          "Leadership",
+          "Healthcare",
+          "Figma",
+          "Storybook",
+          "Team Management"
+        ]
+      },
+      "elisava-master.md": {
+        "title": "Máster en Diseño y Dirección de Proyectos para Internet",
+        "company": "Elisava",
+        "period": "Sep. 2019 - Jul. 2020 - Barcelona",
+        "type": "education",
+        "logo": "/assets/logos/elisava-logo.svg",
+        "logoAlt": "Logo de Elisava",
+        "tasks": [
+          "Diseño centrado en el usuario, UX research, wireframing, prototipado.",
+          "Estrategias de negocio.",
+          "Metodologías Agiles (Scrum)."
+        ],
+        "description": "Máster especializado en diseño digital y dirección de proyectos web, con enfoque en UX/UI, investigación de usuarios y metodologías ágiles.",
+        "website": "https://elisava.net",
+        "featured": true,
+        "current": false,
+        "order": 14,
+        "startDate": "2019-09-01",
+        "endDate": "2020-07-01",
+        "keywords": [
+          "UX/UI",
+          "User Research",
+          "Prototyping",
+          "Agile",
+          "Business Strategy"
+        ]
+      },
+      "ironhack-fullstack.md": {
+        "title": "Full Stack Web Developer Program",
+        "company": "Ironhack",
+        "period": "Sep. 2020 - Abr. 2021 - Barcelona",
+        "type": "education",
+        "logo": "/assets/logos/ironhack-logo.svg",
+        "logoAlt": "Logo de Ironhack",
+        "tasks": [
+          "Front End: HTML | CSS | SCSS | Javascript (ES6) | React.",
+          "Back End: Express.JS | Node.JS | MongoDB | Axios."
+        ],
+        "description": "Formación intensiva en desarrollo web full stack, cubriendo tanto tecnologías frontend como backend modernas.",
+        "website": "https://ironhack.com",
+        "featured": true,
+        "current": false,
+        "order": 13,
+        "startDate": "2020-09-01",
+        "endDate": "2021-04-01",
+        "keywords": [
+          "Full Stack",
+          "React",
+          "Node.js",
+          "MongoDB",
+          "JavaScript",
+          "HTML/CSS"
+        ]
+      },
+      "mrmarcel-design-data.md": {
+        "title": "Curso de especialización en Diseño y Datos",
+        "company": "Mr Marcel School",
+        "period": "Sep. 2024 - Oct. 2024 - Barcelona",
+        "type": "education",
+        "logo": "/assets/logos/mrmarcel-logo.svg",
+        "logoAlt": "Logo de Mr Marcel School",
+        "tasks": [
+          "Especialización en el uso de datos para informar decisiones de diseño.",
+          "Análisis de métricas de producto y experiencia de usuario.",
+          "Metodologías para testing y validación basada en datos.",
+          "Herramientas de analytics y research cuantitativo."
+        ],
+        "description": "Formación en la intersección entre diseño y datos, aprendiendo a usar información cuantitativa para tomar mejores decisiones de diseño y validar hipótesis.",
+        "website": "https://mrmarcel.com",
+        "certificate": "/certificates/mrmarcel-design-data-2024.pdf",
+        "featured": true,
+        "current": false,
+        "order": 9,
+        "startDate": "2024-09-01",
+        "endDate": "2024-10-01",
+        "keywords": [
+          "Data-Driven Design",
+          "Analytics",
+          "User Research",
+          "A/B Testing",
+          "Product Metrics",
+          "Quantitative Research"
+        ]
+      },
+      "mrmarcel-design-systems.md": {
+        "title": "Curso de especialización en Design Systems",
+        "company": "Mr Marcel School",
+        "period": "Oct. 2021 - Dic. 2021 - Barcelona",
+        "type": "education",
+        "logo": "/assets/logos/mrmarcel-logo.svg",
+        "logoAlt": "Logo de Mr Marcel School",
+        "tasks": [
+          "Definición de misión, visión, objetivos y modelos de gobierno para sistemas de diseño.",
+          "Creación y mantenimiento de arquitecturas de Design Tokens escalables.",
+          "Documentación de patrones visuales y funcionales para equipos multidisciplinares.",
+          "Planificación end-to-end: auditoría, implementación y mantenimiento del sistema."
+        ],
+        "description": "Formación especializada en la creación de sistemas de diseño desde cero, aprendiendo metodologías y herramientas para desarrollar design systems escalables.",
+        "website": "https://mrmarcel.com",
+        "featured": true,
+        "current": false,
+        "order": 12,
+        "startDate": "2021-10-01",
+        "endDate": "2021-12-01",
+        "keywords": [
+          "Design Systems",
+          "Figma",
+          "Component Libraries",
+          "Design Tokens",
+          "Scalability"
+        ]
+      },
+      "sabadell-product-designer.md": {
+        "title": "Senior Product Designer",
+        "company": "Banc Sabadell",
+        "period": "Mayo. 2024 - Presente - Barcelona",
+        "type": "work",
+        "logo": "/assets/logos/sabadell-logo.svg",
+        "logoAlt": "Logo de Banc Sabadell",
+        "tasks": [
+          "Diseño y optimización de flujos para Desktop y App en el equipo de empresas.",
+          "Gestión de mejoras y nuevos componentes con el equipo de Sistema de Diseño.",
+          "Soporte a equipos externos en fases de diseño y validación.",
+          "Colaboración con Research en ideación, investigación y testeo.",
+          "Mentoría a diseñador junior y formación en diseño y sistemas de diseño para Product Owners, desarrolladores y otros roles clave."
+        ],
+        "description": "Diseño de productos financieros para el segmento empresarial, enfocándome en optimizar la experiencia de usuario y colaborar estrechamente con el equipo de Design System.",
+        "website": "https://bancsabadell.com",
+        "featured": true,
+        "current": true,
+        "order": 1,
+        "startDate": "2024-05-01",
+        "keywords": [
+          "Product Design",
+          "Banking",
+          "Design System",
+          "Enterprise",
+          "UX Research",
+          "Mentoring"
+        ]
+      },
+      "strategycomm-web-designer.md": {
+        "title": "Diseñador web",
+        "company": "Strategycomm",
+        "period": "Feb. 2018 - Set. 2020 - Mataró",
+        "type": "work",
+        "logo": "/assets/logos/strategycomm-logo.svg",
+        "logoAlt": "Logo de Strategycomm",
+        "tasks": [
+          "Gestión y diseño de newsletters con Mailchimp.",
+          "Diseño UI (Sketch, Figma).",
+          "Maquetación y mantenimiento web en Wordpress."
+        ],
+        "description": "Diseño web y gestión de comunicación digital, enfocándome en newsletters, interfaces de usuario y mantenimiento de sitios web.",
+        "website": "https://strategycomm.net/",
+        "featured": false,
+        "current": false,
+        "order": 5,
+        "startDate": "2018-02-01",
+        "endDate": "2020-09-01",
+        "keywords": [
+          "Web Design",
+          "WordPress",
+          "Mailchimp",
+          "UI Design",
+          "Email Marketing"
+        ]
+      },
+      "tecnocampus-audiovisuales.md": {
+        "title": "Grado en Medios Audiovisuales",
+        "company": "Tecnocampus Mataró",
+        "period": "Sep. 2015 - Jul. 2019 - Mataró",
+        "type": "education",
+        "logo": "/assets/logos/tecnocampus-logo.svg",
+        "logoAlt": "Logo de Tecnocampus Mataró",
+        "tasks": [
+          "Grado en medios audiovisuales donde estudie todo lo que tiene que ver con el mundo audiovisual. Decidí enfocar mi especialización hacia el diseño y la elaboración de proyectos interactivos, ya sean páginas web o audiovisuales interactivos."
+        ],
+        "description": "Grado en medios audiovisuales con especialización en diseño digital y proyectos interactivos.",
+        "website": "https://tecnocampus.cat",
+        "featured": false,
+        "current": false,
+        "order": 15,
+        "startDate": "2015-09-01",
+        "endDate": "2019-07-01",
+        "keywords": [
+          "Audiovisual",
+          "Interactive Design",
+          "Web Design",
+          "Digital Media",
+          "Creative Technology"
+        ]
+      },
+      "uxer-design-ops.md": {
+        "title": "Curso de especialización en Design OPS",
+        "company": "UXER School",
+        "period": "May. 2023 - May. 2023 - Barcelona",
+        "type": "education",
+        "logo": "/assets/logos/uxer-logo.png",
+        "logoAlt": "Logo de UXER School",
+        "tasks": [
+          "Curso de especialización en Design Ops donde profundice en herramientas y procesos para optimizar los flujos de trabajo entre equipos de diseño, producto y desarrollo."
+        ],
+        "description": "Especialización en Design Operations para optimizar procesos, herramientas y flujos de trabajo en equipos de diseño.",
+        "website": "https://uxerschool.com",
+        "featured": true,
+        "current": false,
+        "order": 11,
+        "startDate": "2023-05-01",
+        "endDate": "2023-05-01",
+        "keywords": [
+          "Design Ops",
+          "Process Optimization",
+          "Team Management",
+          "Workflow",
+          "Design Systems"
+        ]
+      },
+      "webbing-seo-designer.md": {
+        "title": "Diseñador web y técnico en posicionamiento SEO",
+        "company": "Webbing Barcelona",
+        "period": "Mar. 2017 - Ene. 2018 - Mataró",
+        "type": "work",
+        "logo": "/assets/logos/webbing-logo.png",
+        "logoAlt": "Logo de Webbing Barcelona",
+        "tasks": [
+          "Optimización SEO (on page y off page).",
+          "Maquetación web en Wordpress.",
+          "Mantenimiento y actualización de webs (Wordpress, Joomla)."
+        ],
+        "description": "Especialización en optimización SEO y desarrollo web, combinando técnicas de posicionamiento con diseño y mantenimiento de sitios web.",
+        "website": "https://webbing.online/",
+        "featured": false,
+        "current": false,
+        "order": 6,
+        "startDate": "2017-03-01",
+        "endDate": "2018-01-01",
+        "keywords": [
+          "SEO",
+          "WordPress",
+          "Web Development",
+          "Joomla",
+          "Digital Marketing"
+        ]
+      }
+    },
+    "en": {
+      "accessibleeu-technology-design.md": {
+        "title": "Accessible Technology Design",
+        "company": "AccessibleEU Centre",
+        "period": "Dec. 2023 - Dec. 2023 - Barcelona",
+        "type": "education",
+        "logo": "/assets/logos/accessibleeu-logo.png",
+        "logoAlt": "AccessibleEU Centre Logo",
+        "tasks": [
+          "Course on the basic concepts for creating inclusive digital solutions, covering principles, legal requirements, and design strategies for accessibility."
+        ],
+        "description": "Specialized training in inclusive design and digital accessibility, learning the fundamentals to create products accessible to all users.",
+        "website": "https://accessibleeu.org",
+        "featured": false,
+        "current": false,
+        "order": 10,
+        "startDate": "2023-12-01",
+        "endDate": "2023-12-01",
+        "keywords": [
+          "Accessibility",
+          "Inclusive Design",
+          "WCAG",
+          "Digital Inclusion",
+          "UX"
+        ]
+      },
+      "alea-product-designer.md": {
+        "title": "Product Designer / Design System Designer",
+        "company": "ALEA Design",
+        "period": "Dec. 2022 - Dec. 2023 - Barcelona",
+        "type": "work",
+        "logo": "/assets/logos/alea-logo.svg",
+        "logoAlt": "ALEA Design Logo",
+        "tasks": [
+          "Product design for startups and tech companies in Saudi Arabia.",
+          "Management and delivery support for development teams.",
+          "Creation of design systems for different clients."
+        ],
+        "description": "Digital product design for the Middle Eastern market, with a strong focus on tech startups and the creation of scalable design systems.",
+        "website": "https://alea.design",
+        "featured": true,
+        "current": false,
+        "order": 3,
+        "startDate": "2022-12-01",
+        "endDate": "2023-12-01",
+        "keywords": [
+          "Product Design",
+          "Saudi Arabia",
+          "Startups",
+          "Design Systems",
+          "International"
+        ]
+      },
+      "catsalut-design-system-lead.md": {
+        "title": "Design System Lead",
+        "company": "Sistema de Salut de Catalunya",
+        "period": "Dec. 2023 - May. 2024 - Barcelona",
+        "type": "work",
+        "tasks": [
+          "Led the development and maintenance of the design system.",
+          "Managed the design system team.",
+          "Collaborated with multidisciplinary teams to ensure effective adoption of the system.",
+          "Defined and applied design standards, components, and guidelines to maintain consistency and efficiency across the product.",
+          "Mentored other designers within the team."
+        ],
+        "order": 2,
+        "featured": true,
+        "current": false,
+        "logo": "/assets/logos/catsalut-logo.svg",
+        "logoAlt": "Logo of Sistema de Salut de Catalunya",
+        "description": "Leadership in the creation and evolution of the design system that unifies the digital experience across all applications of the Catalan healthcare system.",
+        "website": "https://catsalut.gencat.cat",
+        "startDate": "2023-12-01",
+        "endDate": "2024-05-01",
+        "keywords": [
+          "Design System",
+          "Leadership",
+          "Healthcare",
+          "Figma",
+          "Storybook",
+          "Team Management"
+        ]
+      },
+      "crealogix-ux-designer.md": {
+        "title": "UX Product Designer / System Designer",
+        "company": "Crealogix AG",
+        "period": "Oct. 2020 - Nov. 2022 - Barcelona",
+        "type": "work",
+        "logo": "/assets/logos/crealogix-logo.svg",
+        "logoAlt": "Logo of Crealogix AG",
+        "tasks": [
+          "Fintech product design for clients in the Middle East, Europe, and Asia.",
+          "Contributed to the creation and maintenance of the company’s design system.",
+          "Participated in the redesign of the application of one of the largest banks in the Middle East as a product designer and design system specialist."
+        ],
+        "description": "Design of fintech solutions for international markets, specializing in design systems and large-scale banking products.",
+        "website": "https://crealogix.com",
+        "featured": true,
+        "current": false,
+        "order": 4,
+        "startDate": "2020-11-01",
+        "endDate": "2022-11-30",
+        "keywords": [
+          "Fintech",
+          "Banking",
+          "Design Systems",
+          "International",
+          "Mobile Apps",
+          "Enterprise"
+        ]
+      },
+      "elisava-master.md": {
+        "title": "Master’s in Design and Project Management for the Internet",
+        "company": "Elisava",
+        "period": "Sep. 2019 - Jul. 2020 - Barcelona",
+        "type": "education",
+        "logo": "/assets/logos/elisava-logo.svg",
+        "logoAlt": "Logo of Elisava",
+        "tasks": [
+          "User-centered design, UX research, wireframing, prototyping.",
+          "Business strategies.",
+          "Agile methodologies (Scrum)."
+        ],
+        "description": "Master’s degree specialized in digital design and web project management, with a focus on UX/UI, user research, and agile methodologies.",
+        "website": "https://elisava.net",
+        "featured": true,
+        "current": false,
+        "order": 14,
+        "startDate": "2019-09-01",
+        "endDate": "2020-07-01",
+        "keywords": [
+          "UX/UI",
+          "User Research",
+          "Prototyping",
+          "Agile",
+          "Business Strategy"
+        ]
+      },
+      "ironhack-fullstack.md": {
+        "title": "Full Stack Web Developer Program",
+        "company": "Ironhack",
+        "period": "Sep. 2020 - Apr. 2021 - Barcelona",
+        "type": "education",
+        "logo": "/assets/logos/ironhack-logo.svg",
+        "logoAlt": "Logo of Ironhack",
+        "tasks": [
+          "Front End: HTML | CSS | SCSS | JavaScript (ES6) | React.",
+          "Back End: Express.js | Node.js | MongoDB | Axios."
+        ],
+        "description": "Intensive training in full stack web development, covering both modern frontend and backend technologies.",
+        "website": "https://ironhack.com",
+        "featured": true,
+        "current": false,
+        "order": 13,
+        "startDate": "2020-09-01",
+        "endDate": "2021-04-01",
+        "keywords": [
+          "Full Stack",
+          "React",
+          "Node.js",
+          "MongoDB",
+          "JavaScript",
+          "HTML/CSS"
+        ]
+      },
+      "mrmarcel-design-data.md": {
+        "title": "Specialization Course in Design and Data",
+        "company": "Mr Marcel School",
+        "period": "Sep. 2024 - Oct. 2024 - Barcelona",
+        "type": "education",
+        "logo": "/assets/logos/mrmarcel-logo.svg",
+        "logoAlt": "Logo of Mr Marcel School",
+        "tasks": [
+          "Specialization in the use of data to inform design decisions.",
+          "Analysis of product and user experience metrics.",
+          "Methodologies for testing and data-driven validation.",
+          "Tools for analytics and quantitative research."
+        ],
+        "description": "Training at the intersection of design and data, learning to use quantitative information to make better design decisions and validate hypotheses.",
+        "website": "https://mrmarcel.com",
+        "certificate": "/certificates/mrmarcel-design-data-2024.pdf",
+        "featured": true,
+        "current": false,
+        "order": 9,
+        "startDate": "2024-09-01",
+        "endDate": "2024-10-01",
+        "keywords": [
+          "Data-Driven Design",
+          "Analytics",
+          "User Research",
+          "A/B Testing",
+          "Product Metrics",
+          "Quantitative Research"
+        ]
+      },
+      "mrmarcel-design-systems.md": {
+        "title": "Specialization Course in Design Systems",
+        "company": "Mr Marcel School",
+        "period": "Oct. 2021 - Dec. 2021 - Barcelona",
+        "type": "education",
+        "logo": "/assets/logos/mrmarcel-logo.svg",
+        "logoAlt": "Logo of Mr Marcel School",
+        "tasks": [
+          "Definition of mission, vision, objectives, and governance models for design systems.",
+          "Creation and maintenance of scalable Design Token architectures.",
+          "Documentation of visual and functional patterns for multidisciplinary teams.",
+          "End-to-end planning: auditing, implementation, and system maintenance."
+        ],
+        "description": "Specialized training in building design systems from scratch, learning methodologies and tools to develop scalable systems.",
+        "website": "https://mrmarcel.com",
+        "featured": true,
+        "current": false,
+        "order": 12,
+        "startDate": "2021-10-01",
+        "endDate": "2021-12-01",
+        "keywords": [
+          "Design Systems",
+          "Figma",
+          "Component Libraries",
+          "Design Tokens",
+          "Scalability"
+        ]
+      },
+      "sabadell-product-designer.md": {
+        "title": "Senior Product Designer",
+        "company": "Banc Sabadell",
+        "period": "May. 2024 - Present - Barcelona",
+        "type": "work",
+        "logo": "/assets/logos/sabadell-logo.svg",
+        "logoAlt": "Logo of Banc Sabadell",
+        "tasks": [
+          "Design and optimization of flows for Desktop and App within the business team.",
+          "Management of improvements and new components with the Design System team.",
+          "Support for external teams during design and validation phases.",
+          "Collaboration with Research in ideation, user research, and testing.",
+          "Mentoring a junior designer and providing training in design and design systems for Product Owners, developers, and other key roles."
+        ],
+        "description": "Design of financial products for the business segment, focusing on optimizing the user experience and closely collaborating with the Design System team.",
+        "website": "https://bancsabadell.com",
+        "featured": true,
+        "current": true,
+        "order": 1,
+        "startDate": "2024-05-01",
+        "keywords": [
+          "Product Design",
+          "Banking",
+          "Design System",
+          "Enterprise",
+          "UX Research",
+          "Mentoring"
+        ]
+      },
+      "strategycomm-web-designer.md": {
+        "title": "Web Designer",
+        "company": "Strategycomm",
+        "period": "Feb. 2018 - Sep. 2020 - Mataró",
+        "type": "work",
+        "logo": "/assets/logos/strategycomm-logo.svg",
+        "logoAlt": "Logo of Strategycomm",
+        "tasks": [
+          "Management and design of newsletters with Mailchimp.",
+          "UI design (Sketch, Figma).",
+          "Web layout and maintenance in WordPress."
+        ],
+        "description": "Web design and digital communication management, focusing on newsletters, user interfaces, and website maintenance.",
+        "website": "https://strategycomm.net/",
+        "featured": false,
+        "current": false,
+        "order": 5,
+        "startDate": "2018-02-01",
+        "endDate": "2020-09-01",
+        "keywords": [
+          "Web Design",
+          "WordPress",
+          "Mailchimp",
+          "UI Design",
+          "Email Marketing"
+        ]
+      },
+      "tecnocampus-audiovisuales.md": {
+        "title": "Bachelor’s Degree in Audiovisual Media",
+        "company": "Tecnocampus Mataró",
+        "period": "Sep. 2015 - Jul. 2019 - Mataró",
+        "type": "education",
+        "logo": "/assets/logos/tecnocampus-logo.svg",
+        "logoAlt": "Logo of Tecnocampus Mataró",
+        "tasks": [
+          "Bachelor’s degree in audiovisual media where I studied everything related to the audiovisual field. I decided to focus my specialization on design and the development of interactive projects, such as websites or interactive audiovisuals."
+        ],
+        "description": "Bachelor’s degree in audiovisual media with a specialization in digital design and interactive projects.",
+        "website": "https://tecnocampus.cat",
+        "featured": false,
+        "current": false,
+        "order": 15,
+        "startDate": "2015-09-01",
+        "endDate": "2019-07-01",
+        "keywords": [
+          "Audiovisual",
+          "Interactive Design",
+          "Web Design",
+          "Digital Media",
+          "Creative Technology"
+        ]
+      },
+      "uxer-design-ops.md": {
+        "title": "Specialization Course in Design Ops",
+        "company": "UXER School",
+        "period": "May. 2023 - May. 2023 - Barcelona",
+        "type": "education",
+        "logo": "/assets/logos/uxer-logo.png",
+        "logoAlt": "Logo of UXER School",
+        "tasks": [
+          "Specialization course in Design Ops focused on tools and processes to optimize workflows between design, product, and development teams."
+        ],
+        "description": "Specialization in Design Operations to optimize processes, tools, and workflows within design teams.",
+        "website": "https://uxerschool.com",
+        "featured": true,
+        "current": false,
+        "order": 11,
+        "startDate": "2023-05-01",
+        "endDate": "2023-05-01",
+        "keywords": [
+          "Design Ops",
+          "Process Optimization",
+          "Team Management",
+          "Workflow",
+          "Design Systems"
+        ]
+      },
+      "webbing-seo-designer.md": {
+        "title": "Web Designer and SEO Specialist",
+        "company": "Webbing Barcelona",
+        "period": "Mar. 2017 - Jan. 2018 - Mataró",
+        "type": "work",
+        "logo": "/assets/logos/webbing-logo.png",
+        "logoAlt": "Logo of Webbing Barcelona",
+        "tasks": [
+          "SEO optimization (on-page and off-page).",
+          "Web layout in WordPress.",
+          "Website maintenance and updates (WordPress, Joomla)."
+        ],
+        "description": "Specialization in SEO optimization and web development, combining positioning techniques with design and website maintenance.",
+        "website": "https://webbing.online/",
+        "featured": false,
+        "current": false,
+        "order": 6,
+        "startDate": "2017-03-01",
+        "endDate": "2018-01-01",
+        "keywords": [
+          "SEO",
+          "WordPress",
+          "Web Development",
+          "Joomla",
+          "Digital Marketing"
+        ]
+      }
+    }
+  },
+  "skills": {
+    "es": [
+      "Sector bancario",
+      "Sistemas de diseño",
+      "Accesibilidad web",
+      "Front-End Development",
+      "Resolución de problemas",
+      "Mentoría",
+      "Gestión de proyectos",
+      "Design Tokens",
+      "Dev Hand-off",
+      "Diseño UI",
+      "Edición de vídeo",
+      "JIRA",
+      "Procesos de diseño",
+      "Diseño de apps",
+      "Diseño web",
+      "Gestión de equipos"
+    ],
+    "en": [
+      "Banking sector",
+      "Design systems",
+      "Web accessibility",
+      "Front-End Development",
+      "Problem solving",
+      "Mentorship",
+      "Project management",
+      "Design Tokens",
+      "Dev Hand-off",
+      "UI design",
+      "Video editing",
+      "JIRA",
+      "Design processes",
+      "App design",
+      "Web design",
+      "Team management"
+    ]
+  }
+}
