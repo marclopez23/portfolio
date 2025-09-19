@@ -6,16 +6,14 @@ export async function handler() {
     {
       headers: { Authorization: `Bearer ${process.env.HF_API_KEY}` },
       method: "POST",
-      body: JSON.stringify({
-        inputs: "Say hello in Spanish"
-      }),
+      body: JSON.stringify({ inputs: "Say hello in Spanish" }),
     }
   );
 
-  const result = await response.json();
+  const text = await response.text(); // <-- lee como texto
 
   return {
-    statusCode: 200,
-    body: JSON.stringify(result),
+    statusCode: response.status,
+    body: text,
   };
 }
