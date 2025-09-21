@@ -1,4 +1,4 @@
-// netlify/functions/test-hf.js
+// netlify/functions/simple-test.js
 exports.handler = async (event, context) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -10,75 +10,71 @@ exports.handler = async (event, context) => {
     return { statusCode: 200, headers, body: '' };
   }
 
+  const apiKey = process.env.HF_API_KEY;
+  
+  if (!apiKey) {
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ 
+        error: 'Token no configurado en variables de entorno',
+        timestamp: new Date().toISOString()
+      })
+    };
+  }
+
   try {
-    const apiKey = process.env.HF_API_KEY;
+    console.log('Testing Hugging Face API...');
     
-    if (!apiKey) {
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({ error: 'HF_API_KEY no configurada' })
-      };
-    }
-
-    console.log('Testing HF token...');
-    console.log('Token length:', apiKey.length);
-    console.log('Token start:', apiKey.substring(0, 10));
-    console.log('Token end:', apiKey.substring(apiKey.length - 10));
-
-    // Test simple con gpt2
     const response = await fetch('https://api-inference.huggingface.co/models/gpt2', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        inputs: 'Hello world',
-        parameters: { max_new_tokens: 10 }
+      body: JSON.stringify({ 
+        inputs: 'Hello world', 
+        parameters: { max_new_tokens: 5 } 
       })
     });
 
-    const responseText = await response.text();
-    console.log('Response status:', response.status);
-    console.log('Response text:', responseText);
-
-    let result;
+    const resultText = await response.text();
+    console.log('API Response:', response.status, resultText.substring(0, 100));
+    
+    let parsedResult;
     try {
-      result = JSON.parse(responseText);
-    } catch (e) {
-      result = { unparseable: responseText };
+      parsedResult = JSON.parse(resultText);
+    } catch (parseError) {
+      parsedResult = { raw: resultText };
     }
-
+    
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
         success: response.ok,
         status: response.status,
-        tokenInfo: {
-          length: apiKey.length,
-          startsWithHf: apiKey.startsWith('hf_'),
-          first10: apiKey.substring(0, 10),
-          last10: apiKey.substring(apiKey.length - 10)
-        },
-        result: result,
+        tokenConfigured: true,
+        tokenLength: apiKey.length,
+        apiResponse: parsedResult,
         message: response.ok ? 
-          '✅ Token funciona correctamente!' : 
-          `❌ Error ${response.status}: ${responseText}`,
+          'API de Hugging Face funciona correctamente' : 
+          `Error ${response.status} en la API`,
         timestamp: new Date().toISOString()
       })
     };
 
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error in function:', error);
     
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({
-        error: 'Error interno del servidor',
-        message: error.message
+      body: JSON.stringify({ 
+        error: 'Error interno de la función',
+        message: error.message,
+        tokenConfigured: !!apiKey,
+        timestamp: new Date().toISOString()
       })
     };
   }
