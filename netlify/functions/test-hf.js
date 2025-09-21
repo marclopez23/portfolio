@@ -10,11 +10,7 @@ exports.handler = async (event, context) => {
     return { statusCode: 200, headers, body: '' };
   }
 
-  const results = [];
-
   try {
-    console.log('=== TESTING HUGGING FACE MODELS ===');
-
     if (!process.env.HF_API_KEY) {
       return {
         statusCode: 500,
@@ -24,120 +20,114 @@ exports.handler = async (event, context) => {
     }
 
     const apiKey = process.env.HF_API_KEY;
-    console.log('✅ API Key found, length:', apiKey.length);
-
-    // Lista de modelos para probar (de más simple a más complejo)
-    const modelsToTest = [
-      {
-        name: "gpt2",
-        url: "https://api-inference.huggingface.co/models/gpt2",
-        payload: {
-          inputs: "Hello",
-          parameters: { max_new_tokens: 20 }
-        }
-      },
-      {
-        name: "distilbert-base-uncased",
-        url: "https://api-inference.huggingface.co/models/distilbert-base-uncased",
-        payload: {
-          inputs: "Hello world"
-        }
-      },
-      {
-        name: "microsoft/DialoGPT-small",
-        url: "https://api-inference.huggingface.co/models/microsoft/DialoGPT-small",
-        payload: {
-          inputs: "Hello",
-          parameters: { max_length: 50 }
-        }
-      }
-    ];
-
-    // Probar cada modelo
-    for (const model of modelsToTest) {
-      try {
-        console.log(`🔍 Testing model: ${model.name}`);
-        
-        const response = await fetch(model.url, {
-          method: "POST",
-          headers: { 
-            Authorization: `Bearer ${apiKey}`,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(model.payload)
-        });
-
-        const responseText = await response.text();
-        console.log(`📡 ${model.name} response:`, response.status, responseText.substring(0, 200));
-
-        let result;
-        try {
-          result = JSON.parse(responseText);
-        } catch (parseError) {
-          results.push({
-            model: model.name,
-            success: false,
-            error: 'Invalid JSON response',
-            rawResponse: responseText.substring(0, 500),
-            status: response.status
-          });
-          continue;
-        }
-
-        results.push({
-          model: model.name,
-          success: response.ok && !result.error,
-          status: response.status,
-          result: result,
-          error: result.error || null
-        });
-
-        // Si encontramos un modelo que funciona, podemos parar
-        if (response.ok && !result.error) {
-          console.log(`✅ Model ${model.name} works!`);
-          break;
-        }
-
-      } catch (error) {
-        console.error(`❌ Error with model ${model.name}:`, error);
-        results.push({
-          model: model.name,
-          success: false,
-          error: error.message,
-          status: 'network_error'
-        });
-      }
+    
+    // Verificar formato del token
+    if (!apiKey.startsWith('hf_')) {
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ 
+          error: 'Token inválido - debe empezar con hf_',
+          tokenStart: apiKey.substring(0, 5),
+          tokenLength: apiKey.length
+        })
+      };
     }
 
-    // Verificar si algún modelo funcionó
-    const workingModel = results.find(r => r.success);
+    console.log('Testing with token:', apiKey.substring(0, 10) + '...');
+
+    // Test 1: Verificar que el token existe con un endpoint básico
+    console.log('🔍 Testing token validity...');
     
+    const response = await fetch('https://huggingface.co/api/whoami', {
+      headers: { 
+        Authorization: `Bearer ${apiKey}`
+      }
+    });
+
+    const whoAmIText = await response.text();
+    console.log('WhoAmI response:', response.status, whoAmIText);
+
+    let whoAmIResult;
+    try {
+      whoAmIResult = JSON.parse(whoAmIText);
+    } catch (e) {
+      whoAmIResult = { error: 'Could not parse response', raw: whoAmIText };
+    }
+
+    // Test 2: Probar Inference API con el modelo más básico
+    console.log('🔍 Testing inference API...');
+    
+    const inferenceResponse = await fetch(
+      'https://api-inference.huggingface.co/models/gpt2',
+      {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          inputs: 'Hello',
+          parameters: {
+            max_new_tokens: 10,
+            return_full_text: false
+          }
+        })
+      }
+    );
+
+    const inferenceText = await inferenceResponse.text();
+    console.log('Inference response:', inferenceResponse.status, inferenceText);
+
+    let inferenceResult;
+    try {
+      inferenceResult = JSON.parse(inferenceText);
+    } catch (e) {
+      inferenceResult = { 
+        error: 'Could not parse inference response', 
+        raw: inferenceText,
+        status: inferenceResponse.status
+      };
+    }
+
     return {
-      statusCode: workingModel ? 200 : 500,
+      statusCode: 200,
       headers,
       body: JSON.stringify({
-        success: !!workingModel,
-        message: workingModel ? 
-          `✅ Conexión exitosa! Modelo funcional: ${workingModel.model}` : 
-          '❌ Ningún modelo funcionó',
-        workingModel: workingModel?.model || null,
-        apiKeyLength: apiKey.length,
-        allResults: results,
+        tokenValidation: {
+          format: apiKey.startsWith('hf_') ? 'valid' : 'invalid',
+          length: apiKey.length,
+          prefix: apiKey.substring(0, 5)
+        },
+        whoAmI: {
+          status: response.status,
+          success: response.ok,
+          result: whoAmIResult
+        },
+        inference: {
+          status: inferenceResponse.status,
+          success: inferenceResponse.ok,
+          result: inferenceResult
+        },
+        diagnosis: {
+          tokenWorks: response.ok,
+          inferenceWorks: inferenceResponse.ok,
+          overallSuccess: response.ok && inferenceResponse.ok
+        },
         timestamp: new Date().toISOString()
       })
     };
 
   } catch (error) {
-    console.error('💥 Unexpected error:', error);
+    console.error('Error:', error);
     
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ 
-        error: 'Error interno del servidor',
+      body: JSON.stringify({
+        error: 'Error interno',
         message: error.message,
-        results: results,
-        timestamp: new Date().toISOString()
+        stack: error.stack
       })
     };
   }
