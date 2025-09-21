@@ -22,11 +22,11 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    if (!process.env.HF_API_KEY) {
+    if (!process.env.GROQ_API_KEY) {
       return {
         statusCode: 500,
         headers,
-        body: JSON.stringify({ error: 'HF_API_KEY no configurada' })
+        body: JSON.stringify({ error: 'GROQ_API_KEY no configurada' })
       };
     }
 
@@ -59,34 +59,48 @@ exports.handler = async (event, context) => {
 
     const contexto = JSON.stringify(portfolio, null, 2);
 
-    const response = await fetch(
-      "https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium",
-      {
-        method: "POST",
-        headers: { 
-          Authorization: `Bearer ${process.env.HF_API_KEY}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          inputs: `Eres un asistente que responde preguntas sobre Marc Lopez basándote en su portfolio.
+    console.log('Enviando petición a Groq...');
 
-INFORMACIÓN DEL PORTFOLIO:
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'llama-3.1-8b-instant',
+        messages: [
+          {
+            role: 'system',
+            content: `Eres un asistente virtual profesional que responde preguntas sobre Marc Lopez basándote en su información de portfolio. 
+
+INFORMACIÓN DE MARC LOPEZ:
 ${contexto}
 
-PREGUNTA: ${question}
-
-Responde de forma natural y profesional usando solo la información proporcionada.`,
-          parameters: {
-            max_new_tokens: 300,
-            temperature: 0.7,
-            return_full_text: false
+Instrucciones:
+- Responde de forma natural y profesional
+- Usa solo la información proporcionada
+- Si no tienes información específica, dilo claramente pero mantén un tono amigable
+- Responde en español
+- Sé conciso pero informativo
+- Máximo 3-4 frases por respuesta`
+          },
+          {
+            role: 'user',
+            content: question
           }
-        })
-      }
-    );
+        ],
+        max_tokens: 300,
+        temperature: 0.7
+      })
+    });
+
+    console.log('Respuesta de Groq recibida, status:', response.status);
 
     if (!response.ok) {
       const errorText = await response.text();
+      console.error('Error de Groq:', errorText);
+      
       return {
         statusCode: response.status,
         headers,
@@ -98,27 +112,34 @@ Responde de forma natural y profesional usando solo la información proporcionad
     }
 
     const result = await response.json();
+    console.log('Resultado procesado');
 
-    if (!result || !Array.isArray(result) || !result[0] || !result[0].generated_text) {
+    if (!result.choices || !result.choices[0] || !result.choices[0].message) {
+      console.error('Formato inesperado:', result);
       return {
         statusCode: 500,
         headers,
         body: JSON.stringify({ 
-          error: 'Formato de respuesta inesperado'
+          error: 'Formato de respuesta inesperado de Groq'
         })
       };
     }
+
+    const answer = result.choices[0].message.content.trim();
 
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({ 
-        answer: result[0].generated_text.trim(),
-        success: true
+        answer: answer,
+        success: true,
+        model: 'llama-3.1-8b-instant'
       })
     };
 
   } catch (error) {
+    console.error('Error en chatbot:', error);
+    
     return {
       statusCode: 500,
       headers,
