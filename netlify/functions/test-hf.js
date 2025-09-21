@@ -1,4 +1,4 @@
-// netlify/functions/simple-test.js
+// netlify/functions/test-groq.js
 exports.handler = async (event, context) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
@@ -10,35 +10,42 @@ exports.handler = async (event, context) => {
     return { statusCode: 200, headers, body: '' };
   }
 
-  const apiKey = process.env.HF_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   
   if (!apiKey) {
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({ 
-        error: 'Token no configurado en variables de entorno',
+        error: 'GROQ_API_KEY no configurada',
         timestamp: new Date().toISOString()
       })
     };
   }
 
   try {
-    console.log('Testing alternative HF model...');
+    console.log('Testing Groq API...');
     
-    const response = await fetch('https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium', {
+    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ 
-        inputs: "Hello world"
+      body: JSON.stringify({
+        model: 'llama3-8b-8192',
+        messages: [
+          {
+            role: 'user',
+            content: 'Say hello in Spanish'
+          }
+        ],
+        max_tokens: 50
       })
     });
 
     const resultText = await response.text();
-    console.log('API Response:', response.status, resultText.substring(0, 100));
+    console.log('Groq Response:', response.status, resultText.substring(0, 200));
     
     let parsedResult;
     try {
@@ -55,17 +62,17 @@ exports.handler = async (event, context) => {
         status: response.status,
         tokenConfigured: true,
         tokenLength: apiKey.length,
-        model: 'microsoft/DialoGPT-medium',
+        model: 'llama3-8b-8192',
         apiResponse: parsedResult,
         message: response.ok ? 
-          'API de Hugging Face funciona con modelo alternativo' : 
-          `Error ${response.status} en la API`,
+          'Groq API funciona correctamente' : 
+          `Error ${response.status} en Groq`,
         timestamp: new Date().toISOString()
       })
     };
 
   } catch (error) {
-    console.error('Error in function:', error);
+    console.error('Error in Groq test:', error);
     
     return {
       statusCode: 500,
