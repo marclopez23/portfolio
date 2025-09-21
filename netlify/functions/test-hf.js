@@ -1,151 +1,89 @@
-// netlify/functions/chatbot.js
-const fs = require('fs');
-const path = require('path');
-
+// netlify/functions/test-groq.js
 exports.handler = async (event, context) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS'
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
   };
 
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
   }
 
-  if (event.httpMethod !== 'POST') {
+  // Aceptar tanto GET como POST para facilitar testing desde navegador
+
+  const apiKey = process.env.GROQ_API_KEY;
+  
+  if (!apiKey) {
     return {
-      statusCode: 405,
+      statusCode: 500,
       headers,
-      body: JSON.stringify({ error: 'Método no permitido' })
+      body: JSON.stringify({ 
+        error: 'GROQ_API_KEY no configurada',
+        timestamp: new Date().toISOString()
+      })
     };
   }
 
   try {
-    if (!process.env.GROQ_API_KEY) {
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({ error: 'GROQ_API_KEY no configurada' })
-      };
-    }
-
-    // Leer el archivo portfolio.json real
-    let portfolio;
-    try {
-      const portfolioPath = path.join(__dirname, '../../src/data/portfolio.json');
-      const portfolioData = fs.readFileSync(portfolioPath, 'utf8');
-      portfolio = JSON.parse(portfolioData);
-    } catch (fileError) {
-      // Si no existe el archivo, usar datos básicos
-      portfolio = {
-        name: "Marc Lopez",
-        title: "Frontend Developer & UX/UI Designer",
-        email: "marclg2000@gmail.com",
-        location: "Vilafranca del Penedès, Barcelona",
-        skills: ["React", "TypeScript", "JavaScript", "HTML/CSS", "Node.js", "Astro", "Next.js", "Figma", "Git"],
-        experience: "Ironhack Full Stack Web Developer Program (2020-2021)"
-      };
-    }
-
-    const { question } = JSON.parse(event.body || '{}');
-
-    if (!question) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: 'Pregunta requerida' })
-      };
-    }
-
-    const contexto = JSON.stringify(portfolio, null, 2);
-
-    console.log('Enviando petición a Groq...');
-
+    console.log('Testing Groq API...');
+    
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         model: 'llama-3.1-8b-instant',
         messages: [
           {
-            role: 'system',
-            content: `Eres un asistente virtual profesional que responde preguntas sobre Marc Lopez basándote en su información de portfolio. 
-
-INFORMACIÓN DE MARC LOPEZ:
-${contexto}
-
-Instrucciones:
-- Responde de forma natural y profesional
-- Usa solo la información proporcionada
-- Si no tienes información específica, dilo claramente pero mantén un tono amigable
-- Responde en español
-- Sé conciso pero informativo`
-          },
-          {
             role: 'user',
-            content: question
+            content: 'Say hello in Spanish'
           }
         ],
-        max_tokens: 300,
-        temperature: 0.7
+        max_tokens: 50
       })
     });
 
-    console.log('Respuesta de Groq recibida, status:', response.status);
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Error de Groq:', errorText);
-      
-      return {
-        statusCode: response.status,
-        headers,
-        body: JSON.stringify({ 
-          error: 'Error del servicio de IA',
-          details: errorText
-        })
-      };
+    const resultText = await response.text();
+    console.log('Groq Response:', response.status, resultText.substring(0, 200));
+    
+    let parsedResult;
+    try {
+      parsedResult = JSON.parse(resultText);
+    } catch (parseError) {
+      parsedResult = { raw: resultText };
     }
-
-    const result = await response.json();
-    console.log('Resultado procesado');
-
-    if (!result.choices || !result.choices[0] || !result.choices[0].message) {
-      console.error('Formato inesperado:', result);
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({ 
-          error: 'Formato de respuesta inesperado de Groq'
-        })
-      };
-    }
-
-    const answer = result.choices[0].message.content.trim();
-
+    
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ 
-        answer: answer,
-        success: true,
-        model: 'llama-3.1-8b-instant'
+      body: JSON.stringify({
+        success: response.ok,
+        status: response.status,
+        tokenConfigured: true,
+        tokenLength: apiKey.length,
+        model: 'llama-3.1-8b-instant',
+        apiResponse: parsedResult,
+        message: response.ok ? 
+          'Groq API funciona correctamente' : 
+          `Error ${response.status} en Groq`,
+        timestamp: new Date().toISOString()
       })
     };
 
   } catch (error) {
-    console.error('Error en chatbot:', error);
+    console.error('Error in Groq test:', error);
     
     return {
       statusCode: 500,
       headers,
       body: JSON.stringify({ 
-        error: 'Error interno del servidor',
-        message: error.message
+        error: 'Error interno de la función',
+        message: error.message,
+        tokenConfigured: !!apiKey,
+        timestamp: new Date().toISOString()
       })
     };
   }
