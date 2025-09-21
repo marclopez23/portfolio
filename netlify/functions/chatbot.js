@@ -13,7 +13,8 @@ exports.handler = async (event, context) => {
     return { statusCode: 200, headers, body: '' };
   }
 
-  if (event.httpMethod !== 'POST') {
+  // Temporal: aceptar GET y POST para debugging
+  if (event.httpMethod !== 'POST' && event.httpMethod !== 'GET') {
     return {
       statusCode: 405,
       headers,
@@ -47,7 +48,15 @@ exports.handler = async (event, context) => {
       };
     }
 
-    const { question } = JSON.parse(event.body || '{}');
+    // Obtener la pregunta del body (POST) o query (GET para debugging)
+    let question;
+    if (event.httpMethod === 'POST') {
+      const body = JSON.parse(event.body || '{}');
+      question = body.question;
+    } else {
+      // GET para debugging
+      question = event.queryStringParameters?.question || 'Hola, ¿quién es Marc Lopez?';
+    }
 
     if (!question) {
       return {
