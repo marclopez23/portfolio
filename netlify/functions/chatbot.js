@@ -1,25 +1,82 @@
 // netlify/functions/chatbot.js
-const fs = require('fs');
-const path = require('path');
+
+// Datos reales del portfolio de Marc Lopez
+const portfolio = {
+  "bio": {
+    "es": "Soy Marc, Product Designer con experiencia en la creación y gestión de productos digitales complejos, siempre con un enfoque en la colaboración y la mejora continua.\n\nMe apasiona diseñar experiencias claras y útiles, pero también explorar nuevas formas de trabajo: dinámicas, procesos y herramientas que impulsen a los equipos a ser más eficientes y creativos.\n\nTrabajo junto con equipos de research, data, negocio y tecnología, lo que me permite abordar los proyectos con una visión integral. Además, mis conocimientos en desarrollo web me ayudan a comprender mejor las limitaciones y oportunidades técnicas, y a colaborar de forma más fluida con los equipos de desarrollo.\n\nA lo largo de mi trayectoria he diseñado y gestionado sistemas de diseño, no solo como soporte de consistencia visual, sino como una herramienta estratégica para escalar productos y mejorar la comunicación entre diseño y desarrollo.\n\nMás allá del diseño, disfruto con la gestión de proyectos, la mentoría a diseñadores junior y la organización de la capacidad del equipo, asegurando que trabajemos de forma óptima y con impacto.\n\nFuera del trabajo, me encontrarás haciendo deporte, jugando a videojuegos o explorando lo último en tecnología."
+  },
+  "experiencia_actual": {
+    "title": "Senior Product Designer",
+    "company": "Banc Sabadell",
+    "period": "Mayo 2024 - Presente",
+    "tasks": [
+      "Diseño y optimización de flujos para Desktop y App en el equipo de empresas",
+      "Gestión de mejoras y nuevos componentes con el equipo de Sistema de Diseño",
+      "Soporte a equipos externos en fases de diseño y validación",
+      "Colaboración con Research en ideación, investigación y testeo",
+      "Mentoría a diseñador junior y formación en diseño y sistemas de diseño"
+    ]
+  },
+  "experiencia_destacada": [
+    {
+      "title": "Design System Lead",
+      "company": "Sistema de Salut de Catalunya",
+      "period": "Dic. 2023 - May. 2024",
+      "description": "Liderazgo en la creación y evolución del sistema de diseño del sistema sanitario catalán"
+    },
+    {
+      "title": "Product Designer / Design System Designer",
+      "company": "ALEA Design",
+      "period": "Dic. 2022 - Dic 2023",
+      "description": "Diseño de productos para startups y empresas tecnológicas en Arabia Saudita"
+    },
+    {
+      "title": "UX Product Designer / System Designer",
+      "company": "Crealogix AG",
+      "period": "Oct. 2020 - Nov. 2022",
+      "description": "Diseño de productos fintech para clientes en Oriente Medio, Europa y Asia"
+    }
+  ],
+  "formacion": [
+    {
+      "title": "Curso de especialización en Diseño y Datos",
+      "company": "Mr Marcel School",
+      "period": "Sep. 2024 - Oct. 2024"
+    },
+    {
+      "title": "Máster en Diseño y Dirección de Proyectos para Internet",
+      "company": "Elisava",
+      "period": "Sep. 2019 - Jul. 2020"
+    },
+    {
+      "title": "Full Stack Web Developer Program",
+      "company": "Ironhack",
+      "period": "Sep. 2020 - Abr. 2021"
+    }
+  ],
+  "skills": [
+    "Sistemas de diseño",
+    "Sector bancario",
+    "Accesibilidad web",
+    "Front-End Development",
+    "Mentoría",
+    "Gestión de proyectos",
+    "Design Tokens",
+    "Diseño UI",
+    "Diseño de apps",
+    "Gestión de equipos"
+  ]
+};
 
 exports.handler = async (event, context) => {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS'
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS'
   };
 
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
-  }
-
-  // Temporal: aceptar GET y POST para debugging
-  if (event.httpMethod !== 'POST' && event.httpMethod !== 'GET') {
-    return {
-      statusCode: 405,
-      headers,
-      body: JSON.stringify({ error: 'Método no permitido' })
-    };
   }
 
   try {
@@ -31,31 +88,13 @@ exports.handler = async (event, context) => {
       };
     }
 
-    // Leer el archivo portfolio.json real
-    let portfolio;
-    try {
-      const portfolioPath = path.join(__dirname, 'portfolio.json');
-      const portfolioData = fs.readFileSync(portfolioPath, 'utf8');
-      portfolio = JSON.parse(portfolioData);
-    } catch (fileError) {
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({ 
-          error: 'Error cargando portfolio.json',
-          details: fileError.message 
-        })
-      };
-    }
-
-    // Obtener la pregunta del body (POST) o query (GET para debugging)
+    // Obtener pregunta
     let question;
     if (event.httpMethod === 'POST') {
       const body = JSON.parse(event.body || '{}');
       question = body.question;
     } else {
-      // GET para debugging
-      question = event.queryStringParameters?.question || 'Hola, ¿quién es Marc Lopez?';
+      question = event.queryStringParameters?.question || 'Hola';
     }
 
     if (!question) {
@@ -68,8 +107,6 @@ exports.handler = async (event, context) => {
 
     const contexto = JSON.stringify(portfolio, null, 2);
 
-    console.log('Enviando petición a Groq...');
-
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -81,18 +118,18 @@ exports.handler = async (event, context) => {
         messages: [
           {
             role: 'system',
-            content: `Eres un asistente virtual profesional que responde preguntas sobre Marc Lopez basándote en su información de portfolio. 
+            content: `Eres un asistente virtual profesional de Marc Lopez, Product Designer especializado en sistemas de diseño y productos digitales.
 
 INFORMACIÓN DE MARC LOPEZ:
 ${contexto}
 
-Instrucciones:
-- Responde de forma natural y profesional
+INSTRUCCIONES:
+- Responde en español de forma natural y profesional
 - Usa solo la información proporcionada
-- Si no tienes información específica, dilo claramente pero mantén un tono amigable
-- Responde en español
-- Sé conciso pero informativo
-- Máximo 3-4 frases por respuesta`
+- Sé conciso pero informativo (máximo 3-4 frases)
+- Si no tienes información específica, dilo claramente
+- Enfócate en su experiencia actual en Banc Sabadell y sus especialidades en design systems
+- Destaca su experiencia en fintech, banking y liderazgo de equipos`
           },
           {
             role: 'user',
@@ -104,12 +141,8 @@ Instrucciones:
       })
     });
 
-    console.log('Respuesta de Groq recibida, status:', response.status);
-
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('Error de Groq:', errorText);
-      
       return {
         statusCode: response.status,
         headers,
@@ -121,34 +154,25 @@ Instrucciones:
     }
 
     const result = await response.json();
-    console.log('Resultado procesado');
 
-    if (!result.choices || !result.choices[0] || !result.choices[0].message) {
-      console.error('Formato inesperado:', result);
+    if (!result.choices?.[0]?.message) {
       return {
         statusCode: 500,
         headers,
-        body: JSON.stringify({ 
-          error: 'Formato de respuesta inesperado de Groq'
-        })
+        body: JSON.stringify({ error: 'Formato de respuesta inesperado' })
       };
     }
-
-    const answer = result.choices[0].message.content.trim();
 
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({ 
-        answer: answer,
-        success: true,
-        model: 'llama-3.1-8b-instant'
+        answer: result.choices[0].message.content.trim(),
+        success: true
       })
     };
 
   } catch (error) {
-    console.error('Error en chatbot:', error);
-    
     return {
       statusCode: 500,
       headers,

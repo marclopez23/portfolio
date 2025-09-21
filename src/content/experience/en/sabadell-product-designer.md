@@ -11,7 +11,7 @@ tasks:
   - "Management of improvements and new components with the Design System team."
   - "Support for external teams during design and validation phases."
   - "Collaboration with Research in ideation, user research, and testing."
-  - "Mentoring a junior designer and providing training in design and design systems for Product Owners, developers, and other key roles."
+  - "Mentoring juniors designers and providing training in design and design systems for Product Owners, developers, and other key roles."
 
 description: "Design of financial products for the business segment, focusing on optimizing the user experience and closely collaborating with the Design System team."
 website: "https://bancsabadell.com"
