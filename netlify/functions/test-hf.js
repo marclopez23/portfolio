@@ -24,17 +24,16 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    console.log('Testing Hugging Face API...');
+    console.log('Testing alternative HF model...');
     
-    const response = await fetch('https://api-inference.huggingface.co/models/gpt2', {
+    const response = await fetch('https://api-inference.huggingface.co/models/sentence-transformers/all-MiniLM-L6-v2', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({ 
-        inputs: 'Hello world', 
-        parameters: { max_new_tokens: 5 } 
+        inputs: "Hello world"
       })
     });
 
@@ -56,9 +55,10 @@ exports.handler = async (event, context) => {
         status: response.status,
         tokenConfigured: true,
         tokenLength: apiKey.length,
+        model: 'sentence-transformers/all-MiniLM-L6-v2',
         apiResponse: parsedResult,
         message: response.ok ? 
-          'API de Hugging Face funciona correctamente' : 
+          'API de Hugging Face funciona con modelo alternativo' : 
           `Error ${response.status} en la API`,
         timestamp: new Date().toISOString()
       })
