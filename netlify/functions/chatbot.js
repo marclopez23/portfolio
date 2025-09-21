@@ -34,7 +34,7 @@ exports.handler = async (event, context) => {
     // Leer el archivo portfolio.json real
     let portfolio;
     try {
-      const portfolioPath = path.join(__dirname, '../../src/data/portfolio.json');
+      const portfolioPath = path.join(__dirname, 'portfolio.json');
       const portfolioData = fs.readFileSync(portfolioPath, 'utf8');
       portfolio = JSON.parse(portfolioData);
     } catch (fileError) {
