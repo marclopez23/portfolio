@@ -26,7 +26,7 @@ exports.handler = async (event, context) => {
   try {
     console.log('Testing alternative HF model...');
     
-    const response = await fetch('https://api-inference.huggingface.co/models/sentence-transformers/all-MiniLM-L6-v2', {
+    const response = await fetch('https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
@@ -55,7 +55,7 @@ exports.handler = async (event, context) => {
         status: response.status,
         tokenConfigured: true,
         tokenLength: apiKey.length,
-        model: 'sentence-transformers/all-MiniLM-L6-v2',
+        model: 'microsoft/DialoGPT-medium',
         apiResponse: parsedResult,
         message: response.ok ? 
           'API de Hugging Face funciona con modelo alternativo' : 
