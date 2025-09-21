@@ -13,41 +13,85 @@ const portfolio = {
         "objective": "Rediseñar la aplicación de banca retail de SNB para Arabia Saudí",
         "role": "Product Designer y Design System Designer",
         "duration": "7 meses",
-        "challenges": ["Productos financieros locales", "Diseño bilingüe (RTL y LTR)", "Coordinación internacional con +30 desarrolladores"]
+        "challenges": ["Productos financieros locales", "Diseño bilingüe (RTL y LTR)", "Coordinación internacional con +30 desarrolladores"],
+        "url": "https://marclopezia.netlify.app/proyectos/saudi-national-bank"
       },
       {
         "title": "DH Design System",
         "objective": "Crear un Design System multiplataforma para todos los equipos de la compañía",
         "role": "Design System Designer",
         "duration": "6 meses",
-        "challenges": ["Arquitectura de tokens escalable", "Unir diseño y desarrollo", "Conseguir presupuesto y recursos"]
+        "challenges": ["Arquitectura de tokens escalable", "Unir diseño y desarrollo", "Conseguir presupuesto y recursos"],
+        "url": "https://marclopezia.netlify.app/proyectos/dh-design-system"
       },
       {
         "title": "Bayn",
         "objective": "Plataforma financiera completa para gestión de grandes volúmenes de datos",
         "role": "Product Designer",
         "description": "Plataforma para dos segmentos: distribuidores y retailers, con eCommerce integrado",
-        "challenges": ["Dos tipos de usuarios diferentes", "Creación de eCommerce integrado"]
+        "challenges": ["Dos tipos de usuarios diferentes", "Creación de eCommerce integrado"],
+        "url": "https://marclopezia.netlify.app/proyectos/bayn"
       },
       {
         "title": "DH Retail App",
         "objective": "App de banca retail moderna que compita con grandes bancos europeos",
         "role": "Product Designer",
         "description": "App white-label que rompe con la seriedad tradicional bancaria",
-        "challenges": ["Tono visual más humano y accesible", "Flexibilidad de diseño para diferentes bancos"]
+        "challenges": ["Tono visual más humano y accesible", "Flexibilidad de diseño para diferentes bancos"],
+        "url": "https://marclopezia.netlify.app/proyectos/dh-retail-app"
       },
       {
         "title": "Aljuf Finance",
         "objective": "Digitalización completa de procesos de financiación para PYMES",
         "role": "Product Designer",
         "description": "Enfoque en leasing de automóviles y configuraciones complejas",
-        "challenges": ["Flujo de leasing de coches con +25 modelos", "Configuraciones y simulaciones en tiempo real"]
+        "challenges": ["Flujo de leasing de coches con +25 modelos", "Configuraciones y simulaciones en tiempo real"],
+        "url": "https://marclopezia.netlify.app/proyectos/aljuf-finance"
       }
     ],
     "en": [
       {
         "title": "SNB Retail App",
         "objective": "Redesign the SNB retail banking app for Saudi Arabian market",
+        "role": "Product Designer and Design System Designer",
+        "duration": "7 months",
+        "challenges": ["Local financial products", "Bilingual design (RTL and LTR)", "International coordination with +30 developers"],
+        "url": "https://marclopezia.netlify.app/en/projects/saudi-national-bank"
+      },
+      {
+        "title": "DH Design System",
+        "objective": "Create a cross-platform design system for all company teams",
+        "role": "Design System Designer",
+        "duration": "6 months",
+        "challenges": ["Scalable token architecture", "Aligning design and development", "Securing budget and resources"],
+        "url": "https://marclopezia.netlify.app/en/projects/dh-design-system"
+      },
+      {
+        "title": "Bayn",
+        "objective": "Comprehensive financial platform for managing large volumes of data",
+        "role": "Product Designer",
+        "description": "Platform for two segments: distributors and retailers, with integrated eCommerce",
+        "challenges": ["Two different user types", "Creating integrated eCommerce"],
+        "url": "https://marclopezia.netlify.app/en/projects/bayn"
+      },
+      {
+        "title": "DH Retail App",
+        "objective": "Modern retail banking app that competes with major European banks",
+        "role": "Product Designer",
+        "description": "White-label app breaking away from traditional banking seriousness",
+        "challenges": ["More human and accessible visual tone", "Design flexibility for different banks"],
+        "url": "https://marclopezia.netlify.app/en/projects/dh-retail-app"
+      },
+      {
+        "title": "Aljuf Finance",
+        "objective": "Complete digitization of financing processes for SMEs",
+        "role": "Product Designer",
+        "description": "Focus on auto leasing and complex configurations",
+        "challenges": ["Car leasing flow with +25 models", "Real-time configurations and simulations"],
+        "url": "https://marclopezia.netlify.app/en/projects/aljuf-finance"
+      }
+    ]
+  } SNB retail banking app for Saudi Arabian market",
         "role": "Product Designer and Design System Designer",
         "duration": "7 months",
         "challenges": ["Local financial products", "Bilingual design (RTL and LTR)", "International coordination with +30 developers"]
@@ -495,30 +539,32 @@ exports.handler = async (event, context) => {
     const contexto = JSON.stringify(contextData, null, 2);
 
     const systemPrompt = isEnglish ? 
-      `You are Marc Lopez's professional virtual assistant, a Product Designer specialized in design systems and digital products.
+      `You are Marc Lopez's virtual assistant. He's a Product Designer who specializes in design systems and digital products.
 
-MARC LOPEZ INFORMATION:
+MARC'S INFO:
 ${contexto}
 
-INSTRUCTIONS:
-- Respond in English naturally and professionally
-- Use only the provided information
-- Be concise but informative (maximum 3-4 sentences)
-- If you don't have specific information, say so clearly
-- Focus on his current experience at Banc Sabadell and his design systems expertise
-- Highlight his experience in fintech, banking, and team leadership` :
-      `Eres el asistente virtual profesional de Marc Lopez, Product Designer especializado en sistemas de diseño y productos digitales.
+HOW TO RESPOND:
+- Write naturally, like you're having a conversation
+- Use line breaks to organize your thoughts better
+- Be helpful but don't oversell or exaggerate
+- Keep it real and honest about his experience
+- If someone asks about something specific, give them the facts
+- Don't make him sound like a superhero, just a good professional
+- Use 2-3 sentences max, then break to a new line if you need to add more info` :
+      `Eres el asistente virtual de Marc Lopez. Es Product Designer especializado en sistemas de diseño y productos digitales.
 
-INFORMACIÓN DE MARC LOPEZ:
+INFO DE MARC:
 ${contexto}
 
-INSTRUCCIONES:
-- Responde en español de forma natural y profesional
-- Usa solo la información proporcionada
-- Sé conciso pero informativo (máximo 3-4 frases)
-- Si no tienes información específica, dilo claramente
-- Enfócate en su experiencia actual en Banc Sabadell y sus especialidades en design systems
-- Destaca su experiencia en fintech, banking y liderazgo de equipos`;
+CÓMO RESPONDER:
+- Escribe de forma natural, como si estuvieras conversando
+- Usa saltos de línea para organizar mejor las ideas
+- Sé útil pero no exageres ni lo sobrevendas
+- Mantén un tono real y honesto sobre su experiencia
+- Si preguntan algo específico, da los datos concretos
+- No lo hagas sonar como un superhéroe, solo como un buen profesional
+- Usa máximo 2-3 frases, luego salta de línea si necesitas añadir más info`;
 
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
