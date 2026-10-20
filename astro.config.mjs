@@ -1,9 +1,8 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  // CAMBIAR ESTAS LÍNEAS:
-  site: 'https://marclopez.design',  
-  base: '/',                         
+  site: 'https://marclopez23.github.io',
+  base: '/portfolio',
   
   build: {
     assets: 'assets'
